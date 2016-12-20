@@ -54,7 +54,7 @@
     <security-constraint>
 		<display-name>Single Sign On-to</display-name>
 		<web-resource-collection>
-		  <web-resource-name>test</web-resource-name>
+		  <web-resource-name>pmotef</web-resource-name>
 		  <url-pattern>/</url-pattern>
 		  <url-pattern>/*</url-pattern>
 		  <http-method>GET</http-method>
