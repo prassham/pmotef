@@ -10,6 +10,15 @@
         <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
-    <application name="JavaHelloWorldApp" context-root="/JavaHelloWorldApp" location="${appLocation}" type="war"/>
 
+   <application name='pmotef' location='pmotef.war' type='war' context-root='/'>
+   
+
+	<application-bnd>
+            <security-role name="Single Sign On-to">
+                <special-subject type="ALL_AUTHENTICATED_USERS"/>
+             </security-role>
+     </application-bnd> 
+   </application>
+        
 </server>
