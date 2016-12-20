@@ -1,8 +1,0 @@
-applications:
-- path: target/pmotefdev.war
-  memory: 512M
-  instances: 1
-  domain: mybluemix.net
-  name: pmotef
-  host: pmotef
-  disk_quota: 1024M
