@@ -52,7 +52,7 @@
   </servlet-mapping> 
   
     <security-constraint>
-		<display-name>Single Sign On-8h</display-name>
+		<display-name>Single Sign On-to</display-name>
 		<web-resource-collection>
 		  <web-resource-name>test</web-resource-name>
 		  <url-pattern>/</url-pattern>
@@ -66,7 +66,7 @@
 		  <http-method>OPTIONS</http-method>
 		</web-resource-collection>
 		<auth-constraint>
-		  <role-name>Single Sign On-8h</role-name>
+		  <role-name>Single Sign On-to</role-name>
 		</auth-constraint>
 	</security-constraint>   
 </web-app>
