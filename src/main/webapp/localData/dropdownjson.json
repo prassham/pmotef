@@ -1,0 +1,83 @@
+{
+	"typeoptions":[
+ 			{"type":"RF"},
+ 			{"type":"CT"}
+			],
+ 	"shoreoptions":[
+ 			{"shore":"Onshore"},
+ 			{"shore":"Offshore"}
+			],
+	"bandoptions":[
+ 			{"band":"3"},
+ 			{"band":"4"},
+ 			{"band":"5"},
+ 			{"band":"6G"},
+ 			{"band":"6A"},
+ 			{"band":"6B"},
+ 			{"band":"7A"},
+ 			{"band":"7B"},
+ 			{"band":"8"},
+ 			{"band":"9"},
+ 			{"band":"10"}
+			],	
+  	"workstreamoptions":[
+ 			{"workstream":"SG1"},
+ 			{"workstream":"SG2"},
+ 			{"workstream":"SG3"},
+ 			{"workstream":"SG4"},
+ 			{"workstream":"E2E"},
+ 			{"workstream":"TEST"},
+ 			{"workstream":"TIG"},
+ 			{"workstream":"Delivery Services"},
+ 			{"workstream":"TDA"},
+ 			{"workstream":"PMO"},
+ 			{"workstream":"DPE"},
+ 			{"workstream":"PM"},
+ 			{"workstream":"CIM"}
+			],
+	"wsmanageroptions":[
+			{"SG1":"Thyagaraju Rangappan"},
+			{"SG2":"Seema Basantani"},
+			{"SG3":"Preetheswari Ramarajan"},
+			{"SG4":"Thyagaraju Rangappan"},
+			{"E2E":"Icy John"},
+			{"TEST":"Nithin Ranjan"},
+			{"TIG":"Murugan G Achary"},
+			{"Delivery Services":"Raju D Dhole"},
+			{"TDA":"Suresh B Subramanyam"},
+			{"PMO":"Mahesh Krishna"},
+			{"PM":"Sunith Peethambaran"},
+			{"DPE":"Raju D Dhole"},
+			{"CIM":"Murali Ramakrishna"}
+		],
+			"genderoptions":[
+ 			{"gender":"Male"},
+ 			{"gender":"Female"}
+			],
+			"laptopoptions":[
+ 			{"laptop":"YES"},
+ 			{"laptop":"NO"}
+			],
+			"worklocationoptions":[
+			{"location":"Bangalore"},
+			{"location":"Chennai"},
+			{"location":"Hyderabad"}
+			],
+			"buildingoptions":[
+			 {"Bangalore":"Manyatha"},
+			 {"Bangalore":"Subramanya Arcade"},
+			 {"Bangalore":"Embassy Golf Links"},
+			 {"Bangalore":"ITPL"},
+			 {"Chennai":"DLF"},
+			 {"Hyderabad":"Raheja"}
+			 ],
+			 "employeestatus":[
+			 {"status":"A"},
+			 {"status":"Rotate"},
+			 {"status":"Resign"}
+			 ],
+			 "ELTPoptions":[
+			 {"eltp":"Y"},
+			 {"eltp":"N"}
+			 ]
+	}

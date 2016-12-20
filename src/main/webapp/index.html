@@ -1,25 +1,94 @@
-<!DOCTYPE html>
-<html>
+<!-- public/views/index.html -->
+<!doctype html>
+<html lang="en">
+
 <head>
-	<title>Java Web Starter Application</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Prashant Murthy E">
+
+
+    <title>IBM Telefonica PMO Portal</title>
+    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/angular.min.js" type="text/javascript"></script>
+        <script src="assets/js/angular-sanitize.js" type="text/javascript"></script>
+        <script src="assets/js/angular-sanitize.min.js" type="text/javascript"></script>        
+        <!--
+        <script src="../js/fileinput_locale_fr.js" type="text/javascript"></script>
+        <script src="../js/fileinput_locale_es.js" type="text/javascript"></script> 
+        -->
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+    
+ 
+    <link href="assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- JS -->
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+    <script src="assets/js/fileinput.js" ></script> 
+    <script src="assets/js/angular-file-upload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script> 
+   
+   
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js" ></script>
+     <script src="https://cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.min.js"></script>
+     <script src="http://www.chartjs.org/assets/Chart.min.js"></script> 
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="appjs/app.js"></script>
+    <script src="appjs/appRoute.js"></script>
+    <script src="appjs/services/pmoUtilService.js"></script>
+    <script src="appjs/services/pmoHttpService.js"></script>
+    <script src="appjs/services/pmoDirectives.js"></script>
+    <script src="appjs/controller/login.js"></script>
+    <script src="appjs/controller/landing.js"></script>
+    <script src="appjs/controller/utilization.js"></script>
+    <script src="appjs/controller/o2Observer.js"></script>
+    <script src="appjs/controller/reportStatistics.js"></script>
+    <script src="appjs/controller/vacationPlanner.js"></script>
+    <script src="appjs/controller/CreateVacationRequestController.js"></script>
+    <script src="appjs/controller/RequestHistory.js"></script>
+    <script src="appjs/controller/updateRequest.js"></script>
+    <script src="appjs/controller/pendingApproval.js"></script>
+    <script src="appjs/controller/userUpdate.js"></script>
+    <script src="appjs/controller/updateEmployee.js"></script>
+    <script src="appjs/controller/offBoarding.js"></script>
+    <script src="appjs/controller/rapEntryForm.js"></script>
+    <script src="appjs/controller/home.js"></script>      
+    <script src="appjs/controller/SOWViewController.js"></script>
+    <script src="appjs/controller/SOWEditController.js"></script>
+	<script src="appjs/controller/sideBar.js"></script>
+        <script src="appjs/controller/TeamLeaves.js"></script>
+     <script src="appjs/controller/LeaveRecord.js"></script>
 </head>
-<body>
-	<table>
-		<tr>
-			<td style='width: 30%;'>
-				<img class = "newappIcon" src='images/newapp-icon.png'>
-			</td>
-			<td>
-				<!-- The "Hello World!" message comes from /SimpleServlet -->
-				<h1 id = "message"></h1>
-				
-				<p class='description'></p> Thanks for creating a <span class="blue">Liberty for Java Starter Application</span>.
-			</td>
-		</tr>
-	</table>
-	<!-- Call SimpleServlet to get the "Hello World" message  -->
-	<script type="text/javascript" src="index.js"></script>
+
+<body ng-app="pmoApp">
+
+    <div class="col-lg-12">
+
+        <div ng-include="'/views/components/header.html'"></div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div ng-view></div>
+
+    </div>
+
+    </div>
+
 </body>
+
 </html>

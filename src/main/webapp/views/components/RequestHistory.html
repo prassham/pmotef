@@ -1,0 +1,42 @@
+<div id="mydiv">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+<div ng-include="'views/components/sideBar.html'"></div>
+     <div class='row col-md-9 height'>
+      <a href ="#/vacationPlanner">&nbsp Home &nbsp</a>
+      <a href ="#/RequestHistory">&nbsp Request History &nbsp</a>
+      <a href ="#/CreateVacationRequest">&nbsp New Entry &nbsp</a>
+      <a ng-hide=pendingbutton href ="#/pendingApproval">&nbsp Pending Approvals &nbsp</a>
+       <a ng-hide=pendingbutton href ="#/TeamLeaves">&nbsp Employee Leave Record &nbsp</a>
+  </div>
+<div>
+<div class="col-md-9 vacationrequest">{{val}} {{name}} ({{email}})
+</div>
+<div class="height"></div>
+<div class="col-md-9">
+<table class="table" >
+<tr height="30">
+<th> Leave Type</th>
+<th> Reason </th>
+<th> Start Date </th>
+<th> End Date </th>
+<th> Days </th>
+<th> Approver </th>
+<th> Status </th>
+<th> Requested date </th>
+<th> Action </th>
+</tr>
+<tr height="30" ng-repeat="(k,v) in vacationhistory">
+<td>{{v.vacationtype}}</td>
+<td>{{v.reason}}</td>
+<td>{{v.startDate}}</td>
+<td>{{v.endDate}}</td>
+<td>{{v.no_of_days}}</td>
+<td>{{v.approver}}</td>
+<td>{{v.requeststate}}</td>
+<td>{{v.requestedDate}}</td>
+<td ng-if="((v.startDate) >= (CurrentDate | date:'yyyy-MM-dd')) && (v.requeststate == 'Pending')"><a href ng-click=updateRequest(v._id)>Modify</a></td>
+</tr>
+</table>
+</div>
+</div>

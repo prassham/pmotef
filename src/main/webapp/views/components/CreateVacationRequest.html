@@ -1,0 +1,129 @@
+<div id="mydiv">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+    <div ng-include="'views/components/sideBar.html'"></div>
+    <div class='row col-md-9 height'>
+      <a href ="#/vacationPlanner">&nbsp Vacation Home &nbsp</a>
+      <a href ="#/RequestHistory">&nbsp Request History &nbsp</a>
+      <a href ="#/CreateVacationRequest">&nbsp New Entry &nbsp</a>
+      <a ng-hide=pendingbutton href ="#/pendingApproval">&nbsp Pending Approvals &nbsp</a>
+        <a ng-hide=pendingbutton href ="#/TeamLeaves">&nbsp Employee Leave Record &nbsp</a>
+  </div>
+    <!--<div ng-include="'views/components/VacationButton.html'"></div>-->
+    <div class="row">
+    <div >
+      	<div class="col-md-9 vacationrequest">Vacation and Time Away Calendar Entry</div><br>
+      	</div>
+    	<div class ="col-md-9">
+    	<div class ="height">
+  		</div>
+      	<form name="myForm" class="form-horizontal">
+      		<div class="col-md-6">
+    	<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-3 control-label">Person</label>
+    			<div class="col-md-6">
+      			<input type="email" class="form-control" id="inputReason3" ng-model="loggedInUser" readonly>
+    			</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-3 control-label">Reason</label>
+    			<div class="col-md-6">
+      			<input type="email" class="form-control" id="inputReason3" placeholder="Reason" ng-model="reason" readonly>
+    			</div>
+  		</div>
+  		<!-- <div class="form-group">
+    		<label for="inputPassword3" class="col-sm-3 control-label">Comments*</label>
+    			<div class="col-md-6">
+      				<input type="text" class="form-control" id="inputComments3" placeholder="Comments">
+    			</div>
+  		</div> -->
+  		<div class="form-group">
+    		<label for="inputPassword3" class="col-sm-3 control-label">Start Date*</label>
+    			<div class="col-md-6">
+    				<p class="input-group">
+      				<input type="text" class="form-control" placeholder="Start Date" datepicker-popup="mediumDate" is-open="valuationDatePickerstartdateIsOpen" 
+                   ng-click="valuationDatePickerOpen()" ng-model="vacation.valuationstartDate" ng-change="createDate()" required/>
+            	<span class="input-group-btn">
+              		<button type="button" class="btn btn-default" ng-click="valuationDatePickerstartOpen($event)">
+                		<i class="glyphicon glyphicon-calendar"></i>
+              		</button>
+              		</span>
+              		</p>
+    			</div>
+  		</div>
+  		<div class="form-group">
+  		<label for="inputPassword3" class="col-sm-3 control-label">End Date*</label>
+    			<div class="col-md-6">
+      				<p class="input-group">
+            		<input type="text" class="form-control" placeholder="End Date" datepicker-popup="mediumDate" is-open="valuationDatePickerenddateIsOpen" 
+                   ng-click="valuationDatePickerOpen()" ng-model="vacation.valuationendDate" ng-change="createDate()" required/>
+            	<span class="input-group-btn">
+              		<button type="button" class="btn btn-default" ng-click="valuationDatePickerendOpen($event)">
+                		<i class="glyphicon glyphicon-calendar"></i>
+              		</button>
+            	</span>
+          		</p>
+    			</div>
+  		</div>
+  		<div class="form-group">
+  		<label for="inputPassword3" class="col-sm-3 control-label">Leave Type*</label>
+  		<div class="col-md-6">
+  		<select class="form-control" name="formField" ng-model="vacation.leaveType">
+  			 <option value="">Select Option</option>
+ 			 <option value="Privileged Leave">Privilege Leave</option>
+			 <option value="Sick Leave">Sick Leave</option>
+			 <option value="Complementry Off">Compensatory Off</option>
+		</select>
+    			</div>
+  		</div>
+
+  		</div>
+  		<div class="col-md-6">
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-4 control-label">Vacation days</label>
+    			<div class="col-md-6">
+      				<div ng-repeat="item in vacation.dateArr" ng-if="$index % 3 == 0" class="row">
+        <div class="col-xs-4">{{vacation.dateArr[$index] | date:'dd-MM-yyyy'}}</div>
+        <div class="col-xs-4">{{vacation.dateArr[$index + 1] | date:'dd-MM-yyyy'}}</div>
+        <div class="col-xs-4">{{vacation.dateArr[$index + 2] | date:'dd-MM-yyyy'}}</div>
+    </div>
+    			</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-4 control-label">No. of Days</label>
+    			<div class="col-md-6">
+    				<input type="text" class="form-control" id="inputComments3" ng-model="vacation.noofday" readonly>
+    			</div>
+  		</div>
+  		<div class="form-group">
+  			<label for="inputEmail3" class="col-sm-4 control-label">Team</label>
+    			<div class="col-md-6">
+    			<input type="text" class="form-control" id="inputComments3" ng-model="team" readonly>
+    			</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-4 control-label">Approver</label>
+    			<div class="col-md-6">
+    			<input type="text" class="form-control" id="inputComments3" ng-model="approver" readonly>
+    			</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-4 control-label">Requested Date</label>
+    			<div class="col-md-6">
+    			<input type="text" class="form-control" id="inputComments3" ng-model="currentdate" readonly>
+    			</div>
+  		</div>
+  		<div class ="height">
+  		</div>
+  <div class="form-inline">
+    <div class="col-sm-offset-5 col-sm-50">
+      <button type="submit" class="btn btn-default" ng-if="vacation.leaveType" ng-click=createRequest()>Submit</button>
+      <button type="submit" class="btn btn-default" ng-click=cancelRequest()>Cancel</button>
+      <button type="submit" class="btn btn-default" ng-click=reset(vacation)>Reset</button>
+    </div>
+  </div>
+  </div>
+  </form>
+  </div>
+</div>
+    </div> 

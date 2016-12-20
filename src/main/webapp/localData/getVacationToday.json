@@ -1,0 +1,46 @@
+{
+"vacationlistfortoday" :[
+  {
+        "empid" : "IN910446",
+        "name"    : "edwin1 ",
+        "email": "edwin1@in.ibm.com",
+        "reason": "Vacation",
+        "vacationtype": "Sick Leave",
+        "startDate": "05/19/2016",
+        "endDate": "05/19/2016",
+        "no_of_days": "1",
+        "team": "1",
+        "approver": "Seema/India/IBM",
+        "requeststate": "Rejected",
+        "requestedDate": "19/05/2016"
+    },
+      {
+            "empid" : "IN910446",
+        "name"    : "edwin2 ",
+        "email": "edwin2@in.ibm.com",
+        "reason": "Vacation",
+        "vacationtype": "Sick Leave",
+        "startDate": "05/19/2016",
+        "endDate": "05/19/2016",
+        "no_of_days": "1",
+        "team": "2",
+        "approver": "Seema Basantani/India/IBM",
+        "requeststate": "Pending",
+        "requestedDate": "19/05/2016"
+    },
+      {
+        "empid" : "IN910446",
+        "name"    : "edwin3 ",
+        "email": "edwin3@in.ibm.com",
+        "reason": "Vacation",
+        "vacationtype": "Sick Leave",
+        "startDate": "05/19/2016",
+        "endDate": "05/19/2016",
+        "no_of_days": "1",
+        "team": "2",
+        "approver": "Seema Basantani/India/IBM",
+        "requeststate": "Approved",
+        "requestedDate": "19/05/2016"
+    }
+    ]
+}

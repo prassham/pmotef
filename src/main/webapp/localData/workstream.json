@@ -1,0 +1,23 @@
+{
+     "workstream": [
+        {
+			"team": "SG1"
+		}, {
+			"team": "SG2"
+		}, {
+			"team": "SG3"
+		}, {
+			"team": "SG4"
+		}, {
+			"team": "Delivery Services"
+		}, {
+			"team": "TDA"
+		}, {
+			"team": "TEST"
+		}, {
+			"team": "TIG"
+		}
+
+	]
+
+}

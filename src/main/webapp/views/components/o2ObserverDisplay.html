@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<div id="mydiv">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+<html>
+<div ng-controller="o2ObserverController">
+    <div ng-include="'views/components/sideBar.html'"></div>
+<head>
+<meta charset="ISO-8859-1">
+<title>O2 Observer</title>
+</head>
+<body>
+<h3>O2 Observer</h3>
+</div> 
+
+<iframe ng-src="{{o2Observer}}" type="application/pdf" style="width:1050px;height:600px;" id="viewer" ></iframe>
+
+</body>
+</html>

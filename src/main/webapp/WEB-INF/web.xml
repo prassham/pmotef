@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>PMOWeb</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+  <servlet>
+    <servlet-name>PMO Rest Services</servlet-name>
+      <servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
+      <init-param>
+        <param-name>javax.ws.rs.Application</param-name>
+        <param-value>com.ibm.pmo.startup.PMOStartup</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+      
+      <servlet-mapping>
+    <servlet-name>PMO Rest Services</servlet-name>
+    <url-pattern>/pmo/*</url-pattern>
+  </servlet-mapping>
+
+    <servlet>
+<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>com.ibm.pmo.utilization</param-value>
+		</init-param>
+  </servlet>
+<servlet-mapping>
+    <servlet-name>jersey-serlvet</servlet-name>
+    <url-pattern>/restUtilization/*</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+<servlet-name>jersey-ser</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>com.ibm.pmo.O2Observer</param-value>
+		</init-param>
+  </servlet>
+<servlet-mapping>
+    <servlet-name>jersey-ser</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping> 
+  
+    <security-constraint>
+		<display-name>Single Sign On-8h</display-name>
+		<web-resource-collection>
+		  <web-resource-name>test</web-resource-name>
+		  <url-pattern>/</url-pattern>
+		  <url-pattern>/*</url-pattern>
+		  <http-method>GET</http-method>
+		  <http-method>PUT</http-method>
+		  <http-method>HEAD</http-method>
+		  <http-method>TRACE</http-method>
+		  <http-method>POST</http-method>
+		  <http-method>DELETE</http-method>
+		  <http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+		  <role-name>Single Sign On-8h</role-name>
+		</auth-constraint>
+	</security-constraint>   
+</web-app>

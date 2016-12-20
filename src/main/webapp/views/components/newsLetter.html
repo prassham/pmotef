@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/modern-business.css" rel="stylesheet">
+
+
+<!-- Custom Fonts -->
+<link href="font-awesome-4.1.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<style>
+.rounded {
+	border-radius: 10px;
+	background: #000;
+}
+</style>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<title>IBM Telefonica PMO</title>
+</head>
+<body ng-app="">
+	<!-- Navigation -->
+	<div ng-include="'views/components/Header.html'"></div>
+
+	<div class="container-full">
+		<div class="container-fluid-full">
+
+			<!-- side bar -->
+
+			<div ng-include="'views/components/sideBar.html'"></div>
+			<!-- Page Content -->
+
+
+			<!-- Page Heading/Breadcrumbs -->
+			<div class="container-full" style="float: left; width: 75%">
+				<div ng-include="'views/components/observer.html'"></div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div ng-include="'views/components/Footer.html'"></div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- ANGULAR Sidebar CONTENT -->
+
+
+    <!--Start with Angular and bootstrap-->
+
+    <div ng-include="'views/components/sideBar.html'"></div>
+   <div class='row col-md-9 height'>
+      <a href ="#/vacationPlanner">&nbsp Vacation Home &nbsp</a>
+      <a href ="#/RequestHistory">&nbsp Request History &nbsp</a>
+      <a href ="#/CreateVacationRequest">&nbsp New Entry &nbsp</a>
+      <a ng-hide=pendingbutton href ="#/pendingApproval">&nbsp Pending Approvals &nbsp</a>
+        <a ng-hide=pendingbutton href ="#/TeamLeaves">&nbsp Employee Leave Record &nbsp</a>
+  </div>
+<div class="row">
+    <div >
+      	<div class="col-md-9 vacationrequest">Pending Approvals</div><br>
+      	</div>
+      	<div class="height"></div>
+<div class="col-md-9">
+    			<table class="table">
+    				<tbody>
+    				<tr>
+    					<th>Emp Id</th>
+    					<th>Emp Name</th>
+    					<th>Email</th>
+    					<th>Vacation Type</th>
+    					<th>Start Date</th>
+    					<th>End Date</th>
+    					<th>No. of Days</th>
+    					<th>Requested Date</th>
+    					<th>Status</th>
+    					</tr>
+    					<tr ng-repeat="item in pendingList">
+    					<td>{{item.empid}}</td>
+    					<td>{{item.name}}</td>
+    					<td>{{item.email}}</td>
+    					<td>{{item.vacationtype}}</td>
+    					<td>{{item.startDate}}</td>
+    					<td>{{item.endDate}}</td>
+    					<td>{{item.no_of_days}}</td>
+    					<td>{{item.requestedDate}}</td>
+    					<td>
+       						<select class="form-control" ng-model="selectedValue" ng-options="v for v in dropdown.values" ng-change=requestState(selectedValue,item)>
+       						<option value="">Select</option>
+      						</select>
+    					</td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    		
+    	
+    		      </div>
+    		      

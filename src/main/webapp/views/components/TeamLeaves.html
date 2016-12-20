@@ -1,0 +1,32 @@
+<div id="mydiv">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+<div ng-include="'views/components/sideBar.html'"></div>
+     <div class='row col-md-9 height'>
+      <a href ="#/vacationPlanner">&nbsp Vacation Home &nbsp</a>
+      <a href ="#/RequestHistory">&nbsp Request History &nbsp</a>
+      <a href ="#/CreateVacationRequest">&nbsp New Entry &nbsp</a>
+      <a ng-hide=pendingbutton href ="#/pendingApproval">&nbsp Pending Approvals &nbsp</a>
+       <a href ="#/TeamLeaves">&nbsp Employee Leave Record &nbsp</a>
+  </div>
+  <div >
+    		<div class="col-md-9 vacationrequest">
+    			<div class="col-md-9" >Employees under {{email}}</div> <div class="col-md-3"> {{today | date:'medium'}}</div>
+   </div>
+   <div class="col-md-9">
+   <table class="table table-striped table-hover">
+   <tr height="30">
+    		<th>Name </th>
+    		<th>Intranet ID </th>
+    		<th>Current Utilization </th>
+    		</tr>
+              <tr height="30" ng-repeat="item in notes" ng-click="empDetail(item)">
+                    <td>{{item.NAME}}</td>
+                    <td>{{item.EMAIL}}</td>
+                    <td>{{item.UTILIZATION}}%</td>
+                </tr>
+        </table>
+        </div>
+ 
+    		      </div>
+    		      

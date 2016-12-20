@@ -1,0 +1,26 @@
+    <!-- Login Form  validation-->
+        <div class="row">
+            <div class="col-md-8">
+              
+                <form name="signin" id="signForm" validate>
+                    
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email Address:</label>
+                            <input type="email" class="form-control" id="email" name="email" ng-model="email" required data-validation-required-message="Please enter your email address.">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" ng-model="password" required data-validation-required-message="Please enter your password">
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button ng-click="authenticate()">Submit</button>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.row -->

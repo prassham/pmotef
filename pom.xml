@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>net.wasdev.wlp.sample</groupId>
-    <artifactId>JavaHelloWorldApp</artifactId>
+    <artifactId>pmotef</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 

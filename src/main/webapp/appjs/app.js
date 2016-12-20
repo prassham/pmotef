@@ -1,0 +1,2 @@
+angular.module('pmoApp', ['ngRoute', 'appRoutes', 'LoginCtrl', 'sidebarCtrl','rapEntryFormCtrl','sowEditDataCtrl','sowViewDataCtrl','LandingCtrl', 'PMOHttp', 'PMODirective', 'PMOUtil', 'angularFileUpload', 'UtilizationCtrl','o2ObserverCtrl','ReportCtrl','vacationPlannerCtrl','CreateVacationRequestCtrl', 'RequestHistoryCtrl', 'updateRequestCtrl','pendingApprovalCtrl','homeCtrl','ui.bootstrap','chart.js', 'UserUpdateCtrl','UpdateEmployeeCtrl','offBoardingCtrl', 'TeamLeavesCtrl', 'LeaveRecordCtrl']);
+

@@ -1,0 +1,87 @@
+<script>
+     $(function() {
+ $("#datepicker").datepicker({ }).val();
+  
+         });   
+</script>
+<div ng-include="'views/components/sideBar.html'"></div>
+<div ng-controller="SOWViewController">
+    <!-- ANGULAR Sidebar CONTENT -->
+
+
+    <!--Start with Angular and bootstrap-->
+
+   </br></br></br>
+    <div class="col-md-9">
+        
+            <div class="text-center">
+        <p style="font-size:35px;">Start Of The Week</p></div>
+      
+                  <div class="row"><div class="pull-left"> 
+                  <p>
+<div class="pull-left"> <label>Select a date</label> 
+ <input type="text" id="datepicker" data-date-format='yyyy-mm-dd'  ng-model="startdate"  required ng-required="true">
+ </div>
+
+ </div>
+
+ <div class="pull-right">
+ 
+ <select ng-model="selectedTeam" >
+           <option ng-repeat="item in items" >{{item}}</option></select>
+           
+ </div> 
+                </div>
+        <br/>
+         <div class="text-center">
+  <button type="submit" class="btn btn-default" ng-click="showdetails(startdate,selectedTeam)">Submit</button>
+      <button type="submit" class="btn btn-default">Cancel</button>    
+        </div>
+    <div class="container" style="width:1000px">
+                
+      </br></br>
+        <table class="table table-striped table-bordered"   >
+            <tbody> 
+            <tr>
+                      
+                            <th class="headings" style="background-color: rgb(184, 204, 228); width:30%">Weekend Callouts OR Any issues</th>
+               
+							<td>{{callouts}}
+                                </textarea></td>
+					</tr>
+          
+       
+         
+            <tr>
+
+							<th class="headings"  style="background-color: rgb(184, 204, 228); width:30%">Sunrise Checks</th>
+							<td>{{src}}
+                                      </textarea></td>
+		  <tr>
+
+							<th class="headings"  style="background-color: rgb(184, 204, 228); width:30% ">Major projects deployed</th>
+							<td>{{pjt}}
+                                      </textarea></td>
+					</tr>
+                <tr>
+
+							<th class="headings"  style="background-color: rgb(184, 204, 228); width:30%">Production Defects deployed</th>
+							<td>{{defects}}
+                                      </textarea></td>
+					</tr>
+                <tr>
+
+							<th class="headings"  style="background-color: rgb(184, 204, 228); width:30%">Upcoming deployments in current week</th>
+							<td>{{deployments}}</td>
+					</tr>
+              <tr>
+
+							<th class="headings"  style="background-color: rgb(184, 204, 228); width:30%">Anything else to highlight</th>
+							<td>{{highlights}}</td>
+					</tr>
+           
+            </tbody>
+        </table>
+   
+    </div> </div>  </div> 
+    

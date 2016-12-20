@@ -1,0 +1,9 @@
+<pmo>
+	<cloudant>
+		<userName>c012e4d2-248f-4229-a73b-ffc0003c192d-bluemix</userName>
+		<password>b7f8c735c3cb7d22e1008dcc6166bf5b6de32777ac944255ed568f447b6a083d</password>
+		<host>c012e4d2-248f-4229-a73b-ffc0003c192d-bluemix.cloudant.com</host>
+		<port>443</port>
+		<url>https://c012e4d2-248f-4229-a73b-ffc0003c192d-bluemix:b7f8c735c3cb7d22e1008dcc6166bf5b6de32777ac944255ed568f447b6a083d@c012e4d2-248f-4229-a73b-ffc0003c192d-bluemix.cloudant.com</url>
+	</cloudant>
+</pmo> 

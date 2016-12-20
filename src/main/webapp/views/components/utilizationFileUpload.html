@@ -1,0 +1,77 @@
+<div ng-controller="UtilizationController">
+
+	<!--Start with Angular and bootstrap-->
+	<!-- ANGULAR Sidebar CONTENT -->
+
+	<div ng-include="'views/components/sideBar.html'"></div>
+
+	<div class="col-md-9">
+		<div>
+			<h4>Select input file for Utilization calculation</h4>
+			<input id="file-0a" data-min-file-count="1" class="file file-loading"
+				multiple data-show-upload="false" data-show-caption="true"
+				data-allowed-file-extensions='["csv"]' type="file" nv-file-select=""
+				uploader="uploader" />
+		</div>
+		<div style="margin-bottom: 40px">
+			<hr>
+			<h4>Upload queue</h4>
+			<table class="table">
+				<thead>
+					<tr>
+						<th width="50%">Name</th>
+						<th ng-show="uploader.isHTML5">Size</th>
+						<th ng-show="uploader.isHTML5">Progress</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in uploader.queue">
+						<td><strong>{{ item.file.name }}</strong></td>
+						<td ng-show="uploader.isHTML5" nowrap>{{
+							item.file.size/1024|number:2 }} KB</td>
+						<td ng-show="uploader.isHTML5">
+							<div class="progress" style="margin-bottom: 0;">
+								<div class="progress-bar" role="progressbar"
+									ng-style="{ 'width': item.progress + '%' }"></div>
+							</div>
+						</td>
+						<td class="text-center"><span ng-show="item.isSuccess"><i
+								class="glyphicon glyphicon-ok"></i></span> <span
+							ng-show="item.isCancel"><i
+								class="glyphicon glyphicon-ban-circle"></i></span> <span
+							ng-show="item.isError"><i
+								class="glyphicon glyphicon-remove"></i></span></td>
+						<td nowrap>
+							<button type="button" class="btn btn-success btn-xs"
+								ng-click="item.upload()"
+								ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+								<span class="glyphicon glyphicon-upload"></span> Upload
+							</button>
+							<button type="button" class="btn btn-warning btn-xs"
+								ng-click="item.cancel()" ng-disabled="!item.isUploading">
+								<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+							</button>
+							<button type="button" class="btn btn-danger btn-xs"
+								ng-click="item.remove()">
+								<span class="glyphicon glyphicon-trash"></span> Remove
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+</div>
+<script>
+			// initialize with defaults
+			$("#file-0a").fileinput();
+
+			// with plugin options
+			$("#file-0a").fileinput({
+				'showUpload' : true,
+				'previewFileType' : 'any'
+			});
+		</script>
+		<!--End with Angular and bootstrap-->

@@ -1,0 +1,64 @@
+<div id="mydiv">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+<div >
+    <div ng-include="'views/components/sideBar.html'"></div>
+    <div class="col-md-9 vacationrequest">
+    			<div class="col-md-7" >Employee Bandmix report</div> <div class="col-md-2" ng-if="Bandmix">Band mix : {{Bandmix}}</div> <div class="col-md-3" ng-if="Bandmix">Total Employees : {{tot}}</div>
+    </div>
+    <div class="col-md-9" ng-if="Bandmix">
+    	<div class="col-md-12">
+    	<section>
+    		<div class="col-md-7">
+    		<h4>Employee Band Classification Report</h4>
+    			<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true">
+				</canvas>
+				<div id="my-doughnut-legend" class="chart-legend"></div>
+    		</div>
+    		<div class="col-md-5">
+    		<h4>Diversity Report</h4>
+    		<br>
+    		<br>
+				<canvas id="doughnut" class="chart chart-doughnut" chart-data="data3" chart-labels="labels3" chart-colours="colors" chart-legend="true">
+				</canvas> 
+    		</div>
+    		</section>
+    	</div>
+    	<br>
+    	<div class="col-md-12">
+    	<br>
+    	<section>
+    		<div class="col-md-7">
+    		<h4>Billing Band Mix Report</h4>
+    			<canvas id="bar" class="chart chart-bar" chart-data="data1" chart-labels="labels1" chart-series="series1" chart-colours="colors" chart-legend="true">
+				</canvas>
+    		</div>
+    		<div class="col-md-5">
+    		<h4>Offshore/Onshore Mix Report</h4>
+    		<br>
+    		<br>
+				<canvas id="doughnut" class="chart chart-doughnut" chart-data="data4" chart-labels="labels4" chart-colours="colors" chart-legend="true">
+				</canvas> 
+				</div>
+    		</section>
+    	</div>
+    	<br>
+    	<div class="col-md-12">
+    	<br>
+    	<section>
+    		<div class="col-md-7">
+    		<h4>Employee Band Mix Report</h4>
+    			<canvas id="bar" class="chart chart-bar" chart-data="data2" chart-labels="labels" chart-series="series2" chart-colours="colors" chart-legend="true">
+				</canvas>
+    		</div>
+    		<div class="col-md-5">
+    		<h4>Employee Type Report</h4>
+    		<br>
+    		<br>
+				<canvas id="doughnut" class="chart chart-doughnut" chart-data="data5" chart-labels="labels5" chart-colours="colors" chart-legend="true">
+				</canvas> 
+    		</div>
+    		</section>
+    	</div>
+    </div>
+</div>
