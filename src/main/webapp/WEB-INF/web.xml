@@ -51,4 +51,23 @@
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping> 
   
+  <security-constraint>
+		<display-name>Single Sign On-to</display-name>
+		<web-resource-collection>
+		  <web-resource-name>test</web-resource-name>
+		  <url-pattern>/</url-pattern>
+		  <url-pattern>/*</url-pattern>
+		  <http-method>GET</http-method>
+		  <http-method>PUT</http-method>
+		  <http-method>HEAD</http-method>
+		  <http-method>TRACE</http-method>
+		  <http-method>POST</http-method>
+		  <http-method>DELETE</http-method>
+		  <http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+		  <role-name>Single Sign On-to</role-name>
+		</auth-constraint>
+	</security-constraint>   
+  
 </web-app>
