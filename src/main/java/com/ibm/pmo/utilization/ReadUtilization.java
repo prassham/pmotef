@@ -1,25 +1,19 @@
 package com.ibm.pmo.utilization;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.Reader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,10 +21,11 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response; 
+import javax.ws.rs.core.Response;
+
+import org.json.JSONException;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import com.ibm.pmo.*;
@@ -63,56 +58,50 @@ public class ReadUtilization {
 		public Response uploadFile(
 				@FormDataParam("file") InputStream uploadedInputStream,
 				@FormDataParam("file") FormDataContentDisposition fileDetail) throws Exception {
-
+			try{
 			String uploadedFileLocation = fileDetail.getFileName();
 			  File file = new File(fileDetail.getFileName());
 			  ReadUtilization obj = new ReadUtilization();
-		//	  System.out.println(obj.startEndDateInitializer().toString());
+			  UtilCloudantDBInsert dbupdate = new UtilCloudantDBInsert();
+			  obj.startEndDateInitializer();
+		
 			HashMap<String, EmployUtilizationBean> empUtilMap= obj.readFile(uploadedInputStream);
-			obj.printMap(empUtilMap);
-			
-			UtilCloudantDBInsert dbupdate = new UtilCloudantDBInsert();
+			obj.printMap(empUtilMap);		
 			dbupdate.dbinsert(empUtilMap);
 
 			// save it
 		//	writeToFile(uploadedInputStream, uploadedFileLocation);
 
 			String output = "File uploaded to : " + uploadedFileLocation;
-
-			return Response.status(200).entity(output).build();
-
-		} 
+			
+			return Response.status(200).build();
+		}catch(Exception ex){
+			ex.printStackTrace();
+    			return Response.status(500).build();
+    		}
+		}
     private final Pattern csvPattern = Pattern.compile("\"([^\"]*)\"|(?<=,|^)([^,]*)(?:,|$)");
 	private  HashMap<String,EmployUtilizationBean> empUtilMap = new HashMap<>();
 	private  HashMap<String, ArrayList<String>> startEndDate = new HashMap<String, ArrayList<String>>();
 	
-	public HashMap<String, ArrayList<String>> startEndDateInitializer() {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet resultSet = null;
-		String sql_select = "Select emp_id,DOJ_O2,END_DATE_GBSTIMESTAMP from employee";
-		
+	public void startEndDateInitializer() {
+		EmployeePojo empPojo = null;
 		try {
-			System.out.println("Stablishing a DB Connection to Employee");
-			conn= DBConnection.getConnectionForPMO();
-			ps=conn.prepareStatement(sql_select);
-			resultSet = ps.executeQuery();
-			while(resultSet.next()){
-				ArrayList<String> arrlist= new ArrayList<>();
-				arrlist.add(resultSet.getString(2));
-				arrlist.add(resultSet.getString(3));
-				startEndDate.put(resultSet.getString(1),arrlist);
-			}
-			ps.close();
-			resultSet.close();
-			conn.close();
 			
+			System.out.println("Fetching Start & End  Data from Employee ");
+			empPojo = this.getCloudantEmployee();
+			
+			for (com.ibm.pmo.utils.EmployeePojo.Rows iterable : empPojo.rows) {	
+				ArrayList<String> arrlist= new ArrayList<>();
+				arrlist.add(iterable.getKey().getSTART_DATE());
+				arrlist.add(iterable.getKey().getEND_DATE_GBSTIMESTAMP());
+				startEndDate.put(iterable.getKey().getEMP_ID(),arrlist);
+			}
+						
 		} catch (Exception e) {			
 			e.printStackTrace();
-			System.out.println("Could Not Read from DB Employee");
+			System.out.println("Could Not Read Start and enddate from DB Employee");
 		}
-		
-		return startEndDate; 
 		
 	}
 	
@@ -136,8 +125,11 @@ public class ReadUtilization {
 //		System.out.println("empID : "+headerLine[8]+ " empName :"+headerLine[11] + "Chrg Method Cd :"+ headerLine[23]
 //				+" hours : "+headerLine[19] +" week end Date :"+headerLine[21]);					
 		String [][]columnheader = columnMatcher(headerLine);
+		int count = 1 ;  
 		while ((line = br.readLine()) != null) {
-			String[] row = parse(line);			
+			//String[] row = parse(line);
+			String[] row = line.split(",");
+			System.out.print("Line "+ count++ +" ");
 //Reading 	second row  from the CSV File and creating a UtilizationRowBean for each row encountered.	
 			UtilizationRowBean utilbean = utilRowBeanReader(row,columnheader);
 //			System.out.println(utilbean.getHours() + "  " +utilbean.getMonth() + " "+ utilbean.getWeekEndDate());
@@ -207,7 +199,7 @@ public class ReadUtilization {
         now.set(Calendar.SECOND, 0);
         now.set(Calendar.MINUTE, 0);
         now.set(Calendar.HOUR_OF_DAY, 0);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     	Date startdate = now.getTime();
     //	System.out.println(startdate);
     	now.set(Calendar.MONTH,Calendar.DECEMBER);
@@ -222,7 +214,7 @@ public class ReadUtilization {
     	if(startEndDate.containsKey(utilbean.getEmpID())){
     		arrDate = startEndDate.get(utilbean.getEmpID());
     		startdate = sdf.parse(arrDate.get(0));
-    		enddate = sdf.parse(arrDate.get(1));  		
+    		enddate = sdf.parse(arrDate.get(1));
     	}
 		if(i==1){
 		return startdate;	
@@ -409,12 +401,18 @@ public class ReadUtilization {
 					break;
 			default :utilBean.setEmpID(row[Integer.parseInt(columnheader[0][1])].trim());
 			}
-		}		
-		utilBean.setEmpName(row[Integer.parseInt(columnheader[1][1])].trim());
-		utilBean.setChrgMethodCd(row[Integer.parseInt(columnheader[4][1])].trim());
-		utilBean.setHours(row[Integer.parseInt(columnheader[2][1])].trim());
-		utilBean.setWeekEndDate(row[Integer.parseInt(columnheader[3][1])].trim());
-		System.out.println("utilBean : "+utilBean.getEmpID());
+		}
+		try {
+			System.out.println("["+row[Integer.parseInt(columnheader[1][1])]+"]["+row[Integer.parseInt(columnheader[4][1])]+"]["+row[Integer.parseInt(columnheader[2][1])]+"]["+row[Integer.parseInt(columnheader[3][1])]+"]");
+			utilBean.setEmpName(row[Integer.parseInt(columnheader[1][1])].trim());
+			utilBean.setChrgMethodCd(row[Integer.parseInt(columnheader[4][1])].trim());
+			utilBean.setHours(row[Integer.parseInt(columnheader[2][1])].trim());
+			utilBean.setWeekEndDate(row[Integer.parseInt(columnheader[3][1])].trim());
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+		System.out.println("utilBean : "+utilBean.toString());
 		return utilBean;
 	}
 
@@ -476,19 +474,19 @@ public class ReadUtilization {
 	public static void printMap(HashMap<String, EmployUtilizationBean> empUtilMap2) {
 		float hours=0F;
 		for (Map.Entry<String, EmployUtilizationBean> entry : empUtilMap2.entrySet()) {
-			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().toString());
+			// System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().toString());
 			EmployUtilizationBean inner =(EmployUtilizationBean)entry.getValue();
 			System.out.println("empid : "+inner.getEmpID()+" empname : "+ inner.getEmpName());
 			
 			for (Map.Entry<String, Float> month : inner.getYear_map().entrySet()){
-				System.out.print(month.getKey() + month.getValue()+ "  ");
+				System.out.print(month.getKey() +" "+ month.getValue()+ "  ");
 				hours+=month.getValue();
 			}
 			System.out.println("total hours "+hours );
 			hours=0F;
 			
 			for (Map.Entry<String, Float> month : inner.getAvail_hours().entrySet()){
-				System.out.print(month.getKey() + month.getValue()+ "  ");
+				System.out.print(month.getKey() +" "+ month.getValue()+ "  ");
 				hours+=month.getValue();
 			}
 			System.out.println("total hours "+hours );
@@ -498,7 +496,20 @@ public class ReadUtilization {
 		}}
 		System.out.println("\n"+empUtilMap2.size());
 	    }
-
+	    
+	public EmployeePojo getCloudantEmployee() throws JSONException, IOException{
+		String uri = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
+		URL url = new URL(uri);
+		String loginPassword = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix"+ ":" + "Bluemix4me";
+		@SuppressWarnings("restriction")
+		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
+		URLConnection conn = url.openConnection();
+		conn.setRequestProperty ("Authorization", "Basic " + encoded);
+	    InputStream input = conn.getInputStream();
+	    Reader reader = new InputStreamReader(input,"UTF-8");
+	    EmployeePojo emppojo = new Gson().fromJson(reader, EmployeePojo.class);	   
+	    return emppojo;
+	} 
 }
 
 	

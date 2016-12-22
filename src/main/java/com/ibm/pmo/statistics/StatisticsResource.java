@@ -3,6 +3,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+import com.ibm.pmo.resources.PMOTest;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +22,12 @@ public class StatisticsResource {
 	@Path("/{data}")
 	@Produces("application/json")
 	public InputStream bandmixpercentage(@PathParam("data") String data) throws Exception {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		InputStream inputStream = null;
 		Properties prop = new Properties();
 		String userName ="";

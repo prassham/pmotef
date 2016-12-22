@@ -8,12 +8,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
+import org.json.JSONObject;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.ibm.pmo.employee.EmployeeResource;
 
 @Path("/PMOTest")
@@ -34,8 +39,9 @@ public class PMOTest {
 
 	@GET
 	@Produces("text/plain")
-	public String getEmployee() {
-
+	public Response getEmployee() {
+		EmployeeResource empr = new EmployeeResource();
+		JSONObject responseObject = new JSONObject();
 		System.out.println("invoking ===" );
 		String loginid = null;	
 		Principal principal = httprequest.getUserPrincipal();
@@ -49,18 +55,31 @@ public class PMOTest {
 			String [] splits = name.split("/");
 			System.out.println("login id is "+splits[splits.length-1]);
 			loginid = splits[splits.length-1];
+			String result = empr.getId(loginid);
+			if(result!=null){
+				responseObject.put("email",loginid);
+				return Response.status(200).entity(responseObject.toString()).build();
+			}
+			else{
+				responseObject.put("message","Forbidden Access");
+				System.out.println(responseObject);
+				return Response.status(403).entity(responseObject.toString()).build();
+			}
 		}
-
-		return loginid;
+		return null;
 	}
 		
 	@GET
 	@Path("/EmpManageaccess")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String checkPMO(){
-		String loggedinId =  getEmployee();
+		Gson gson = new Gson();
+		Response loggedinId =  getEmployee();
 		EmployeeResource empr = new EmployeeResource();
-		String result = empr.getId(loggedinId);
+		String json1 = loggedinId.getEntity().toString();
+		JsonObject jobj = gson.fromJson(json1, JsonObject.class);
+		String email = jobj.get("email").toString().replace("\"", "");
+		String result = empr.getId(email);
 		return result;
 	}
 }

@@ -51,6 +51,8 @@ public class UtilizationRowBean {
 		return weekEndDate;
 	}
 	public void setWeekEndDate(String weekEndDate)throws ParseException {
+		
+		try {
 			SimpleDateFormat cvsfileformat = new SimpleDateFormat("MMM dd, yyyy");
 		//	SimpleDateFormat cvsfileformat = new SimpleDateFormat("dd-MMM-yy");
 			Date date = cvsfileformat.parse(weekEndDate);		
@@ -63,8 +65,15 @@ public class UtilizationRowBean {
 				this.month = "EvaluateManually";
 			}		
 		this.weekEndDate = date;
+		
+	}catch(Exception ex) {
+		System.out.println("culprint value is "+weekEndDate);
+		ex.printStackTrace();
+	}
+
 	}
 	public void setWeekEndDate(Date weekEndDate ){
+		try {
 		SimpleDateFormat propertyfileformat = new SimpleDateFormat("dd/MM/yyyy");		
 		String cvsToPro = propertyfileformat.format(weekEndDate);		
 		if(PropertiesCache.getInstance().containsKey(cvsToPro)){
@@ -74,6 +83,11 @@ public class UtilizationRowBean {
 			this.month = "EvaluateManually";
 		}	
 		this.weekEndDate = weekEndDate;
+	}catch(Exception ex) {
+		System.out.println("culprint value is "+weekEndDate.toString());
+		ex.printStackTrace();
+	}
+
 	}
 	public String getMonth() {
 		return month;
@@ -88,4 +102,7 @@ public class UtilizationRowBean {
 		this.counter = counter;
 	}
 	
+	public String toString() {
+		return "["+empID+"]["+empName+"]["+weekEndDate+"]["+chrgMethodCd+"]["+hours+"]";
+	}
 }

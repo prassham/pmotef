@@ -57,8 +57,14 @@ public class EmployeePojo
  public class Key
 {
     private String BUILDING;
-
-    private String REMARKS;
+    
+    private String SN_ID;
+    
+    private String STATUS;
+    
+    private String EMAIL;
+    
+	private String REMARKS;
 
     private String WS_MANAGER;
 
@@ -117,6 +123,15 @@ public class EmployeePojo
     private String GENDER;
 
     private String OPEN_SEAT_NO;
+    
+    public String getSN_ID() {
+		return SN_ID;
+	}
+
+	public void setSN_ID(String sN_ID) {
+		SN_ID = sN_ID;
+	}
+
 
     public String getBUILDING ()
     {
@@ -428,7 +443,23 @@ public class EmployeePojo
         this.OPEN_SEAT_NO = OPEN_SEAT_NO;
     }
 
-    @Override
+    public String getEMAIL() {
+		return EMAIL;
+	}
+
+	public void setEMAIL(String eMAIL) {
+		EMAIL = eMAIL;
+	}
+
+	public String getSTATUS() {
+		return STATUS;
+	}
+
+	public void setSTATUS(String sTATUS) {
+		STATUS = sTATUS;
+	}
+
+	@Override
     public String toString()
     {
         return "ClassPojo [BUILDING = "+BUILDING+", REMARKS = "+REMARKS+", WS_MANAGER = "+WS_MANAGER+", PEM = "+PEM+", LAPTOP = "+LAPTOP+", ELTP = "+ELTP+", _id = "+_id+", RANGE_EXP = "+RANGE_EXP+", NOTES_ID = "+NOTES_ID+", BAND = "+BAND+", SKILL_SET = "+SKILL_SET+", UTILIZATION = "+UTILIZATION+", END_DATE_GBSTIMESTAMP = "+END_DATE_GBSTIMESTAMP+", TYPE = "+TYPE+", WORK_LOCATION = "+WORK_LOCATION+", NAME = "+NAME+", DOJ_O2 = "+DOJ_O2+", WORKSTREAM = "+WORKSTREAM+", ON_OFF_SHORE = "+ON_OFF_SHORE+", REVISED_EMP_ID = "+REVISED_EMP_ID+", CURRENT_ROLE = "+CURRENT_ROLE+", AGE_TENURE = "+AGE_TENURE+", TENURE = "+TENURE+", _rev = "+_rev+", DOJ_IBM = "+DOJ_IBM+", EXPIRES = "+EXPIRES+", START_DATE = "+START_DATE+", MOBILE = "+MOBILE+", EMP_ID = "+EMP_ID+", GENDER = "+GENDER+", OPEN_SEAT_NO = "+OPEN_SEAT_NO+"]";

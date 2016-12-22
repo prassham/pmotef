@@ -25,6 +25,7 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.ibm.pmo.resources.PMOTest;
 
 @Path("/employee")
 public class EmployeeResource {
@@ -62,7 +63,14 @@ public class EmployeeResource {
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String geEmployee(){
+	public JSONObject geEmployee(){
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		JSONObject jsonObj = null;
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -83,18 +91,25 @@ public class EmployeeResource {
 		if(!list3.isEmpty()){
 			Gson gson = new Gson();
 			 json3 = gson.toJson(list3);
+			 jsonObj = new JSONObject(json3);
 			 System.out.println(json3);
 			 }
 		else{
 			System.out.println("User does not exist");
 		}
-			 return json3;
+			 return jsonObj;
 		}
 	@POST
 	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON)
 	/*@Produces(MediaType.APPLICATION_JSON)*/
 	public Response insert(String data) throws JSONException {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		System.out.println("abcd");
 		CloudantClient con = null;
 		try {
@@ -131,6 +146,12 @@ public class EmployeeResource {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(String data) throws JSONException {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		JSONObject responseObject = new JSONObject();
 		String json3=null;
 				CloudantClient con = null;
@@ -174,6 +195,12 @@ public class EmployeeResource {
 	@Path("/delete/{i}/{r}")
 	@Produces("text/html")
 	public Response delete(@PathParam("i") String id, @PathParam("r") String rev) throws CouchDbException {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -199,6 +226,12 @@ public class EmployeeResource {
 	@Path("/getEmployee/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getEmployeeId(@PathParam("i") String empid) throws CouchDbException {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		String json3=null;
 		
 		System.out.println(empid);
@@ -236,6 +269,12 @@ public class EmployeeResource {
 	@Path("/getws_manager/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getEmployeeName(@PathParam("i") String empname) throws CouchDbException {
+		PMOTest validation = new PMOTest();
+		Response res = validation.getEmployee();
+		System.out.print(res.getStatus());
+		if(res.getStatus()!=200){
+			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+		}
 		String json3=null;
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
@@ -271,6 +310,12 @@ public class EmployeeResource {
 	@Path("/history")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHistory(){
+			PMOTest validation = new PMOTest();
+			Response res = validation.getEmployee();
+			System.out.print(res.getStatus());
+			if(res.getStatus()!=200){
+				throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
+			}
 		String json3=null;
 		CloudantClient con = null;
 		try {
