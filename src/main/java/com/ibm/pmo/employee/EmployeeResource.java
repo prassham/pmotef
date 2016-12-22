@@ -306,7 +306,7 @@ public class EmployeeResource {
 		
 			 return json3;
 		}
-		@GET
+	@GET
 	@Path("/history")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHistory(){
