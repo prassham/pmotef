@@ -112,7 +112,7 @@ angular.module('PMOHttp', []).factory('PMOHttpService', ['$http', function ($htt
         	return $http({ method:"GET", url:"pmo/employee/getEmployee/"+empid+""});
         },
         loginName: function(){
-        	return $http({ method:"GET", url:"pmo/PMOTest"});
+        	return $http({ method:"GET", url:"/pmo/PMOTest"});
         },
         getOptions: function(){
         	return $http({ method:"GET", url:"localData/dropdown.json" });
