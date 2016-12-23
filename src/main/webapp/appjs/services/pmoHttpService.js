@@ -125,7 +125,7 @@ angular.module('PMOHttp', []).factory('PMOHttpService', ['$http', function ($htt
         	 return $http.post('pmo/sowedit/insert', json);
         },
         getHistoryList: function(){
-            return $http({ method:"GET", url: "pmo/employee/history" });
+            return $http({ method:"GET", url: "pmo/employee/history"});
             //return $http({ method:"GET", url: _url+"/getEmployee.json" });
         },
         checkPMO:function(){
