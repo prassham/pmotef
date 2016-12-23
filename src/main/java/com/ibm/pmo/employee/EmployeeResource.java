@@ -372,6 +372,7 @@ public class EmployeeResource {
 			 json3 = gson.toJson(list3);
 			 System.out.println("User record"+list3);
 			 System.out.println(json3);
+			 return json3;
 			 }
 		else{
 			System.out.println("User does not exist");
