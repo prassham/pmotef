@@ -22,12 +22,12 @@ public class StatisticsResource {
 	@Path("/{data}")
 	@Produces("application/json")
 	public InputStream bandmixpercentage(@PathParam("data") String data) throws Exception {
-		PMOTest validation = new PMOTest();
+/*		PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		InputStream inputStream = null;
 		Properties prop = new Properties();
 		String userName ="";
