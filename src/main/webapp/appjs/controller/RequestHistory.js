@@ -4,7 +4,7 @@ angular.module('RequestHistoryCtrl', []).controller('RequestHistoryController', 
 	$scope.user = PMOHttpService;
 	$scope.pendingbutton = $scope.user.pending;
 	$scope.uservacation=PMOHttpService
-						.getVacationHistory(PMOHttpService.email)
+						.getVacationHistory($scope.user.intranetID)
 						.then(
 								function(response) {
 									$('#mydiv').hide();
