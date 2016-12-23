@@ -64,13 +64,13 @@ public class EmployeeResource {
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public JSONObject geEmployee(){
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		JSONObject jsonObj = null;
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -104,12 +104,12 @@ public class EmployeeResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	/*@Produces(MediaType.APPLICATION_JSON)*/
 	public Response insert(String data) throws JSONException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		System.out.println("abcd");
 		CloudantClient con = null;
 		try {
@@ -146,12 +146,12 @@ public class EmployeeResource {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(String data) throws JSONException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		JSONObject responseObject = new JSONObject();
 		String json3=null;
 				CloudantClient con = null;
@@ -195,12 +195,12 @@ public class EmployeeResource {
 	@Path("/delete/{i}/{r}")
 	@Produces("text/html")
 	public Response delete(@PathParam("i") String id, @PathParam("r") String rev) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -226,12 +226,12 @@ public class EmployeeResource {
 	@Path("/getEmployee/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getEmployeeId(@PathParam("i") String empid) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		String json3=null;
 		
 		System.out.println(empid);
@@ -269,12 +269,12 @@ public class EmployeeResource {
 	@Path("/getws_manager/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getEmployeeName(@PathParam("i") String empname) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		String json3=null;
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
@@ -310,13 +310,13 @@ public class EmployeeResource {
 	@Path("/history")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHistory(){
-			PMOTest validation = new PMOTest();
+			/*PMOTest validation = new PMOTest();
 			Response res = validation.getEmployee();
 			System.out.print(res.getStatus());
 			System.out.println("response status" + res.getStatus());
 			if(res.getStatus()!=200){
 				throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-			}
+			}*/
 			System.out.println("Inside history");
 		String json3=null;
 		CloudantClient con = null;

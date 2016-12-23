@@ -71,12 +71,12 @@ public class VacationResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String login(String data) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		System.out.println(data);
 		CloudantClient con = null;
 		try {
@@ -116,12 +116,12 @@ public class VacationResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	/*@Produces(MediaType.APPLICATION_JSON)*/
 	public Response insert(String data) throws JSONException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -160,12 +160,12 @@ public class VacationResource {
 	@Path("/delete/{i}/{r}")
 	@Produces("text/html")
 	public Response delete(@PathParam("i") String id, @PathParam("r") String rev) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -190,12 +190,12 @@ public class VacationResource {
 	@Path("/update/{i}")
 	@Produces("text/html")
 	public String update(@PathParam("i") String id) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -224,12 +224,12 @@ public class VacationResource {
 	@Path("/employeeonleave")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String employeeonleave() throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -259,12 +259,12 @@ public class VacationResource {
 	@Path("/vacationhistory/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String vacationhistory(@PathParam("i") String email) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -285,12 +285,12 @@ public class VacationResource {
 	@Path("/pendingapprovals/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String pendingapprovals(@PathParam("i") String email) throws CouchDbException, IOException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = getConnection();
 		Database db = con.database("vacation_request", false);
 		
@@ -314,12 +314,12 @@ public class VacationResource {
 			@PathParam("j") String startDate, 
 			@PathParam("k") String endDate, 
 			@PathParam("l") String status) throws CouchDbException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		System.out.println(status);
 		CloudantClient con = null;
 		try {
@@ -360,12 +360,12 @@ public class VacationResource {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateVacationStatus(String data) throws JSONException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		String json2=null;
 		CloudantClient con = null;
 		try {
@@ -393,12 +393,12 @@ public class VacationResource {
 	@Path("/getnotesid/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getnotesid(@PathParam("i") String email) throws CouchDbException, IOException {
-			PMOTest validation = new PMOTest();
+			/*PMOTest validation = new PMOTest();
 			Response res = validation.getEmployee();
 			System.out.print(res.getStatus());
 			if(res.getStatus()!=200){
 				throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-			}
+			}*/
 		CloudantClient con = getConnection();
 		Database db = con.database("employee", false);
 		System.out.println(email);
@@ -420,12 +420,12 @@ public class VacationResource {
 	@Path("/getLeaverecord/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getLeaverecord(@PathParam("i") String email) throws CouchDbException, IOException {
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		Response res = validation.getEmployee();
 		System.out.print(res.getStatus());
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}
+		}*/
 		CloudantClient con = getConnection();
 		Database db = con.database("vacation_request", false);
 		System.out.println(email);

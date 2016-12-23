@@ -55,7 +55,7 @@ public class PMOTest {
 			String [] splits = name.split("/");
 			System.out.println("login id is "+splits[splits.length-1]);
 			loginid = splits[splits.length-1];
-			String result = empr.getId(loginid);
+			/*String result = empr.getId(loginid);
 			System.out.println("Result from empr.getID : " + result);
 			if(result!=null){
 				responseObject.put("email",loginid);
@@ -65,22 +65,25 @@ public class PMOTest {
 				responseObject.put("message","Forbidden Access");
 				System.out.println(responseObject);
 				return Response.status(403).entity(responseObject.toString()).build();
-			}
+			}*/
 		}
-		return null;
+		return loginid;
 	}
 		
 	@GET
 	@Path("/EmpManageaccess")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String checkPMO(){
-		Gson gson = new Gson();
+		/*Gson gson = new Gson();
 		Response loggedinId =  getEmployee();
 		EmployeeResource empr = new EmployeeResource();
 		String json1 = loggedinId.getEntity().toString();
 		JsonObject jobj = gson.fromJson(json1, JsonObject.class);
 		String email = jobj.get("email").toString().replace("\"", "");
-		String result = empr.getId(email);
+		String result = empr.getId(email);*/
+		String loggedinId =  getEmployee();
+		EmployeeResource empr = new EmployeeResource();
+		String result = empr.getId(loggedinId);
 		return result;
 	}
 }
