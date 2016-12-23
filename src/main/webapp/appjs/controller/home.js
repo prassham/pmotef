@@ -17,6 +17,7 @@ angular.module('homeCtrl', []).controller('HomeController', function ($scope,PMO
 		 $scope.loggedinuser = PMOHttpService
 			.loginName().then(function (response) {
 				var id = JSON.stringify(response.data);
+				$scope.user.intranetID = id;
 				console.log(id);
 				
 				$scope.logindetails = PMOHttpService

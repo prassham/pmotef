@@ -4,6 +4,7 @@ angular.module('vacationPlannerCtrl', []).controller('vacationPlannerController'
 	$scope.user = PMOHttpService;
 	
 	$scope.pendingbutton = $scope.user.pending;
+	$scope.loginid = $scope.user.intranetID;
 	/*$scope.loggedinuser = PMOHttpService
 	.loginidCheck().then(function (response) {
 		$scope.loginid = response.data;
