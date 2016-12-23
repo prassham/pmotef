@@ -20,7 +20,7 @@ $scope.user = PMOHttpService;
 	$scope.user.pending = true;
 	$scope.pendingbutton = $scope.user.pending;
 	
- $scope.loggedinuser = PMOHttpService
+/* $scope.loggedinuser = PMOHttpService
 		.loginName().then(function (response) {
 			var id = JSON.stringify(response.data);
 			console.log(id);
@@ -47,7 +47,7 @@ $scope.user = PMOHttpService;
 				});
 				
 			});
-});
+});*/
 	 
 	 $scope.loginid = PMOHttpService.
 		checkPMO().then(function(response){
