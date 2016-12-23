@@ -56,6 +56,7 @@ public class PMOTest {
 			System.out.println("login id is "+splits[splits.length-1]);
 			loginid = splits[splits.length-1];
 			String result = empr.getId(loginid);
+			System.out.println("Result from empr.getID : " + result);
 			if(result!=null){
 				responseObject.put("email",loginid);
 				return Response.status(200).entity(responseObject.toString()).build();
@@ -66,6 +67,7 @@ public class PMOTest {
 				return Response.status(403).entity(responseObject.toString()).build();
 			}
 		}
+		return loginid;
 	}
 		
 	@GET
