@@ -71,6 +71,7 @@ public class EmployeeResource {
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
 		}*/
+		JSONObject jsonObj = null;
 		CloudantClient con = null;
 		try {
 			con = getConnection();
