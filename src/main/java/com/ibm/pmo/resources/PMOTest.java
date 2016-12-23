@@ -67,7 +67,7 @@ public class PMOTest {
 				return Response.status(403).entity(responseObject.toString()).build();
 			}
 		}
-		return loginid;
+		return null;
 	}
 		
 	@GET
