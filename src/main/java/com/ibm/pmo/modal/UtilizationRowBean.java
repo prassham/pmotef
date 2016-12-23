@@ -53,7 +53,7 @@ public class UtilizationRowBean {
 	public void setWeekEndDate(String weekEndDate)throws ParseException {
 		
 		try {
-			SimpleDateFormat cvsfileformat = new SimpleDateFormat("MMM dd, yyyy");
+			SimpleDateFormat cvsfileformat = new SimpleDateFormat("dd/MM/yyyy");
 		//	SimpleDateFormat cvsfileformat = new SimpleDateFormat("dd-MMM-yy");
 			Date date = cvsfileformat.parse(weekEndDate);		
 			SimpleDateFormat propertyfileformat = new SimpleDateFormat("dd/MM/yyyy");		

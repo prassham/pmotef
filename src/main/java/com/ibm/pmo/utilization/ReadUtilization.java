@@ -1,15 +1,18 @@
 package com.ibm.pmo.utilization;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,7 +54,6 @@ import com.ibm.pmo.utils.*;
 @Path("/PMOFileUpload")
 
 public class ReadUtilization {
-    
     @POST
 	@Path("/utilizationFileUpload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -66,8 +68,13 @@ public class ReadUtilization {
 			  obj.startEndDateInitializer();
 		
 			HashMap<String, EmployUtilizationBean> empUtilMap= obj.readFile(uploadedInputStream);
-			obj.printMap(empUtilMap);		
-			dbupdate.dbinsert(empUtilMap);
+			obj.printMap(empUtilMap);	
+			try{
+				dbupdate.dbinsert(empUtilMap);
+			}
+			catch(NullPointerException ne){
+				ne.printStackTrace();
+			}
 
 			// save it
 		//	writeToFile(uploadedInputStream, uploadedFileLocation);
@@ -122,14 +129,13 @@ public class ReadUtilization {
 		String line = br.readLine();
 		String cvsSplitBy = ",";
 		String[] headerLine = line.split(cvsSplitBy);		
-//		System.out.println("empID : "+headerLine[8]+ " empName :"+headerLine[11] + "Chrg Method Cd :"+ headerLine[23]
-//				+" hours : "+headerLine[19] +" week end Date :"+headerLine[21]);					
+		System.out.println("empID : "+headerLine[8]+ " empName :"+headerLine[11] + "Chrg Method Cd :"+ headerLine[23]
+				+" hours : "+headerLine[19] +" week end Date :"+headerLine[20]);					
 		String [][]columnheader = columnMatcher(headerLine);
 		int count = 1 ;  
 		while ((line = br.readLine()) != null) {
-			//String[] row = parse(line);
-			String[] row = line.split(",");
-			System.out.print("Line "+ count++ +" ");
+			String[] row = parse(line);
+			System.out.print("Line : " +count++ +"\n");
 //Reading 	second row  from the CSV File and creating a UtilizationRowBean for each row encountered.	
 			UtilizationRowBean utilbean = utilRowBeanReader(row,columnheader);
 //			System.out.println(utilbean.getHours() + "  " +utilbean.getMonth() + " "+ utilbean.getWeekEndDate());
@@ -248,6 +254,7 @@ public class ReadUtilization {
 		return date;
 	}
 
+
 	private HashMap<String, Float> utilizationCalculate(UtilizationRowBean utilbean) throws ParseException {
 		/* utilization to calculate is based upon
 		 * CTA and NON CTA values
@@ -292,107 +299,121 @@ public class ReadUtilization {
 
 	private HashMap<String, Float> hashUtilizationHoursAddition(HashMap<String, Float> availHours,
 			UtilizationRowBean utilbean) {
-	//	System.out.println(utilbean.getHours() + "  " + utilbean.getMonth() + "  " + utilbean.getWeekEndDate());
-		float hours = 0F;
-		String month=null;
-		if(!availHours.isEmpty()){
-			if(availHours.containsKey(utilbean.getMonth())){
-				hours=availHours.get(utilbean.getMonth());
-			//	System.out.println("previous count "+ hours);
-				hours+=utilbean.getHours();
-			//	System.out.println("current count "+ hours);
-				month = utilbean.getMonth();
-				
-			}
-			else{
-			//	System.out.println("for new month not in hashmap ");
-				
-				hours = utilbean.getHours();
-				month = utilbean.getMonth();
-				
-			}		
-		availHours.put(month, hours);
-		
-		}else{//	System.out.println("hashmap is empty");
-			availHours.put(utilbean.getMonth(),utilbean.getHours());
-		}
-		
-	//	System.out.println("Whithin hashUtilizationHoursAddition "+availHours.toString());
-		return availHours;
-	}
-
-	private HashMap<String, Float> hashMapAddition(HashMap<String, Float> availHours, UtilizationRowBean utilbean) {
-		
-		float hours = 0F;
-		String month = null;
-		if(!availHours.isEmpty()){		
-			if(availHours.containsKey(utilbean.getMonth())){
-				hours=availHours.get(utilbean.getMonth());
-			//	System.out.println("previous count "+ hours);
-				hours+=utilbean.weekhours();
-			//	System.out.println("current count "+ hours);
-				
-				month = utilbean.getMonth();
-			}
-			else{
-				hours = utilbean.weekhours();
-				month = utilbean.getMonth();
-			}
-		availHours.put(month, hours);
-		}else{
-			availHours.put(utilbean.getMonth(), utilbean.weekhours());
-		}
-		return availHours;
-	}
-
-	private HashMap<String, Float> availHoursCalculate(UtilizationRowBean utilbean)throws ParseException {
-		
-		/* availHours to calculate is based upon start date and end date only
-		 * Nothing to do with CTA and NON CTA values
-		 * Need to check dates in arraylist
-		 * */
-		HashMap<String, Float> availHours = new HashMap<>();
-		ArrayList<Date> dateHistoric = new ArrayList<>();		
-		if(empUtilMap.containsKey(utilbean.getEmpID())){
-			availHours = empUtilMap.get(utilbean.getEmpID()).getAvail_hours();
-			Date start = empUtilMap.get(utilbean.getEmpID()).getStartDate();
-			Date end = empUtilMap.get(utilbean.getEmpID()).getEndDate();
-			if((utilbean.getWeekEndDate().after(start)||utilbean.getWeekEndDate().equals(start))&&
-					(utilbean.getWeekEndDate().before(end)||utilbean.getWeekEndDate().equals(end)) ){
-				dateHistoric = empUtilMap.get(utilbean.getEmpID()).getWeekEndingDate();				
-				if(!dateHistoric.contains(utilbean.getWeekEndDate())){
-					// Needs to add hours
-					dateHistoric=weekEndingDateCalculate(utilbean);// date addition has been taken care off
-					availHours = hashMapAddition(availHours,utilbean);
-	//				empUtilMap.get(utilbean.getEmpID()).setWeekEndingDate(dateHistoric);
-	//				System.out.println("Should RUN more than once"+availHours.toString() + " Date : "+ utilbean.getWeekEndDate());
-				}// else do nothing already exists there in arraylist
-			}
-				
-			
-		}
-		else{// Since not present in empUtilMap
-			Date start = startEndDateRetriver(1,utilbean);
-			Date end = startEndDateRetriver(2,utilbean);
-			if((utilbean.getWeekEndDate().after(start)||utilbean.getWeekEndDate().equals(start))&&
-					(utilbean.getWeekEndDate().before(end)||utilbean.getWeekEndDate().equals(end)) ){
-				// Since dateHistoric is null
-	//			dateHistoric = empUtilMap.get(utilbean.getEmpID()).getWeekEndingDate();	
-	//			if(dateHistoric.contains(utilbean.getWeekEndDate())){
-					// Needs to add hours					
-					availHours = hashMapAddition(availHours,utilbean);
-	//				empUtilMap.get(utilbean.getEmpID()).setWeekEndingDate(dateHistoric);
-	//				System.out.println("Should RUN only once"+availHours.toString() + " Date : "+ utilbean.getWeekEndDate());
-				}// else do nothing already is there in arraylist
+//		System.out.println(utilbean.getHours() + "  " + utilbean.getMonth() + "  " + utilbean.getWeekEndDate());
+			float hours = 0F;
+			String month=null;
+			if(!availHours.isEmpty()){
+				if(availHours.containsKey(utilbean.getMonth())){
+					hours=availHours.get(utilbean.getMonth());
+				//	System.out.println("previous count "+ hours);
+					hours+=utilbean.getHours();
+				//	System.out.println("current count "+ hours);
+					month = utilbean.getMonth();
+					
 				}
-		
-		return availHours;
-	}
+				else{
+				//	System.out.println("for new month not in hashmap ");
+					
+					hours = utilbean.getHours();
+					month = utilbean.getMonth();
+					
+				}		
+			availHours.put(month, hours);
+			
+			}else{//	System.out.println("hashmap is empty");
+				availHours.put(utilbean.getMonth(),utilbean.getHours());
+			}
+			
+		//	System.out.println("Whithin hashUtilizationHoursAddition "+availHours.toString());
+			return availHours;
+		}
+
+		private HashMap<String, Float> hashMapAddition(HashMap<String, Float> availHours, UtilizationRowBean utilbean) {
+			
+			float hours = 0F;
+			String month = null;
+			if(!availHours.isEmpty()){		
+				if(availHours.containsKey(utilbean.getMonth())){
+					hours=availHours.get(utilbean.getMonth());
+				//	System.out.println("previous count "+ hours);
+					hours+=utilbean.weekhours();
+				//	System.out.println("current count "+ hours);
+					
+					month = utilbean.getMonth();
+				}
+				else{
+					hours = utilbean.weekhours();
+					month = utilbean.getMonth();
+				}
+			availHours.put(month, hours);
+			}else{
+				availHours.put(utilbean.getMonth(), utilbean.weekhours());
+			}
+			return availHours;
+		}
+
+		private HashMap<String, Float> availHoursCalculate(UtilizationRowBean utilbean)throws ParseException {
+			
+			/* availHours to calculate is based upon start date and end date only
+			 * Nothing to do with CTA and NON CTA values
+			 * Need to check dates in arraylist
+			 * */
+			HashMap<String, Float> availHours = new HashMap<>();
+			ArrayList<Date> dateHistoric = new ArrayList<>();		
+			if(empUtilMap.containsKey(utilbean.getEmpID())){
+				availHours = empUtilMap.get(utilbean.getEmpID()).getAvail_hours();
+				Date start = empUtilMap.get(utilbean.getEmpID()).getStartDate();
+				Date end = empUtilMap.get(utilbean.getEmpID()).getEndDate();
+				if((utilbean.getWeekEndDate().after(start)||utilbean.getWeekEndDate().equals(start))&&
+						(utilbean.getWeekEndDate().before(end)||utilbean.getWeekEndDate().equals(end)) ){
+					dateHistoric = empUtilMap.get(utilbean.getEmpID()).getWeekEndingDate();				
+					if(!dateHistoric.contains(utilbean.getWeekEndDate())){
+						// Needs to add hours
+						dateHistoric=weekEndingDateCalculate(utilbean);// date addition has been taken care off
+						availHours = hashMapAddition(availHours,utilbean);
+		//				empUtilMap.get(utilbean.getEmpID()).setWeekEndingDate(dateHistoric);
+		//				System.out.println("Should RUN more than once"+availHours.toString() + " Date : "+ utilbean.getWeekEndDate());
+					}// else do nothing already exists there in arraylist
+				}
+					
+				
+			}
+			else{// Since not present in empUtilMap
+				Date start = startEndDateRetriver(1,utilbean);
+				Date end = startEndDateRetriver(2,utilbean);
+				if((utilbean.getWeekEndDate().after(start)||utilbean.getWeekEndDate().equals(start))&&
+						(utilbean.getWeekEndDate().before(end)||utilbean.getWeekEndDate().equals(end)) ){
+					// Since dateHistoric is null
+		//			dateHistoric = empUtilMap.get(utilbean.getEmpID()).getWeekEndingDate();	
+		//			if(dateHistoric.contains(utilbean.getWeekEndDate())){
+						// Needs to add hours					
+						availHours = hashMapAddition(availHours,utilbean);
+		//				empUtilMap.get(utilbean.getEmpID()).setWeekEndingDate(dateHistoric);
+		//				System.out.println("Should RUN only once"+availHours.toString() + " Date : "+ utilbean.getWeekEndDate());
+					}// else do nothing already is there in arraylist
+					}
+			
+			return availHours;
+		}
+
 
 	private UtilizationRowBean utilRowBeanReader(String[] row,String [][] columnheader) throws ParseException {
-		
+		//System.out.println(Arrays.toString(row).replaceFirst(",", ""));
 		UtilizationRowBean utilBean = new UtilizationRowBean();
-		if(row[Integer.parseInt(columnheader[0][1])].trim().length()<= 6){
+		if(row[Integer.parseInt(columnheader[0][2])].matches("[0-9]+")){
+			if(row[Integer.parseInt(columnheader[1][3])].trim().length()<= 6){
+				switch(row[Integer.parseInt(columnheader[1][3])].trim().length()){
+				
+				case 4 :utilBean.setEmpID("00"+row[Integer.parseInt(columnheader[1][3])].trim());
+						break;
+				case 5 :utilBean.setEmpID("0"+row[Integer.parseInt(columnheader[1][3])].trim());
+						break;
+				default :utilBean.setEmpID(row[Integer.parseInt(columnheader[1][3])].trim());
+				}
+			}			
+		}	
+		else{
+			if(row[Integer.parseInt(columnheader[0][1])].trim().length()<= 6){
 			switch(row[Integer.parseInt(columnheader[0][1])].trim().length()){
 			
 			case 4 :utilBean.setEmpID("00"+row[Integer.parseInt(columnheader[0][1])].trim());
@@ -402,18 +423,31 @@ public class ReadUtilization {
 			default :utilBean.setEmpID(row[Integer.parseInt(columnheader[0][1])].trim());
 			}
 		}
-		try {
-			System.out.println("["+row[Integer.parseInt(columnheader[1][1])]+"]["+row[Integer.parseInt(columnheader[4][1])]+"]["+row[Integer.parseInt(columnheader[2][1])]+"]["+row[Integer.parseInt(columnheader[3][1])]+"]");
-			utilBean.setEmpName(row[Integer.parseInt(columnheader[1][1])].trim());
-			utilBean.setChrgMethodCd(row[Integer.parseInt(columnheader[4][1])].trim());
-			utilBean.setHours(row[Integer.parseInt(columnheader[2][1])].trim());
-			utilBean.setWeekEndDate(row[Integer.parseInt(columnheader[3][1])].trim());
-		}catch(Exception ex) {
-			ex.printStackTrace();
+	}
+		if(row[Integer.parseInt(columnheader[0][2])].matches("[0-9]+")){
+			utilBean.setEmpName(row[Integer.parseInt(columnheader[2][2])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[2][2])].trim());
+			utilBean.setChrgMethodCd(row[Integer.parseInt(columnheader[0][3])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[0][3])].trim());
+			utilBean.setHours(row[Integer.parseInt(columnheader[3][2])].trim());
+			System.out.println(row[Integer.parseInt(columnheader[3][2])].trim());
+			utilBean.setWeekEndDate(row[Integer.parseInt(columnheader[4][2])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[4][2])].trim());
+			System.out.println("utilBean : "+utilBean.getEmpID() +" " +row[Integer.parseInt(columnheader[2][2])].trim() +" " +row[Integer.parseInt(columnheader[0][3])].trim() +" " +row[Integer.parseInt(columnheader[3][2])].trim() +" " +row[Integer.parseInt(columnheader[4][2])].trim());
+			return utilBean;
 		}
-
-		System.out.println("utilBean : "+utilBean.toString());
-		return utilBean;
+		else{
+			utilBean.setEmpName(row[Integer.parseInt(columnheader[1][1])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[1][1])].trim());
+			utilBean.setChrgMethodCd(row[Integer.parseInt(columnheader[4][1])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[4][1])].trim());
+			utilBean.setHours(row[Integer.parseInt(columnheader[2][1])].trim());
+			System.out.println(row[Integer.parseInt(columnheader[2][1])].trim());
+			utilBean.setWeekEndDate(row[Integer.parseInt(columnheader[3][1])].trim());
+			//System.out.println(row[Integer.parseInt(columnheader[3][1])].trim());
+			System.out.println("utilBean : "+utilBean.getEmpID() +" " +row[Integer.parseInt(columnheader[1][1])].trim() +" " +row[Integer.parseInt(columnheader[4][1])].trim() +" " +row[Integer.parseInt(columnheader[2][1])].trim() +" " +row[Integer.parseInt(columnheader[3][1])].trim());
+			return utilBean;
+		}
 	}
 
 	private  String[] parse(String csvLine) {
@@ -441,33 +475,58 @@ public class ReadUtilization {
 	  private static String [][] columnMatcher(String arr[]){
 //		System.out.println("empID column 8 : "+ row[8]+ " empName colummn 11 :"+row[11] + "Chrg Method Cd  colummn 23 :"+ row[23]
 //		+" hours colummn 19 : "+row[19] +" week end Date colummn 21 :"+row[21]);
-		String [][] cloumnnumbers = new String[5][2];
+		String [][] cloumnnumbers = new String[5][4];
 		int count =0;
+		
 		cloumnnumbers[0][0]="Emp Ser Num";
 		cloumnnumbers[1][0]="Emp Last Name";
 		cloumnnumbers[2][0]="Hours";
 		cloumnnumbers[3][0]="Week Ending Date";
 		cloumnnumbers[4][0]="Chrg Method Cd";
-		cloumnnumbers[0][1]="8";
+		cloumnnumbers[0][1]="9";
 		cloumnnumbers[1][1]="11";
 		cloumnnumbers[2][1]="19";
-		cloumnnumbers[3][1]="21";
-		cloumnnumbers[4][1]="23";
+		cloumnnumbers[3][1]="20";
+		cloumnnumbers[4][1]="22";
+		cloumnnumbers[0][2]="1";
 		
-		for (String strings : arr) {			
-			if((strings.trim()).equalsIgnoreCase(cloumnnumbers[0][0])){
-			cloumnnumbers[0][1]=Integer.toString(count);
-			}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[1][0])){
-				cloumnnumbers[1][1]=Integer.toString(count);
-			}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[2][0])){
-				cloumnnumbers[2][1]=Integer.toString(count);
-			}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[3][0])){
-				cloumnnumbers[3][1]=Integer.toString(count);
-			}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[4][0])){
-				cloumnnumbers[4][1]=Integer.toString(count);
+		cloumnnumbers[1][2]="10";
+		cloumnnumbers[2][2]="13";
+		cloumnnumbers[3][2]="21";
+		cloumnnumbers[4][2]="22";
+		cloumnnumbers[0][3]="24";
+		cloumnnumbers[1][3]="11";
+		
+		/*
+		for (String strings : arr) {
+			if(flag == 1){
+				if((strings.trim()).equalsIgnoreCase(cloumnnumbers[0][0])){
+					cloumnnumbers[1][3]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[1][0])){
+						cloumnnumbers[2][2]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[2][0])){
+						cloumnnumbers[3][2]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[3][0])){
+						cloumnnumbers[4][2]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[4][0])){
+						cloumnnumbers[0][3]=Integer.toString(count);
+					}
+			}
+			else{
+				if((strings.trim()).equalsIgnoreCase(cloumnnumbers[0][0])){
+					cloumnnumbers[0][1]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[1][0])){
+						cloumnnumbers[1][1]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[2][0])){
+						cloumnnumbers[2][1]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[3][0])){
+						cloumnnumbers[3][1]=Integer.toString(count);
+					}else if((strings.trim()).equalsIgnoreCase(cloumnnumbers[4][0])){
+						cloumnnumbers[4][1]=Integer.toString(count);
+					}	
 			}
 			count++;
-		}
+		}*/
 		
 		return cloumnnumbers;
 	}
@@ -480,7 +539,9 @@ public class ReadUtilization {
 			
 			for (Map.Entry<String, Float> month : inner.getYear_map().entrySet()){
 				System.out.print(month.getKey() +" "+ month.getValue()+ "  ");
+				System.out.print("Incoming avail hours per month : " +month.getValue());
 				hours+=month.getValue();
+				System.out.print("Hours for testing : " +hours);
 			}
 			System.out.println("total hours "+hours );
 			hours=0F;

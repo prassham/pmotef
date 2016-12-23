@@ -11,7 +11,7 @@ angular
 					// $scope.accountDetails
 					var uploader = $scope.uploader = new FileUploader(
 							{
-								url : '/restUtilization/PMOFileUpload/utilizationFileUpload'
+								url : 'restUtilization/PMOFileUpload/utilizationFileUpload'
 							});
 					// CALLBACKS
 
