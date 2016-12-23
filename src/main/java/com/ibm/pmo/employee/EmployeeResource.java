@@ -313,7 +313,7 @@ public class EmployeeResource {
 			PMOTest validation = new PMOTest();
 			Response res = validation.getEmployee();
 			System.out.print(res.getStatus());
-			System.out.pritnln("response status" + res.getStatus());
+			System.out.println("response status" + res.getStatus());
 			if(res.getStatus()!=200){
 				throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
 			}
