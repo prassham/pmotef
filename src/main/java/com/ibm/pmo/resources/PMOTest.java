@@ -39,8 +39,7 @@ public class PMOTest {
 
 	@GET
 	@Produces("text/plain")
-	public Response getEmployee() {
-		EmployeeResource empr = new EmployeeResource();
+	public String getEmployee() {
 		JSONObject responseObject = new JSONObject();
 		System.out.println("invoking ===" );
 		String loginid = null;	
