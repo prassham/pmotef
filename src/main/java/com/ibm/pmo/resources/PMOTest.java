@@ -66,7 +66,7 @@ public class PMOTest {
 				return Response.status(403).entity(responseObject.toString()).build();
 			}
 		}
-		return null;
+		return Response.status(200).entity(responseObject.toString()).build();
 	}
 		
 	@GET
