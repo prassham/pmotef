@@ -2,7 +2,6 @@ angular.module('sidebarCtrl', []).controller('sidebarController', function ($sco
 	console.log('displaying Sidebar page from the controller');
 	
 	$scope.user = PMOHttpService;
-
 	$scope.user.pending = true;
 	$scope.pendingbutton = $scope.user.pending;
 	$scope.user.resourcemanagementbutton = true;
