@@ -9,7 +9,7 @@ angular.module('ReportCtrl', []).controller('ReportController', function ($scope
 	$scope.percentage1=[];
 	$scope.BandMixData = [];
 	$scope.Netvalue=[];
-	$scope.colors = [ '#FF0000', '#808080'];
+	$scope.colors = [ '#1C4165', '#C2C3C4'];
 	
 	$scope.total = PMOHttpService.gettotal().then(function(response) {
 		$('#mydiv').hide();
@@ -77,7 +77,8 @@ angular.module('ReportCtrl', []).controller('ReportController', function ($scope
 											
 										$scope.series = ['Count', 'Percentage(%)'];
 										  $scope.data = [ $scope.dat,$scope.percentage];
-										console.log(JSON.stringify($scope.BandMix));
+										console.log(JSON.stringify(JSON.stringify($scope.BandMix)));
+										console.log($scope.labels.indexOf("7A"));
 										
 										
 										for( var j =0;j<$scope.labels.length;j++){
@@ -97,28 +98,6 @@ angular.module('ReportCtrl', []).controller('ReportController', function ($scope
 											else if($scope.labels[j]=='6A' && $scope.labels.indexOf("6B")!=-1){
 												for( var k=0; k<$scope.labels.length;k++){
 													if($scope.labels[k]=='6B'){
-														$scope.labels1.push($scope.labels[j]+"/" +$scope.labels[k]);
-														$scope.dat1.push(parseFloat($scope.dat[j])+parseFloat($scope.dat[k]));
-														$scope.sum=parseFloat($scope.percentage[j])+parseFloat($scope.percentage[k]);
-														$scope.percentage1.push($scope.sum.toFixed(1));
-													}
-												}
-											}
-											else if($scope.labels.indexOf("6C")==-1 || $scope.labels.indexOf("6G")==-1){
-												if($scope.labels[j]=='6C'){
-													$scope.labels1.push($scope.labels[j]);
-													$scope.dat1.push($scope.dat[j]);
-													$scope.percentage1.push($scope.percentage[j]);
-												}
-												else if($scope.labels[j]=='6G'){
-													$scope.labels1.push($scope.labels[j]);
-													$scope.dat1.push($scope.dat[j]);
-													$scope.percentage1.push($scope.percentage[j]);
-												}
-											}
-											else if($scope.labels[j]=='6C' && $scope.labels.indexOf("6G")!=-1){
-												for( var k=0; k<$scope.labels.length;k++){
-													if($scope.labels[k]=='6G'){
 														$scope.labels1.push($scope.labels[j]+"/" +$scope.labels[k]);
 														$scope.dat1.push(parseFloat($scope.dat[j])+parseFloat($scope.dat[k]));
 														$scope.sum=parseFloat($scope.percentage[j])+parseFloat($scope.percentage[k]);
@@ -148,13 +127,12 @@ angular.module('ReportCtrl', []).controller('ReportController', function ($scope
 													}
 												}
 											}
-											else if($scope.labels[j]!='6A' && $scope.labels[j]!='6B' && $scope.labels[j]!='6C' && $scope.labels[j]!='6G' && $scope.labels[j]!='7A' && $scope.labels[j]!='7B'){
+											else if($scope.labels[j]!='6A' && $scope.labels[j]!='6B' && $scope.labels[j]!='6C' && $scope.labels[j]!='7A' && $scope.labels[j]!='7B'){
 												$scope.labels1.push($scope.labels[j]);
 												$scope.dat1.push($scope.dat[j]);
 												$scope.percentage1.push($scope.percentage[j]);
 											}
-										}
-											
+										}			
 											$scope.series1 = ['Count', 'Percentage(%)'];
 											  $scope.data1 = [ $scope.dat1,$scope.percentage1];
 											  

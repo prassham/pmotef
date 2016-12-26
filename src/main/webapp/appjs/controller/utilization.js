@@ -76,7 +76,7 @@ angular
 							.getEmployeeUtilization()
 							.then(
 									function(response) {
-
+										$('#mydiv').hide();
 										$scope.employeeUtilizationList = response.data.utilization;
 										$scope.teamList=response.data.workstream[0];
 										console.log("team data "+ (JSON.stringify($scope.teamList)));

@@ -271,7 +271,7 @@ color:#66CD00
     color: #ffffff;
     font-weight: bold;
     font-family: "Times New Roman", Times, serif;
-    background-color: #800000;
+    background-color: rgb(28, 65, 101);
     margin: 1px;
     padding: 5px;
 }
@@ -295,13 +295,23 @@ hr {
 section {
   background: #fff;
   border-radius: 3px;
-  border-bottom: 1px solid #800000;
-  color: #800000;
-  font: 14px/24px "Source Code Pro", Inconsolata, "Lucida Console", Terminal, "Courier New", Courier;
+  border-bottom: 1px solid rgb(28, 65, 101);
+  color: #23527c;
+  font: 14px/24px "Times New Roman", Times, serif;;
   text-align: center;
   height: 30%;
 }
 #mydiv {  
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color:grey;
+    opacity: .8;
+ }
+ #mydiv1 {  
     position:absolute;
     top:0;
     left:0;

@@ -4,7 +4,7 @@ angular.module('RequestHistoryCtrl', []).controller('RequestHistoryController', 
 	$scope.user = PMOHttpService;
 	$scope.pendingbutton = $scope.user.pending;
 	$scope.uservacation=PMOHttpService
-						.getVacationHistory($scope.user.intranetID)
+						.getVacationHistory(PMOHttpService.intranetID.replace("\"", "").replace("\"", ""))
 						.then(
 								function(response) {
 									$('#mydiv').hide();
@@ -13,19 +13,7 @@ angular.module('RequestHistoryCtrl', []).controller('RequestHistoryController', 
 									$scope.name = $scope.vacationhistory[0].name;
 									$scope.email = $scope.vacationhistory[0].email;
 								});
-	 /*$scope.deleteRequest= function(_id, _rev){
-		 if ($window.confirm("Are you sure, you want to delete the vacatioon request?"))
-			 $scope.request = PMOHttpService
-				.deleteVacation(_id, _rev)
-				.then(
-						function(response){
-							$scope.request1 = response.data;
-							alert(JSON.stringify($scope.request.message));
-							javascript:window.location.reload();
-						})*/
-		/* else
-		 $scope.result = "No";
-	 }*/
+
 	 $scope.updateRequest= function(_id){
 	 	$('#mydiv').show();
 		 $scope.request1 =PMOHttpService

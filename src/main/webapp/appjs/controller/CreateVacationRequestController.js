@@ -7,16 +7,16 @@ angular.module('CreateVacationRequestCtrl', []).controller('CreateVacationReques
 	$scope.CurrentDate = new Date();
 	var currentYear =  $scope.CurrentDate.getFullYear();
 	$scope.reason = "Vacation";
-	var e = PMOHttpService.email;
+	var e = PMOHttpService.intranetID;
 	var id = "{\"email\""+":"+e +"}";
 	$('#mydiv').show();
 	
 	$scope.TodayVacationList = PMOHttpService
-		.login(id).then(function (response) {
+		.login(e).then(function (response) {
 					$('#mydiv').hide();
 					$scope.VacationList = response.data;
 					for(var i =0;i< $scope.VacationList.length;i++){
-						if($scope.user.email == $scope.VacationList[i].EMAIL){
+						if(PMOHttpService.intranetID.replace("\"", "").replace("\"", "") == $scope.VacationList[i].EMAIL){
 						$scope.email = $scope.VacationList[i].EMAIL; 
 						$scope.loggedInUser = $scope.VacationList[i].NOTES_ID;
 						$scope.team = $scope.VacationList[i].WORKSTREAM;

@@ -1,5 +1,8 @@
-
-<div ng-controller="sidebarController" class="sidebar-offcanvas" id="sidebar" role="navigation"
+<div ng-controller="sidebarController" >
+<div id="mydiv1">
+    <img src="images/spinner.gif" class="ajax-loader"/>
+</div>
+<div class="sidebar-offcanvas" id="sidebar" role="navigation"
 	style="float: left; width: 20%;">
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse sidebar-divider"
@@ -19,13 +22,27 @@
 					<li class=""><a href="#offBoarding" ng-hide=resourcemanagementbutton style="color: #337AB7;"><span
 							class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;History Records</a></li>		
 				</ul></li>
-			<li><a href="#wip" title="Dashboard"><span
-					class="glyphicon glyphicon-bell" aria-hidden="true"></span>&nbsp;Notification</a></li>
-			<!-- Reports -->		
+							<!-- Reports -->		
 			<li id="teamlist"><a href="#reportStatistics"><span
 					class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Reports
 					</a>
 			</li>
+			<li><a href="#vacationPlanner"><span
+					class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;
+					Vacation Planner</a></li>
+					<li class="dropdown" id="reports" ng-hide=pendingbutton><a href=""
+				class="dropdown-toggle" data-toggle="dropdown"><span
+					class="glyphicon glyphicon-scale" aria-hidden="true"></span>&nbsp;Utilization<b
+					class="caret"></b></a>
+				<ul class="dropdown-menu pull-right">
+					<li><a href="#utilization" style="color: #337AB7;"><span
+							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Report</a></li>
+					<li><a href="#utilizationFileUpload" style="color: #337AB7;"><span
+							class="glyphicon glyphicon-level-up" aria-hidden="true"></span>&nbsp;File
+							Upload</a></li>
+				</ul></li>
+			<li><a href="#wip" title="Dashboard"><span
+					class="glyphicon glyphicon-bell" aria-hidden="true"></span>&nbsp;Notification</a></li>
 			<li id="openseats"><a
 				href="https://w3-01.sso.ibm.com/services/tools/marketplace/login.wss"
 				target="_blank"><span class="glyphicon glyphicon-piggy-bank"
@@ -45,11 +62,11 @@
                                                
 				</ul>
 				</li>
-                    <li class="dropdown" id="startofweek"><a href="" class="dropdown-toggle dropdown-hover" data-toggle="dropdown" >
-      				<span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> >&nbsp;Start Of The Week</a>
+                    <li class="dropdown" id="startofweek"><a href="#wip" class="dropdown-toggle dropdown-hover" data-toggle="dropdown" >
+      				<span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>&nbsp;Start Of The Week</a>
       				<ul class="dropdown-menu pull-right">
-      				 <li><a href="#soweditdata" style="color:#337AB7;">Upload Data</a></li>
-      						<li><a href="#sowviewdata" style="color:#337AB7;">View Data</a></li>
+      				 <li><a href="#wip" style="color:#337AB7;">Upload Data</a></li>
+      						<li><a  style="color:#337AB7;">View Data</a></li>
       				</ul>
 				</li>
 				</li>
@@ -60,15 +77,12 @@
       						<li><a href="#sowviewdata" style="color:#337AB7;">View Data</a></li>
       				</ul>
 				</li>-->
-			<li><a href="#vacationPlanner"><span
-					class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;
-					Vacation Planner</a></li>
-			<li class="dropdown" id="admin"><a href=""
+			<li class="dropdown" id="admin"><a href="#wip"
 				class="dropdown-toggle" data-toggle="dropdown"><span
 					class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> RAP
 					<b class="caret"></b></a>
 				<ul class="dropdown-menu pull-right">
-                   <li class="dropdown" id="o2"><a href="#rapEntryForm" class="dropdown-toggle" data-toggle="dropdown">
+                   <li class="dropdown" id="o2"><a href="#wip" class="dropdown-toggle" data-toggle="dropdown">
 							<span
 							class="glyphicon glyphicon-plus" aria-hidden="true"></span> RAP Entry Form</a>
                     </li>
@@ -89,25 +103,15 @@
                     </li>
 				</ul>
 			</li>
-			<li><a href='#newsletter'><span
+			<li><a href="#wip"><span
 					class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>&nbsp;Administration</a></li>
 			<li><a href="#wip"><span class="glyphicon glyphicon-tasks"
 					aria-hidden="true"></span>&nbsp;Project Status</a></li>
-            			<li class="dropdown" id="reports"><a href=""
-				class="dropdown-toggle" data-toggle="dropdown"><span
-					class="glyphicon glyphicon-scale" aria-hidden="true"></span>&nbsp;Utilization<b
-					class="caret"></b></a>
-				<ul class="dropdown-menu pull-right">
-					<li><a href="#utilization" style="color: #337AB7;"><span
-							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Report</a></li>
-					<li><a href="#utilizationFileUpload" style="color: #337AB7;"><span
-							class="glyphicon glyphicon-level-up" aria-hidden="true"></span>&nbsp;File
-							Upload</a></li>
-				</ul></li>
 			<li id="community"><a
 				href="https://w3-connections.ibm.com/communities/service/html/communitystart?communityUuid=2a680668-36bc-4e43-85a1-02f35b0f91e8 "
 				target="_blank"><span class="glyphicon glyphicon-globe"
 					aria-hidden="true"></span>&nbsp;O2 Community</a></li>
 		</ul>
 	</div>
+</div>
 </div>

@@ -77,7 +77,7 @@ public class VacationResource {
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
 		}*/
-		System.out.println(data);
+		System.out.println("Inside login" +data);
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -88,10 +88,10 @@ public class VacationResource {
 		Database db = con.database("employee", false);
 		String json3=null;
 		List<Employeegetset> list3=null;;
-		JsonObject jobj = gson.fromJson(data, JsonObject.class);
-		String id = jobj.get("email").toString();
+		/*JsonObject jobj = gson.fromJson(data, JsonObject.class);
+		String id = jobj.get("email").toString();*/
 		try{
-		list3 = db.findByIndex("\"selector\": {\"EMAIL\": {\"$eq\":"+id+"}}", Employeegetset.class);
+		list3 = db.findByIndex("\"selector\": {\"EMAIL\": {\"$eq\":"+data+"}}", Employeegetset.class);
 		}
 		catch (CouchDbException e){
 			System.out.println(e);
@@ -107,6 +107,7 @@ public class VacationResource {
 		}
 		else{
 			System.out.println("User does not exist");
+			json3 = "[{\"Message\" : \"User does not exist\"}]";
 		}
 			 return json3;
 	}
