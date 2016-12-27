@@ -195,7 +195,7 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 				$scope.EXPIRES ="green";
 			}
 			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
-				$scope.EXPIRES = "orange";
+				$scope.EXPIRES = "#FFA500";
 			}
 			else{
 				$scope.EXPIRES = "red";

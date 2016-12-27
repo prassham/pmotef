@@ -7,6 +7,7 @@ angular.module('LandingCtrl', []).controller('LandingController', function ($sco
     $scope.employeeDetails = "";
     $scope.employeeReferenceDataList = [];
     $scope.employeePhoto = "";
+    $scope.user = PMOHttpService;
     //alert($scope.user.resourcemanagementbutton);
 	//$scope.user.resourcemanagementbutton = false;
 	//$scope.resourcemanagementbutton = $scope.user.resourcemanagementbutton;
