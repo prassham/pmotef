@@ -117,12 +117,15 @@ public class VacationResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	/*@Produces(MediaType.APPLICATION_JSON)*/
 	public Response insert(String data) throws JSONException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		JSONObject responseObject = new JSONObject();
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
+			return Response.status(403).entity(responseObject.toString()).build();
+		}
+		
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -130,7 +133,6 @@ public class VacationResource {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		JSONObject responseObject = new JSONObject();
 		Database db = con.database("vacation_request", false);
 		
 		JsonObject jobj = gson.fromJson(data, JsonObject.class);
@@ -161,12 +163,11 @@ public class VacationResource {
 	@Path("/delete/{i}/{r}")
 	@Produces("text/html")
 	public Response delete(@PathParam("i") String id, @PathParam("r") String rev) throws CouchDbException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		System.out.println(res);
+		String result = login(res);
+		System.out.println("Checking result : " +result);
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -191,12 +192,13 @@ public class VacationResource {
 	@Path("/update/{i}")
 	@Produces("text/html")
 	public String update(@PathParam("i") String id) throws CouchDbException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+		   return json3;
+		}
 		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
@@ -225,12 +227,13 @@ public class VacationResource {
 	@Path("/employeeonleave")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String employeeonleave() throws CouchDbException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+		   return json3;
+		}
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -260,12 +263,13 @@ public class VacationResource {
 	@Path("/vacationhistory/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String vacationhistory(@PathParam("i") String email) throws CouchDbException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+		   return json3;
+		}
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -286,12 +290,13 @@ public class VacationResource {
 	@Path("/pendingapprovals/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String pendingapprovals(@PathParam("i") String email) throws CouchDbException, IOException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+		   return json3;
+		}
 		CloudantClient con = getConnection();
 		Database db = con.database("vacation_request", false);
 		
@@ -315,12 +320,14 @@ public class VacationResource {
 			@PathParam("j") String startDate, 
 			@PathParam("k") String endDate, 
 			@PathParam("l") String status) throws CouchDbException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		JSONObject responseObject = new JSONObject();
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
+			return Response.status(403).entity(responseObject.toString()).build();
+		}
 		System.out.println(status);
 		CloudantClient con = null;
 		try {
@@ -329,7 +336,6 @@ public class VacationResource {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JSONObject responseObject = new JSONObject();
 		String vstatus = null;
 		Database db = con.database("vacation_request", false);
 		
@@ -361,12 +367,15 @@ public class VacationResource {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateVacationStatus(String data) throws JSONException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		VacationResource vr = new VacationResource();
+		JSONObject responseObject = new JSONObject();
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = vr.login(res);
+		if(result.contains("User does not exist")){
+			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
+			return Response.status(403).entity(responseObject.toString()).build();
+		}
 		String json2=null;
 		CloudantClient con = null;
 		try {
@@ -375,7 +384,6 @@ public class VacationResource {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		JSONObject responseObject = new JSONObject();
 		Database db = con.database("vacation_request", false);
 		try{
 			Gson gson = new Gson();
@@ -394,12 +402,13 @@ public class VacationResource {
 	@Path("/getnotesid/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getnotesid(@PathParam("i") String email) throws CouchDbException, IOException {
-			/*PMOTest validation = new PMOTest();
-			Response res = validation.getEmployee();
-			System.out.print(res.getStatus());
-			if(res.getStatus()!=200){
-				throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-			}*/
+			PMOTest validation = new PMOTest();
+			String res = validation.getEmployee();
+			String result = login(res);
+			if(result.contains("User does not exist")){
+				String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+			   return json3;
+			}
 		CloudantClient con = getConnection();
 		Database db = con.database("employee", false);
 		System.out.println(email);
@@ -421,12 +430,13 @@ public class VacationResource {
 	@Path("/getLeaverecord/{i}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getLeaverecord(@PathParam("i") String email) throws CouchDbException, IOException {
-		/*PMOTest validation = new PMOTest();
-		Response res = validation.getEmployee();
-		System.out.print(res.getStatus());
-		if(res.getStatus()!=200){
-			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
-		}*/
+		PMOTest validation = new PMOTest();
+		String res = validation.getEmployee();
+		String result = login(res);
+		if(result.contains("User does not exist")){
+			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
+		   return json3;
+		}
 		CloudantClient con = getConnection();
 		Database db = con.database("vacation_request", false);
 		System.out.println(email);
