@@ -108,13 +108,13 @@ public class EmployeeResource {
 	public Response insert(String data) throws JSONException {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
 			return Response.status(403).entity(responseObject.toString()).build();
-		}
+		}*/
 		System.out.println("abcd");
 		CloudantClient con = null;
 		try {
@@ -152,13 +152,13 @@ public class EmployeeResource {
 	public Response update(String data) throws JSONException {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
 			return Response.status(403).entity(responseObject.toString()).build();
-		}
+		}*/
 		String json3=null;
 				CloudantClient con = null;
 				try {
@@ -204,12 +204,12 @@ public class EmployeeResource {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
 		PMOTest validation = new PMOTest();
-		String res = validation.getEmployee();
+		/*String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
 			return Response.status(403).entity(responseObject.toString()).build();
-		}
+		}*/
 		CloudantClient con = null;
 		try {
 			con = getConnection();
@@ -236,13 +236,13 @@ public class EmployeeResource {
 	public String getEmployeeId(@PathParam("i") String empid) throws CouchDbException {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
 		   return json3;
-		}
+		}*/
 		String json3=null;
 		
 		System.out.println(empid);
@@ -281,13 +281,13 @@ public class EmployeeResource {
 	public String getEmployeeName(@PathParam("i") String empname) throws CouchDbException {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
 		   return json3;
-		}
+		}*/
 		String json3=null;
 		CloudantClient con = null;
 		try {
@@ -325,12 +325,12 @@ public class EmployeeResource {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
 		PMOTest validation = new PMOTest();
-		String res = validation.getEmployee();
+		/*String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
 		   return json3;
-		}
+		}*/
 			System.out.println("Inside history");
 		String json3=null;
 		CloudantClient con = null;
@@ -364,13 +364,13 @@ public class EmployeeResource {
 	public String getId(@PathParam("i") String email) throws CouchDbException {
 		VacationResource vr = new VacationResource();
 		JSONObject responseObject = new JSONObject();
-		PMOTest validation = new PMOTest();
+		/*PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = vr.login(res);
 		if(result.contains("User does not exist")){
 			String json3 = "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.";
 		   return json3;
-		}
+		}*/
 		String json3=null;
 		CloudantClient con = null;
 		try {
