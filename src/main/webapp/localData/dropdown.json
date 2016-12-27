@@ -74,7 +74,7 @@
 			 "employeestatus":[
 			 {"status":"Active"},
 			 {"status":"Rotate"},
-			 {"status":"Resign"}
+			 {"status":"Attrition"}
 			 ],
 			 "ELTPoptions":[
 			 {"eltp":"Y"},

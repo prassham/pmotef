@@ -103,6 +103,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         	templateUrl: 'views/components/LeaveRecord.html',
         	controller: 'LeaveRecordController'
         })
+		.when('/expire',{
+        	templateUrl: 'views/components/Expire.html',
+        	controller: 'ExpireController'
+        })
         .otherwise({
             redirectTo: '/'
         })		

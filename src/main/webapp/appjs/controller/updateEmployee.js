@@ -125,6 +125,75 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 	 	 $scope.valuationDatePickerenddateIsOpen = true;
 
 	  };
+	 //calculate Tenure and Age Tenure
+	  
+	  $scope.createDate = function(DOJ_O2){
+		    $scope.date1 = $scope.CurrentDate;
+		    $scope.date2 = new Date(DOJ_O2);
+		    $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
+		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
+		    //alert($scope.diffDays);
+		    alert($scope.diffDays);
+		    $scope.RANGE_EXP = Math.round($scope.diffDays/365*100)/100;
+		    $scope.TENURE = Math.round(($scope.diffDays/365)*12*100)/100;
+		  
+		    if($scope.TENURE > 48){
+		    	$scope.AGE_TENURE = "Greater than 48 Months";
+		    }
+		    else if($scope.TENURE < 48 && $scope.TENURE > 24){
+		    	$scope.AGE_TENURE = "24-48 Months";
+		    }
+		    else if($scope.TENURE < 24 && $scope.TENURE > 18){
+		    	$scope.AGE_TENURE = "18-24 Months";
+		    }
+		    else {
+		    	$scope.AGE_TENURE = "18 Months";
+		    }
+		    $scope.user.AGE_TENURE = $scope.AGE_TENURE;
+		    $scope.user.TENURE = $scope.TENURE;
+		    alert($scope.user.TENURE);
+		    
+		  //calculating Previous Experience
+		    if($scope.RANGE_EXP > 5){
+		    	$scope.RANGE_EXP = "Greater than 5 Years";
+		    }
+		    else if($scope.RANGE_EXP > 4){
+		    	$scope.RANGE_EXP = "4-5 Years";
+		    }
+		    else if($scope.RANGE_EXP > 3){
+		    	$scope.RANGE_EXP = "3-4 Years";
+		    }
+		    else if($scope.RANGE_EXP > 2){
+		    	$scope.RANGE_EXP = "2-3 Years";
+		    }
+		    else if($scope.RANGE_EXP > 1){
+		    	$scope.RANGE_EXP = "1-2 Years";
+		    }
+		    else{
+		    	$scope.RANGE_EXP = "Less than one Year";
+		    }
+		    $scope.user.RANGE_EXP = $scope.RANGE_EXP;
+}
+	  //To calculate Expires
+	  $scope.checkExpires = function(enddate){
+		  $scope.date1 = enddate;
+		  $scope.date2 = $scope.CurrentDate;
+		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
+		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
+		    alert($scope.diffDays);
+			if($scope.diffDays > 31){
+				$scope.EXPIRES ="green";
+			}
+			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
+				$scope.EXPIRES = "orange";
+			}
+			else{
+				$scope.EXPIRES = "red";
+			}
+			$scope.user.EXPIRES = $scope.EXPIRES;
+			alert($scope.user.EXPIRES);
+	  }
+	  
 	$scope.update = function(item){
 		item.REVISED_EMP_ID = item.EMP_ID;
 		item.DOJ_IBM = $filter('date')(item.DOJ_IBM,'yyyy-MM-dd');

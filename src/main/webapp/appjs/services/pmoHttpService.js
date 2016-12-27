@@ -115,7 +115,7 @@ angular.module('PMOHttp', []).factory('PMOHttpService', ['$http', function ($htt
         	return $http({ method:"GET", url:"pmo/PMOTest"});
         },
         getOptions: function(){
-        	return $http({ method:"GET", url:"localData/dropdown.json" });
+        	return $http({ method:"GET", url:"localData/dropdownjson.json" });
         },
         updateVacationPending: function(updatedjson){
         	return $http.post('pmo/vacation/update', updatedjson);

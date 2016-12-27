@@ -3,10 +3,13 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 	
 	$scope.activeTab = 1;
 	$scope.CurrentDate = new Date();
+	$scope.user = PMOHttpService;
 	
 	$scope.setActiveTab = function(tabToSet) {
 		$scope.activeTab = tabToSet;
 	}
+	 $scope.user.START_DATE = $scope.CurrentDate;
+	  //alert($scope.user.START_DATE);
 	$scope.count = 0;
 	
 	/*$scope.typeoptions = {1:"RF",2:"CF"}
@@ -132,10 +135,80 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 	 	 $scope.valuationDatePickerenddateIsOpen = true;
 
 	  };
-		
+	  
+	  //calculate Tenure and AgeTenure
+	  $scope.createDate = function(DOJ_O2){
+			    $scope.date1 = $scope.CurrentDate;
+			    $scope.date2 = new Date(DOJ_O2);
+			    $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
+			    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
+			    
+			    $scope.RANGE_EXP = Math.round($scope.diffDays/365*100)/100;
+			    $scope.TENURE = Math.round(($scope.diffDays/365)*12*100)/100;
+			  
+			   //Calculating Age Tenure
+			    if($scope.TENURE > 48){
+			    	$scope.AGE_TENURE = "Greater than 48 Months";
+			    }
+			    else if($scope.TENURE < 48 && $scope.TENURE > 24){
+			    	$scope.AGE_TENURE = "24-48 Months";
+			    }
+			    else if($scope.TENURE < 24 && $scope.TENURE > 18){
+			    	$scope.AGE_TENURE = "18-24 Months";
+			    }
+			    else {
+			    	$scope.AGE_TENURE = "18 Months";
+			    }
+			    $scope.user.AGE_TENURE = $scope.AGE_TENURE;
+			    $scope.user.TENURE = $scope.TENURE;
+			    
+			    //calculating Previous Experience
+			    if($scope.RANGE_EXP > 5){
+			    	$scope.RANGE_EXP = "Greater than 5 Years";
+			    }
+			    else if($scope.RANGE_EXP > 4){
+			    	$scope.RANGE_EXP = "4-5 Years";
+			    }
+			    else if($scope.RANGE_EXP > 3){
+			    	$scope.RANGE_EXP = "3-4 Years";
+			    }
+			    else if($scope.RANGE_EXP > 2){
+			    	$scope.RANGE_EXP = "2-3 Years";
+			    }
+			    else if($scope.RANGE_EXP > 1){
+			    	$scope.RANGE_EXP = "1-2 Years";
+			    }
+			    else{
+			    	$scope.RANGE_EXP = "Less than one Year";
+			    }
+			    $scope.user.RANGE_EXP = $scope.RANGE_EXP;
+	  }
+	  
+	//calculate Expires
+	  $scope.checkExpires = function(enddate){
+		  $scope.date1 = enddate;
+		  $scope.date2 = $scope.CurrentDate;
+		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
+		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
+		    alert($scope.diffDays);
+			if($scope.diffDays > 31){
+				$scope.EXPIRES ="green";
+			}
+			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
+				$scope.EXPIRES = "orange";
+			}
+			else{
+				$scope.EXPIRES = "red";
+			}
+			$scope.user.EXPIRES = $scope.EXPIRES;
+			alert($scope.user.EXPIRES);
+	  }
+	  
 	$scope.insert = function(user){
 		 $scope.registered = true;
 		user.REVISED_EMP_ID = user.EMP_ID;
+		user.STATUS = "Active";
+		user.EXPIRES = $scope.user.EXPIRES;
 		user.DOJ_IBM = $filter('date')(user.DOJ_IBM,'yyyy-MM-dd');
 		user.DOJ_O2 = $filter('date')(user.DOJ_O2,'yyyy-MM-dd');
 		user.START_DATE = $filter('date')(user.START_DATE,'yyyy-MM-dd');

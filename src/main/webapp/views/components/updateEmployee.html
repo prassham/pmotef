@@ -20,7 +20,7 @@
 				<div ng-class="{'tab-pane active': activeTab === 1, 'tab-pane' : activeTab !== 1}">
 						<br>
   						<div class="form-group row">
-    						<label for="inputtext1" class="col-sm-4 form-control-label">Employee ID</label>
+    						<label for="inputtext1" class="col-sm-4 form-control-label">Employee ID*</label>
     						<div class="col-sm-6">
       						<input type="text" name="empid" class="form-control" id="inputtext1" placeholder="Eployee id" ng-model="user.EMP_ID" ng-minlength="6" ng-maxlength="6" required="true">
          						<span ng-show="myForm.empid.$dirty && myForm.empid.$error.required">Emp Id is required</span>
@@ -34,27 +34,27 @@
     						</div>
   						</div>-->
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Employee Name</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Employee Name*</label>
     						<div class="col-sm-6">
       						<input type="text" class="form-control" id="inputtext3" placeholder="Employee name" ng-model="user.NAME" required="true">
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Notes ID</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Notes ID*</label>
     						<div class="col-sm-6">
       						<input type="text" name="emailid" class="form-control" id="inputtext3" placeholder="Notes id" ng-model="user.NOTES_ID" required="true" ng-pattern="emailPattern">
       						<span class="validation" ng-show="myForm.emailid.$error.pattern">Not a valid email address! Ex:ABC/India/IBM</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Notes Short ID</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Notes Short ID*</label>
     						<div class="col-sm-6">
       						<input type="text" name="email" class="form-control" id="inputtext3" placeholder="Notes id" ng-model="user.EMAIL" required="true" ng-pattern=shortEmailPattern>
       						<span class="validation" ng-show="myForm.email.$error.pattern">Not valid email address! Ex:abc@in.ibm.com</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Type</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Type*</label>
     						<div class="col-sm-6">
     						<select class="form-control" ng-model="user.TYPE" ng-options="v.type as v.type for (k,v) in optionsdata.typeoptions">
 							</select>
@@ -63,38 +63,37 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Mobile Number</label>
     						<div class="col-sm-6">
-      						<input type="text" name="mobile" class="form-control" id="inputtext3" placeholder="Mobile number" ng-model="user.MOBILE" ng-minlength="10" ng-maxlength="10"required="true" ng-pattern=mobileNumberPattern>
+      						<input type="text" name="mobile" class="form-control" id="inputtext3" placeholder="Mobile number" ng-model="user.MOBILE" ng-minlength="10" ng-maxlength="10" ng-pattern=mobileNumberPattern>
       						<!-- <span ng-show="myForm.mobile.$error.pattern" class="validation">valid mobile number is required</span>-->
       						<span ng-show="((myForm.mobile.$error.minlength||myForm.mobile.$error.maxlength)&&myForm.mobile.$error.pattern)" class="validation">Enter a valid mobile number</span>
       						</div>
       					</div>
     						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Status</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Status*</label>
     						<div class="col-sm-6">
       						<select class="form-control" ng-model="user.STATUS" ng-options="v.status as v.status for (k,v) in optionsdata.employeestatus" required="true">
       						</select>
     						</div>
   						</div>
-  						
 				</div>
 				<div ng-class="{'tab-pane active': activeTab === 2, 'tab-pane' : activeTab !== 2}">
 				<br>
 				<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Work Location</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Work Location*</label>
     						<div class="col-sm-6">
       						<select class="form-control" ng-model="user.WORK_LOCATION" ng-options="v.location as v.location for (k,v) in optionsdata.worklocationoptions" ng-change=selectedWorkLocation(user.WORK_LOCATION)>
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Building</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Building*</label>
     						<div class="col-sm-6">
       						<select class="form-control" ng-model="user.BUILDING" ng-options="i as i for i in buildingop">
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">On_Off_Shore</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">On_Off_Shore*</label>
     						<div class="col-sm-6">
     						<select class="form-control" ng-model="user.ON_OFF_SHORE" ng-options="v.shore as v.shore for (k,v) in optionsdata.shoreoptions"" ng-change=selectedType(user.ON_OFF_SHORE) ng-selected="user.ON_OFF_SHORE">
 							</select>
@@ -104,41 +103,41 @@
 				<div ng-class="{'tab-pane active': activeTab === 3, 'tab-pane' : activeTab !== 3}">
 				<br>
 				<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream*</label>
     						<div class="col-sm-6">
     						<select class="form-control" ng-model="user.WORKSTREAM" ng-options="v.workstream as v.workstream for (k,v) in optionsdata.workstreamoptions"" ng-selected="user.WORKSTREAM" ng-change=selectedWorkstream(user.WORKSTREAM)>
     						</select>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Skillset</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Skillset*</label>
     						<div class="col-sm-6">
       						<input type="text" name="skillset" class="form-control" id="inputtext3" placeholder="skillset" ng-model="user.SKILL_SET" required="true">
       						<span class="validation" ng-show="myForm.skillset.$error.pattern">Value is invalid Ex:abcd efg</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">CurrentRole</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">CurrentRole*</label>
     						<div class="col-sm-6">
       						<input type="text" name="currentrole" class="form-control" id="inputtext3" placeholder="current role"  ng-model="user.CURRENT_ROLE" required="true">
       						<span class="validation" ng-show="myForm.currentrole.$error.pattern">Value is invalid Ex:abcd efg</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream Manager</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream Manager*</label>
     						<div class="col-sm-6">
       						<input type="text" class="form-control" id="inputtext3" placeholder="ws manager"  ng-model="user.WS_MANAGER" required="true" readonly>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">PEM</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">PEM*</label>
     						<div class="col-sm-6">
       						<input type="text" name="peoplemanager" class="form-control" id="inputtext3" placeholder="pem" ng-model="user.PEM" required="true" ng-pattern=emailPattern>
       						<span class="validation" ng-show="myForm.peoplemanager.$error.pattern">Not a valid email address! Ex:ABC/India/IBM</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputPassword3" class="col-sm-4 control-label">DOJ IBM</label>
+    						<label for="inputPassword3" class="col-sm-4 control-label">DOJ IBM*</label>
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" placeholder="DOJ_IBM" datepicker-popup="mediumDate" is-open="valuationDatePickerdoj_ibmIsOpen" 
@@ -152,11 +151,11 @@
     				</div>
   				</div>
   						<div class="form-group row">
-    						<label for="inputPassword3" class="col-sm-4 control-label">DOJ O2</label>
+    						<label for="inputPassword3" class="col-sm-4 control-label">DOJ O2*</label>
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" placeholder="DOJ_O2" datepicker-popup="mediumDate" is-open="valuationDatePickerdoj_o2IsOpen" 
-                   			ng-click="valuationDatePickerOpen()" max-date="CurrentDate" min-date="user.DOJ_IBM" ng-model="user.DOJ_O2" ng-change="createDate()" required/>
+                   			ng-click="valuationDatePickerOpen()" max-date="CurrentDate" min-date="user.DOJ_IBM" ng-model="user.DOJ_O2" ng-change="createDate(user.DOJ_O2)" required/>
             				<span class="input-group-btn">
               				<button type="button" class="btn btn-default" ng-click="valuationDatePickerdojo2Open($event)">
                 			<i class="glyphicon glyphicon-calendar"></i>
@@ -169,23 +168,23 @@
 	  		<div ng-class="{'tab-pane active': activeTab === 4, 'tab-pane' : activeTab !== 4}">
 	  		<br>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Tenure</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Tenure*</label>
     						<div class="col-sm-6">
-      						<input type="text" name="tenure" class="form-control" id="inputtext3" ng-model="user.TENURE" required="true" ng-pattern="numberPattern">
+      						<input type="text" name="tenure" class="form-control" id="inputtext3" ng-model="user.TENURE" required="true" ng-pattern="numberPattern" readonly>
       						<span class="validation" ng-show="myForm.tenure.$error.pattern">Enter a number</span>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Age Tenure</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Age Tenure*</label>
     						<div class="col-sm-6">
-      						<input type="text" class="form-control" id="inputtext3" ng-model="user.AGE_TENURE" required="true">
+      						<input type="text" class="form-control" id="inputtext3" ng-model="user.AGE_TENURE" required="true" readonly>
     						</div>
   						</div>
 	  		</div>
 	  		<div ng-class="{'tab-pane active': activeTab === 5, 'tab-pane' : activeTab !== 5}">
 	  		<br>
 	  		<div class="form-group row">
-    						<label for="inputPassword3" class="col-sm-4 control-label">Start Date</label>
+    						<label for="inputPassword3" class="col-sm-4 control-label">Start Date*</label>
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" placeholder="START_DATE" datepicker-popup="mediumDate" is-open="valuationDatePickerstartdateIsOpen" 
@@ -199,20 +198,20 @@
     				</div>
   				</div>
 	  		<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Previous Experience</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Previous Experience*</label>
     						<div class="col-sm-6">
-      						<input type="text" class="form-control" id="inputtext3" ng-model="user.RANGE_EXP" required="true">
+      						<input type="text" class="form-control" id="inputtext3" ng-model="user.RANGE_EXP" required="true" readonly>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Band</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Band*</label>
     						<div class="col-sm-6">
     						<select class="form-control" ng-model="user.BAND" ng-options="v.band as v.band for (k,v) in optionsdata.bandoptions" ng-selected="user.BAND">
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Gender</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Gender*</label>
     						<div class="col-sm-6">
     						<select class="form-control" ng-model="user.GENDER" ng-options="v.gender as v.gender for (k,v) in optionsdata.genderoptions" ng-selected="user.GENDER">
    							</select>
@@ -226,7 +225,7 @@
     						</div>
   						</div>
   						<div class="form-group row">
-    						<label for="inputPassword3" class="col-sm-4 control-label">End Date</label>
+    						<label for="inputPassword3" class="col-sm-4 control-label">End Date*</label>
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" datepicker-popup="mediumDate" is-open="valuationDatePickerenddateIsOpen" 
@@ -239,14 +238,14 @@
               			</p>
     				</div>
   				</div>
-  						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Expires</label>
+  						<!-- <div class="form-group row">
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Expires*</label>
     						<div class="col-sm-6">
       						<input type="text" class="form-control" id="inputtext3" ng-model="user.EXPIRES" required="true">
     						</div>
-  						</div>
+  						</div>-->
   						<div class="form-group row">
-    						<label for="inputtext3" class="col-sm-4 form-control-label">Open_Seat_No</label>
+    						<label for="inputtext3" class="col-sm-4 form-control-label">Open_Seat_No*</label>
     						<div class="col-sm-6">
       						<input type="text" name="openseat" class="form-control" id="inputtext3" ng-model="user.OPEN_SEAT_NO" required="true" ng-pattern="numberPattern">
       						<span class="validation" ng-show="myForm.openseat.$error.pattern">Invalid Seat no Ex:1234</span>
@@ -255,11 +254,12 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Remarks</label>
     						<div class="col-sm-6">
-      						<input type="text" class="form-control" id="inputtext3" ng-model="user.REMARKS" required="true">
+      						<input type="text" class="form-control" id="inputtext3" ng-model="user.REMARKS">
     						</div>
   						</div>
 	  		</div>
 	  		<div class="col-xs-6 col-sm-6">
+	  		<h6>Fields indicates * are mandatory.</h6>
       		</div>
 	  		<div class="col-sm-6">
 	  		<input type="submit" class="btn btn-primary" value="update" />

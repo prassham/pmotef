@@ -36,12 +36,12 @@
  			{"workstream":"CIM"}
 			],
 	"wsmanageroptions":[
-			{"SG1":"Thyagaraju Rangappan"},
+			{"SG1":"Thyagaraju Rangappa"},
 			{"SG2":"Seema Basantani"},
-			{"SG3":"Preetheswari Ramarajan"},
-			{"SG4":"Thyagaraju Rangappan"},
+			{"SG3":"Preeteswari Ramaraj"},
+			{"SG4":"Jalaja Balakrishna"},
 			{"E2E":"Icy John"},
-			{"TEST":"Nithin Ranjan"},
+			{"TEST":"Nitin Ranjan"},
 			{"TIG":"Murugan G Achary"},
 			{"Delivery Services":"Raju D Dhole"},
 			{"TDA":"Suresh B Subramanyam"},
@@ -72,9 +72,9 @@
 			 {"Hyderabad":"Raheja"}
 			 ],
 			 "employeestatus":[
-			 {"status":"A"},
+			 {"status":"Active"},
 			 {"status":"Rotate"},
-			 {"status":"Resign"}
+			 {"status":"Attrition"}
 			 ],
 			 "ELTPoptions":[
 			 {"eltp":"Y"},

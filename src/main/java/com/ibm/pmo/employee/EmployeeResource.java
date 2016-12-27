@@ -168,7 +168,7 @@ public class EmployeeResource {
 						JsonObject jobj = gson.fromJson(data, JsonObject.class);
 						String status = jobj.get("STATUS").toString();
 						System.out.println("Status of"+ status);
-						if(status.equals("\"A\"")){
+						if(status.equals("\"Active\"")){
 							db = con.database("employee", false);
 							db.update(jobj);
 							responseObject.put("message","Employee record updated successfully");
