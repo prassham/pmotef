@@ -101,6 +101,7 @@ public class ReadUtilization {
 			for (com.ibm.pmo.utils.EmployeePojo.Rows iterable : empPojo.rows) {	
 				ArrayList<String> arrlist= new ArrayList<>();
 				arrlist.add(iterable.getKey().getDOJ_O2());
+				System.out.println("DOJ of o2 of " + iterable.getKey().getEMP_ID() +" is "+ iterable.getKey().getDOJ_O2());
 				arrlist.add(iterable.getKey().getEND_DATE_GBSTIMESTAMP());
 				startEndDate.put(iterable.getKey().getEMP_ID(),arrlist);
 			}
