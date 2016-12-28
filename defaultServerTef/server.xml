@@ -1,0 +1,24 @@
+<server>
+
+    <featureManager>
+        <feature>servlet-3.1</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint"
+                  host="*"
+                  httpPort="9080">
+        <tcpOptions soReuseAddr="true"/>
+    </httpEndpoint>
+
+
+   <application name='pmotelefonica' location='pmotelefonica.war' type='war' context-root='/'>
+   
+
+	<application-bnd>
+            <security-role name="Single Sign On-to">
+                <special-subject type="ALL_AUTHENTICATED_USERS"/>
+             </security-role>
+     </application-bnd> 
+   </application>
+        
+</server>
