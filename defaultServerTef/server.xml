@@ -11,7 +11,7 @@
     </httpEndpoint>
 
 
-   <application name='pmotelefonica' location='pmotelefonica.war' type='war' context-root='/'>
+   <application name='pmotef' location='pmotef.war' type='war' context-root='/'>
    
 
 	<application-bnd>
