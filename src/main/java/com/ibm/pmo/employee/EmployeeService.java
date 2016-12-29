@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 @Path("/employeeone")
 public class EmployeeService {
 	public CloudantClient getConnection() throws IOException {
-		InputStream inputStream = null;
+		/*InputStream inputStream = null;
 		String url="";
 		String userName ="";
 		String password ="";
@@ -44,17 +44,17 @@ public class EmployeeService {
 			System.out.println("Exception: " + e);
 		} finally {
 			inputStream.close();
-		}
+		}*/
 		System.out.println("Employee Service page");
-		/*JsonObject credentials = CloudantEmployee.getConnectionObject();
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
 		String username = credentials.get("username").toString();
 		System.out.println(username);
         String password = credentials.get("password").toString();
         System.out.println(password);
 	    String url = credentials.get("url").toString();
-	    System.out.println(url);*/
+	    System.out.println(url);
 	    System.out.println("connection establishment");
-		CloudantClient client = new CloudantClient(url,userName,password);
+		CloudantClient client = new CloudantClient(url,username,password);
 		System.out.println("connection done");
 		System.out.println(client);
 		return client;
