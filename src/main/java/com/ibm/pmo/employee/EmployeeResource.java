@@ -73,7 +73,7 @@ public class EmployeeResource {
 	    password = password.replaceAll("^\"|\"$", "");
 	    url = url.replaceAll("^\"|\"$", "");
 	    System.out.println("connection establishment");
-		CloudantClient client = new CloudantClient(username,password);
+		CloudantClient client = new CloudantClient(url);
 		System.out.println("connection done");
 		System.out.println(client);
 		return client;
