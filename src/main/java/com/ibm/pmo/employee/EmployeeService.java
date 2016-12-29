@@ -54,7 +54,7 @@ public class EmployeeService {
 	    String url = credentials.get("url").toString();
 	    System.out.println(url);
 	    System.out.println("connection establishment");
-		CloudantClient client = new CloudantClient(url,username,password);
+		CloudantClient client = new CloudantClient(username,password);
 		System.out.println("connection done");
 		System.out.println(client);
 		return client;
