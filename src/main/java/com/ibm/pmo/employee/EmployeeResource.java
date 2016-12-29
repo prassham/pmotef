@@ -27,6 +27,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ibm.pmo.resources.PMOTest;
 import com.ibm.pmo.vacation.VacationResource;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 @Path("/employee")
 public class EmployeeResource {
@@ -63,9 +68,10 @@ public class EmployeeResource {
         String password = credentials.get("password").toString();
         System.out.println(password);
 	    String url = credentials.get("url").toString();
+	    String finaurl = url.replace("https://", "");
 	    System.out.println(url);
 	    System.out.println("connection establishment");
-		CloudantClient client = new CloudantClient(url,username,password);
+		CloudantClient client = new CloudantClient(url.replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\"", "").replace("https://", "").replace(".cloudant.com", ""),username,password);
 		System.out.println("connection done");
 		System.out.println(client);
 		return client;
