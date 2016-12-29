@@ -48,7 +48,7 @@ public class EmployeeService {
 		String username = credentials.get("username").toString();
         String password = credentials.get("password").toString();
         String url = credentials.get("url").toString();
-		CloudantClient client = new CloudantClient(url,userName,password);
+		CloudantClient client = new CloudantClient(url,username,password);
 		System.out.println(client);
 		return client;
 	}
