@@ -69,6 +69,9 @@ public class EmployeeResource {
         System.out.println(password);
 	    String url = credentials.get("url").toString();
 	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
 	    System.out.println("connection establishment");
 		CloudantClient client = new CloudantClient(username,password);
 		System.out.println("connection done");
