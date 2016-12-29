@@ -25,6 +25,7 @@ import com.cloudant.client.api.model.Params;
 
 import com.ibm.pmo.employee.CloudantEmployee;
 
+import com.google.gson.JsonObject;
 
 @Path("/FileDownload")
 public class viewObserver {

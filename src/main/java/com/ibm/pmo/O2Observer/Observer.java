@@ -25,6 +25,8 @@ import com.cloudant.client.api.Database;
 
 import com.ibm.pmo.employee.CloudantEmployee;
 
+import com.google.gson.JsonObject;
+
 // This class saves the input observer file to cloudant database
 
 @Path("/FileUpload")
