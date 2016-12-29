@@ -22,6 +22,7 @@ public class PMOStartup extends Application{
 		      classes.add(UtilDisplay.class);
 		       classes.add(SowEditData.class);
 		       classes.add(viewObserver.class);
+		       classes.add(CloudantEmployee.class);
 		      // classes.add(SowEditData.class);
 		        return classes;
 		    }

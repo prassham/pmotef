@@ -23,6 +23,8 @@ import com.cloudant.client.api.Database;
 
 import com.cloudant.client.api.model.Params;
 
+import com.ibm.pmo.employee.CloudantEmployee;
+
 
 @Path("/FileDownload")
 public class viewObserver {
@@ -81,14 +83,33 @@ public class viewObserver {
 			return response.status(200).build();
 			}  
 	 // Database connection
-		public static CloudantClient getConnection() {
+		/*public static CloudantClient getConnection() {
 			String url = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/o2observer/_all_docs";
 			String userName = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix";
 			String password = "Bluemix4me";
 			CloudantClient client = new CloudantClient(url,userName,password);
 			System.out.println(client);
 			return client;
-		}
+		}*/
+		
+		public static CloudantClient getConnection() throws IOException {
+		
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		CloudantClient client = new CloudantClient(url,username,password);
+		System.out.println("connection done");
+		System.out.println(client);
+		return client;
+	}
 				
 }
 
