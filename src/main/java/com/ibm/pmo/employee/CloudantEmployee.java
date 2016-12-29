@@ -26,20 +26,26 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 public class CloudantEmployee {
 
-	public static JSONObject getConnectionObject() {
+	public static JsonObject getConnectionObject() {
+		/*String url = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/employee/_security";
+		String userName = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix";
+		String password = "Bluemix4me";*/
 		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
-		JSONObject credentials = null;
+        //JSONObject vcap;
+		JsonObject credentials = null;
         JsonParser parser = new JsonParser();
         try{
 
         Object obj = parser.parse(VCAP_SERVICES);
 
-        JSONObject jsonObject = (JSONObject) obj;
-        JSONArray vcapArray = (JSONArray) jsonObject.get("cloudantNoSQLDB");
+        JsonObject jsonObject = (JsonObject) obj;
+        JsonArray vcapArray = (JsonArray) jsonObject.get("cloudantNoSQLDB");
 
-        JSONObject vcap =(JSONObject) vcapArray.get(0);
+        //JSONArray vcapArray = (JSONArray) jsonObject.get(“cloudantNoSQULDB”);
 
-        credentials = (JSONObject) vcap.get("credentials");
+        JsonObject vcap =(JsonObject) vcapArray.get(0);
+
+        credentials = (JsonObject) vcap.get("credentials");
 
         /*String username = credentials.get("username").toString();
 
@@ -56,7 +62,7 @@ public class CloudantEmployee {
        return credentials;
 	}
 	public static void main(String args[]) throws Exception{
-		JSONObject client = getConnectionObject();
+		JsonObject client = getConnectionObject();
 		System.out.println(client);
 	}
 }
