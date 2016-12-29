@@ -32,7 +32,7 @@ import com.ibm.pmo.vacation.VacationResource;
 public class EmployeeResource {
 	
 	public CloudantClient getConnection() throws IOException {
-		InputStream inputStream = null;
+		/*InputStream inputStream = null;
 		String url="";
 		String userName ="";
 		String password ="";
@@ -56,7 +56,11 @@ public class EmployeeResource {
 			System.out.println("Exception: " + e);
 		} finally {
 			inputStream.close();
-		}
+		}*/
+		JSONObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+        String password = credentials.get("password").toString();
+        String url = credentials.get("url").toString();
 		CloudantClient client = new CloudantClient(url,userName,password);
 		System.out.println(client);
 		return client;
