@@ -62,7 +62,7 @@ public class EmployeeResource {
 		} finally {
 			inputStream.close();
 		}
-		//*JsonObject credentials = CloudantEmployee.getConnectionObject();
+		/*JsonObject credentials = CloudantEmployee.getConnectionObject();
 		String username = credentials.get("username").toString();
 		System.out.println(username);
         String password = credentials.get("password").toString();
