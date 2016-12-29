@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Path("/employeeone")
 public class EmployeeService {
