@@ -9,10 +9,6 @@ angular.module('pendingApprovalCtrl', []).controller('PendingApprovalController'
 	//alert($scope.name);
 	var pendingLeaveList = {};
 	var ApprovalList = {};
-	if($scope.user.pendingbutton !="exist"){
-		alert("You are not allowed to access this page");
-		$location.path("/vacationPlanner");
-	}
 	$scope.PendingApprovalList = PMOHttpService
 	.getPendingList($scope.name).then(function (response) {
 				$scope.pendingList = response.data;
