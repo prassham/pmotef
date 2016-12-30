@@ -137,7 +137,7 @@ public class EmployeeService {
 		@GET
 		@Path("AwaitingEmpList")
 		@Produces({"application/json"})
-		public String getAwaitingEmpList() throws IOException {
+		public String getAwaitingEmpList() {
 			
 			String jsonObj = null;
 			CloudantClient con = null;
@@ -156,7 +156,7 @@ public class EmployeeService {
 					System.out.println("No records found");
 				}
 			}
-			catch (CouchDbException e){
+			catch (Exception e){
 					System.out.println(e);
 			}
 
