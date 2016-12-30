@@ -92,11 +92,11 @@ public class StatisticsResource {
         	return stream;
 		}
         
-		URL url = new URL(uri);
+		URL urlresource = new URL(uri);
 		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
-		URLConnection conn = url.openConnection();
+		URLConnection conn = urlresource.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();
 	    System.out.println(input);
