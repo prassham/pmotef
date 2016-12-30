@@ -27,7 +27,7 @@ angular.module('CreateVacationRequestCtrl', []).controller('CreateVacationReques
 					}
 				}
 });
-	  $scope.currentdate = $filter('date')(new Date(),'yyyy-MM-dd');
+	  $scope.currentdate = $filter('date')(new Date(),'dd-MM-yyyy');
 	  var dateArray = {};
 	  var dateArr = new Array();
 	  var createVacationOb = {};
