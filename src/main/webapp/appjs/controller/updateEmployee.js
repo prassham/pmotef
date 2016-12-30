@@ -133,7 +133,6 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		    $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
 		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
 		    //alert($scope.diffDays);
-		    alert($scope.diffDays);
 		    $scope.RANGE_EXP = Math.round($scope.diffDays/365*100)/100;
 		    $scope.TENURE = Math.round(($scope.diffDays/365)*12*100)/100;
 		  
