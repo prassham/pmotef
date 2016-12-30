@@ -229,9 +229,6 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
 		item.END_DATE_GBSTIMESTAMP = $filter('date')(item.END_DATE_GBSTIMESTAMP,'yyyy-MM-dd');
 		item.EXPIRES = $scope.user.EXPIRES;
-		item.TENURE = $scope.user.TENURE;
-		item.RANGE_EXP = $scope.user.RANGE_EXP;
-		item.AGE_TENURE = $scope.user.AGE_TENURE;
 		var employeejson = JSON.stringify(item);
 		 $scope.insertEmployeeData = PMOHttpService
 			.postEmployee(employeejson).then(function(response) {
