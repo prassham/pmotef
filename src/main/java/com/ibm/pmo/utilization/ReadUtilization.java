@@ -62,8 +62,6 @@ public class ReadUtilization {
 		public Response uploadFile(
 				@FormDataParam("file") InputStream uploadedInputStream,
 				@FormDataParam("file") FormDataContentDisposition fileDetail) throws Exception {
-    	PrintStream out = new PrintStream(new FileOutputStream("/home/prashant/Desktop/output"));
-    	System.setOut(out);
 			try{
 			String uploadedFileLocation = fileDetail.getFileName();
 			  File file = new File(fileDetail.getFileName());
