@@ -15,6 +15,9 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import com.ibm.pmo.employee.CloudantEmployee;
+import com.google.gson.JsonObject;
+
 @Path("/employeeStatistics")
 public class StatisticsResource {
 
@@ -28,7 +31,7 @@ public class StatisticsResource {
 		if(res.getStatus()!=200){
 			throw new RuntimeException("Failed : HTTP error code : "+ res.getStatus());
 		}*/
-		InputStream inputStream = null;
+		/*InputStream inputStream = null;
 		Properties prop = new Properties();
 		String userName ="";
 		String password ="";
@@ -52,23 +55,41 @@ public class StatisticsResource {
 			System.out.println("Exception: " + e);
 		} finally {
 			inputStream.close();
-		}
+		}*/
+		
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		
 		String ins = "{\"Message\" : \"Invalid Request\"}";
 		String uri=null;
 		switch (data) {
         case "bandmixpercentage": 
-        	uri = prop.getProperty("band");
+        	url = url +"/employee/_design/band/_view/band?reduce=true&group=true";
+        	uri = url;
         	break;
-        case "offonmix":  
+        case "offonmix": 
+        	url = url +"employee/_design/offonmix/_view/offonmix?reduce=true&group=true";
         	uri = prop.getProperty("offonmix");
             break;
-        case "diversitymix":  
+        case "diversitymix": 
+        	url = url +"employee/_design/diversitymix/_view/diversitymix?reduce=true&group=true";
         	uri = prop.getProperty("diversitymix");
         	break;
         case "employeetype":  
+        	url = url +"employee/_design/type/_view/type?reduce=true&group=true";
         	uri = prop.getProperty("type");
         	break;
         case "total":  
+        	url = url +"employee/_design/type/_view/type?reduce=true";
         	uri = prop.getProperty("total");
         	break;
         default: 
