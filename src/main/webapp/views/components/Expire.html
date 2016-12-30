@@ -27,7 +27,7 @@
                     <th>Expires</th>
                     <!--<th>Band</th>-->
                 </tr>
-                <tr ng-repeat="item in employeeReferenceDataList | filter:customsearch">
+                <tr ng-repeat="item in awaitingEmpList | filter:customsearch">
                     <td>{{item.EMP_ID}}</td>
                     <td>{{item.NAME}}</td>
                     <td>{{item.WORKSTREAM}}</td>
@@ -37,11 +37,11 @@
                  </tr>
                  </tbody>
                  </table>
-                 <pagination total-items="count" ng-model="currentNo"
+                 <!--<pagination total-items="count" ng-model="currentNo"
 						 max-size="5" boundary-links="true"
 						items-per-page="numPerPage" class="pagination-sm"
 						ng-click="getEmployeePerCurrentPage(currentNo)">
-				</pagination>
+				</pagination>-->
                     <!--<td>{{item.band}}</td>
                 </tr>
             </tbody>

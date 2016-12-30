@@ -132,4 +132,35 @@ public class EmployeeService {
 		return result;
 
 	}
+	
+	//Retrieving Awaiting Employee Details
+		@GET
+		@Path("AwaitingEmpList")
+		@Produces({"application/json"})
+		public String getAwaitingEmpList() throws IOException {
+			
+			String jsonObj = null;
+			CloudantClient con = null;
+			Gson gson = new Gson();
+			try {
+				con = getConnection();
+				Database db = con.database("employee", false);
+				
+				List<Employeegetset> awaitingEmpList = db.findByIndex("\"selector\": {\"_id\": {\"$gt\": 0},\"EXPIRES\": {\"$ne\":\"Green\"}}", Employeegetset.class);
+				if(!awaitingEmpList.isEmpty()){
+					
+					jsonObj = gson.toJson(awaitingEmpList);
+					System.out.println(" Awaiting Employee List" + jsonObj);
+				}
+				else{
+					System.out.println("No records found");
+				}
+			}
+			catch (CouchDbException e){
+					System.out.println(e);
+			}
+
+			return jsonObj;
+
+		}
 }

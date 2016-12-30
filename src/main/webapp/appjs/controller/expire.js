@@ -22,34 +22,22 @@ angular.module('ExpireCtrl', []).controller('ExpireController', function ($scope
 		       console.log("The retrieve EmployeeList request failed: " + JSON.stringify(result));
 		});
 	 
+	 $scope.loadReferenceDataList = PMOHttpService.getAwaitingExtensionList().then(function (response) {
+		   $('#mydiv').hide(); 
+	       $scope.awaitingEmpList = response.data;
+	       console.log($scope.awaitingEmpList);
+	       console.log("Successful retrieve EmployeeList response: " + JSON.stringify(response.data));   
+	   }, function (result) {
+	       console.log("The retrieve EmployeeList request failed: " + JSON.stringify(result));
+	   });
 	 
-   $scope.loadReferenceDataList = PMOHttpService.getEmployeeListPage($scope.currentPage).then(function (response) {
-	   $('#mydiv').hide(); 
-       $scope.employeeReferenceDataList = response.data;
-       console.log($scope.employeeReferenceDataList);
-       console.log("Successful retrieve EmployeeList response: " + JSON.stringify(response.data));   
-   }, function (result) {
-       console.log("The retrieve EmployeeList request failed: " + JSON.stringify(result));
-   });
-   
-   $scope.loading = false;
-   
-    $scope.getEmployeePerCurrentPage = function(currentNo){
-    	if(currentNo >= 1){
-    	$scope.currentPage = currentNo -1 ;
-    	}
-    	else{
-    		$scope.currenPage = currentNo;
-    	}
-    	//$('#mydiv').show();
-    	$scope.loadReferenceDataList = PMOHttpService.getEmployeeListPage($scope.currentPage).then(function (response) {
-    		$('#mydiv').hide(); 
-    	       $scope.employeeReferenceDataList = response.data;
-    	       console.log($scope.employeeReferenceDataList);
-    	       console.log("Successful retrieve EmployeeList response: " + JSON.stringify(response.data));   
-    	   }, function (result) {
-    	       console.log("The retrieve EmployeeList request failed: " + JSON.stringify(result));
-    	       
-    	   });
-    }
+	 $scope.search =" ";
+	   $scope.customsearch = function(item){
+		   //alert($scope.search);
+		   return (item.EMP_ID + item.NAME + item.WORKSTREAM)
+			.indexOf($scope.search) >= 0;
+   };
+
+	   
+  $scope.loading = false;
 });

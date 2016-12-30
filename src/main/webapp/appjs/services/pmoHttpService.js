@@ -142,6 +142,9 @@ angular.module('PMOHttp', []).factory('PMOHttpService', ['$http', function ($htt
         },
         getEmployeeListPage:function(currentPage){
         	return $http({ method:"GET", url: "pmo/employeeone/employeeDetails/"+currentPage+""});
+        },
+        getAwaitingExtensionList:function(){
+        	return $http({ method:"GET", url: "pmo/employeeone/AwaitingEmpList"});
         }
 };
 
