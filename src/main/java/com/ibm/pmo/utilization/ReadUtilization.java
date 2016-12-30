@@ -556,7 +556,6 @@ public class ReadUtilization {
 			hours=0F;
 			cal.setTime(inner.getStartDate());
 			cal1.setTime(inner.getEndDate());
-			int counter = 1;
 			float monthavailhours = 0f;
 			for (Map.Entry<String, Float> month : inner.getAvail_hours().entrySet()){
 				@SuppressWarnings("deprecation")
@@ -582,9 +581,9 @@ public class ReadUtilization {
 					System.out.println(" week values : " +cal.get(Calendar.DAY_OF_WEEK) +" " +inner.getEmpID() +" " +inner.getEmpName() +" Monday Val " +(cal.get(Calendar.DAY_OF_WEEK)-Calendar.MONDAY)*8 +" " + cal2.get(Calendar.MONTH) + " " +startmonth);
 					month.setValue(month.getValue() - (cal.get(Calendar.DAY_OF_WEEK)-Calendar.MONDAY)*8);
 					monthavailhours = month.getValue();
-					counter ++;
 				}
 				else if(cal1.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && cal1.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && quarter1 == (Calendar.getInstance().get(Calendar.MONTH)/3) +1 && cal2.get(Calendar.MONTH) == endmonth){
+					System.out.println("Calculating enddate Employees" +cal2.get(Calendar.MONTH) +" " +endmonth);
 					month.setValue(month.getValue() - (Calendar.FRIDAY- cal1.get(Calendar.DAY_OF_WEEK))*8);
 				}
 				else{
