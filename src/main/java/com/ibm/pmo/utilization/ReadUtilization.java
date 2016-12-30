@@ -36,6 +36,8 @@ import com.ibm.pmo.modal.EmployUtilizationBean;
 import com.ibm.pmo.modal.UtilizationRowBean;
 import com.ibm.pmo.utils.*;
 
+import com.ibm.pmo.employee.CloudantEmployee;
+import com.google.gson.JsonObject;
 
 /* This class parses the CSV file containing employees utilization ,
  * calculates the utilization hours and
@@ -601,11 +603,23 @@ public class ReadUtilization {
 	    }
 	    
 	public EmployeePojo getCloudantEmployee() throws JSONException, IOException{
-		String uri = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		String uri = url +"/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
 		URL url = new URL(uri);
-		String loginPassword = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix"+ ":" + "Bluemix4me";
+		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
+		encoded = encoded.replaceAll("\n","");
 		URLConnection conn = url.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();

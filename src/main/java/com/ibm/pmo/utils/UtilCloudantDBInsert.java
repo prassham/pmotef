@@ -16,13 +16,26 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.ibm.pmo.modal.EmployUtilizationBean;
 
+import com.ibm.pmo.employee.CloudantEmployee;
+
 public class UtilCloudantDBInsert {
 
 	public static CloudantClient getConnection() {
-		String url = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/utilization/02f6f1723b23f4223b35c6edb174d98b";
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		/*String url = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/utilization/02f6f1723b23f4223b35c6edb174d98b";
 		String userName = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix";
-		String password = "Bluemix4me";
-		CloudantClient client = new CloudantClient(url,userName,password);
+		String password = "Bluemix4me";*/
+		CloudantClient client = new CloudantClient(url,username,password);
 		System.out.println(client);
 		return client;
 	}

@@ -9,7 +9,7 @@ angular.module('ReportCtrl', []).controller('ReportController', function ($scope
 	$scope.percentage1=[];
 	$scope.BandMixData = [];
 	$scope.Netvalue=[];
-	$scope.colors = [ '#1C4165', '#C2C3C4'];
+	$scope.colors = ['#1C4165', '#FF0000'];
 	
 	$scope.total = PMOHttpService.gettotal().then(function(response) {
 		$('#mydiv').hide();

@@ -30,13 +30,14 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.ibm.pmo.employee.CloudantEmployee;
 
 @Path("/vacation")
 public class VacationResource {
 	Gson gson = new Gson();
 
 	public CloudantClient getConnection() throws IOException {
-		InputStream inputStream = null;
+		/*InputStream inputStream = null;
 		String url="";
 		String userName ="";
 		String password ="";
@@ -60,8 +61,19 @@ public class VacationResource {
 			System.out.println("Exception: " + e);
 		} finally {
 			inputStream.close();
-		}
-		CloudantClient client = new CloudantClient(url,userName,password);
+		}*/
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		CloudantClient client = new CloudantClient(url,username,password);
 		System.out.println(client);
 		return client;
 	}
