@@ -214,7 +214,7 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
 		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
 		item.END_DATEGBSTIMESTAMP = $filter('date')(item.END_DATEGBSTIMESTAMP,'yyyy-MM-dd');
-		item.EXPIRES = $scope.EXPIRES;
+		item.EXPIRES = $scope.user.EXPIRES;
 		//item.TENURE = $scope.TENURE;
 		//item.RANGE_EXP = $scope.RANGE_EXP;
 		//item.AGE_TENURE = $scope.AGE_TENURE;
