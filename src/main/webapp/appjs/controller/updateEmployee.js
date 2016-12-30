@@ -150,7 +150,7 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		    }
 		    $scope.user.AGE_TENURE = $scope.AGE_TENURE;
 		    $scope.user.TENURE = $scope.TENURE;
-		    alert($scope.user.TENURE);
+		    //alert($scope.user.TENURE);
 		    
 		  //calculating Previous Experience
 		    if($scope.RANGE_EXP > 5){

@@ -146,7 +146,7 @@ public class EmployeeService {
 				con = getConnection();
 				Database db = con.database("employee", false);
 				
-				List<Employeegetset> awaitingEmpList = db.findByIndex("\"selector\": {\"_id\": {\"$gt\": 0},\"EXPIRES\": {\"$ne\":\"Green\"}}", Employeegetset.class);
+				List<Employeegetset> awaitingEmpList = db.findByIndex("\"selector\": {\"_id\": {\"$gt\": 0},\"STATUS\": {\"$eq\":\"Active\"},\"EXPIRES\": {\"$ne\":\"Green\"}}", Employeegetset.class);
 				if(!awaitingEmpList.isEmpty()){
 					
 					jsonObj = gson.toJson(awaitingEmpList);
