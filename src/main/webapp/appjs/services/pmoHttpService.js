@@ -18,6 +18,14 @@ angular.module('PMOHttp', []).factory('PMOHttpService', ['$http', function ($htt
     	getShortPattern: function(){
     		return shortEmailPattern;
     	},
+    	dateformat: function(x){
+    		var date = new Date(x);
+    		var day = date.getDate();
+    		var monthIndex = date.getMonth()+1;
+    		var year = date.getFullYear();
+    		var data = day +'/'+monthIndex+'/'+year;
+    		return data;
+    	},
     	getPattern: function(){
     		return emailPattern;
     	},

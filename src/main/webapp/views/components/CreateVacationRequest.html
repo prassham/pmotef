@@ -17,10 +17,10 @@
     	<div class ="col-md-9">
     	<div class ="height">
   		</div>
-      	<form name="myForm" class="form-horizontal">
+      	<form name="myForm" class="form-horizontal" ng-submit="createRequest();">
       		<div class="col-md-6">
     	<div class="form-group">
-    		<label for="inputEmail3" class="col-sm-3 control-label">Vacation Request for</label>
+    		<label for="inputEmail3" class="col-sm-3 control-label">Person</label>
     			<div class="col-md-6">
       			<input type="email" class="form-control" id="inputReason3" ng-model="loggedInUser" readonly>
     			</div>
@@ -68,7 +68,7 @@
   		<div class="form-group">
   		<label for="inputPassword3" class="col-sm-3 control-label">Leave Type*</label>
   		<div class="col-md-6">
-  		<select class="form-control" name="formField" ng-model="vacation.leaveType">
+  		<select class="form-control" name="formField" ng-model="vacation.leaveType" required>
   			 <option value="">Select Option</option>
  			 <option value="Privileged Leave">Privilege Leave</option>
 			 <option value="Sick Leave">Sick Leave</option>
@@ -76,7 +76,7 @@
 		</select>
     			</div>
   		</div>
-
+  <div  class="form-group col-md-6 control-label"><h6>Fields indicates * are mandatory</h6></div>
   		</div>
   		<div class="col-md-6">
   		<div class="form-group">
@@ -115,12 +115,9 @@
   		</div>
   		<div class ="height">
   		</div>
-  			<div class="col-xs-6 col-sm-6">
-	  		<h6>Fields indicates * are mandatory.</h6>
-      		</div>
   <div class="form-inline">
     <div class="col-sm-offset-5 col-sm-50">
-      <button type="submit" class="btn btn-default" ng-if="vacation.leaveType" ng-click=createRequest()>Submit</button>
+      <input type="submit" class="btn btn-default" value="Submit"></button>
       <button type="submit" class="btn btn-default" ng-click=cancelRequest()>Cancel</button>
       <button type="submit" class="btn btn-default" ng-click=reset(vacation)>Reset</button>
     </div>
@@ -129,4 +126,3 @@
   </form>
   </div>
 </div>
-    </div> 

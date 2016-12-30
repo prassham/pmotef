@@ -60,6 +60,8 @@ public class ReadUtilization {
 		public Response uploadFile(
 				@FormDataParam("file") InputStream uploadedInputStream,
 				@FormDataParam("file") FormDataContentDisposition fileDetail) throws Exception {
+    	PrintStream out = new PrintStream(new FileOutputStream("/home/prashant/Desktop/output"));
+    	System.setOut(out);
 			try{
 			String uploadedFileLocation = fileDetail.getFileName();
 			  File file = new File(fileDetail.getFileName());
@@ -268,6 +270,7 @@ public class ReadUtilization {
 			if(utilbean.getChrgMethodCd().equalsIgnoreCase("CTA")){
 				Date start = empUtilMap.get(utilbean.getEmpID()).getStartDate();
 				Date end = empUtilMap.get(utilbean.getEmpID()).getEndDate();
+				System.out.println(utilbean.getEmpID() +" --- --- " +availHours +" === " +start +" === " +end);
 				if((utilbean.getWeekEndDate().after(start)||utilbean.getWeekEndDate().equals(start))&&
 						(utilbean.getWeekEndDate().before(end)||utilbean.getWeekEndDate().equals(end)) ){
 					// available hours addition
@@ -338,7 +341,7 @@ public class ReadUtilization {
 					hours=availHours.get(utilbean.getMonth());
 				//	System.out.println("previous count "+ hours);
 					hours+=utilbean.weekhours();
-				//	System.out.println("current count "+ hours);
+				System.out.println("current count "+ hours);
 					
 					month = utilbean.getMonth();
 				}
@@ -372,6 +375,7 @@ public class ReadUtilization {
 						// Needs to add hours
 						dateHistoric=weekEndingDateCalculate(utilbean);// date addition has been taken care off
 						availHours = hashMapAddition(availHours,utilbean);
+						System.out.println("Getting the avail hours " +availHours );
 		//				empUtilMap.get(utilbean.getEmpID()).setWeekEndingDate(dateHistoric);
 		//				System.out.println("Should RUN more than once"+availHours.toString() + " Date : "+ utilbean.getWeekEndDate());
 					}// else do nothing already exists there in arraylist
@@ -533,11 +537,13 @@ public class ReadUtilization {
 	}
 	public static void printMap(HashMap<String, EmployUtilizationBean> empUtilMap2) {
 		float hours=0F;
+		Calendar cal = Calendar.getInstance();
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
 		for (Map.Entry<String, EmployUtilizationBean> entry : empUtilMap2.entrySet()) {
 			// System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().toString());
 			EmployUtilizationBean inner =(EmployUtilizationBean)entry.getValue();
 			System.out.println("empid : "+inner.getEmpID()+" empname : "+ inner.getEmpName());
-			
 			for (Map.Entry<String, Float> month : inner.getYear_map().entrySet()){
 				System.out.print(month.getKey() +" "+ month.getValue()+ "  ");
 				System.out.print("Incoming avail hours per month : " +month.getValue());
@@ -546,11 +552,46 @@ public class ReadUtilization {
 			}
 			System.out.println("total hours "+hours );
 			hours=0F;
-			
+			cal.setTime(inner.getStartDate());
+			cal1.setTime(inner.getEndDate());
+			int counter = 1;
+			float monthavailhours = 0f;
 			for (Map.Entry<String, Float> month : inner.getAvail_hours().entrySet()){
-				System.out.print(month.getKey() +" "+ month.getValue()+ "  ");
-				hours+=month.getValue();
+				@SuppressWarnings("deprecation")
+				int quarter = (inner.getStartDate().getMonth() / 3) + 1;
+				@SuppressWarnings("deprecation")
+				int quarter1 = (inner.getEndDate().getMonth() / 3) + 1;
+				@SuppressWarnings("deprecation")
+				int startmonth = inner.getStartDate().getMonth();
+				@SuppressWarnings("deprecation")
+				int endmonth = inner.getEndDate().getMonth();
+				Date date2;
+				try {
+					date2 = new SimpleDateFormat("MMM").parse(month.getKey());
+					cal2.setTime(date2);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+						
+				System.out.println("Quater values " +quarter );
+				if(cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY && cal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && quarter == (Calendar.getInstance().get(Calendar.MONTH)/3) +1 && cal2.get(Calendar.MONTH) == startmonth){
+					System.out.println(" week values : " +cal.get(Calendar.DAY_OF_WEEK) +" " +inner.getEmpID() +" " +inner.getEmpName() +" Monday Val " +(cal.get(Calendar.DAY_OF_WEEK)-Calendar.MONDAY)*8 +" " + cal2.get(Calendar.MONTH) + " " +startmonth);
+					month.setValue(month.getValue() - (cal.get(Calendar.DAY_OF_WEEK)-Calendar.MONDAY)*8);
+					monthavailhours = month.getValue();
+					counter ++;
+				}
+				else if(cal1.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY && cal1.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && quarter1 == (Calendar.getInstance().get(Calendar.MONTH)/3) +1 && cal2.get(Calendar.MONTH) == endmonth){
+					month.setValue(month.getValue() - (Calendar.FRIDAY- cal1.get(Calendar.DAY_OF_WEEK))*8);
+				}
+				else{
+					monthavailhours = month.getValue();
+				}
+				System.out.print(month.getKey() +" "+ monthavailhours+ "  ");
+				hours+=monthavailhours;
 			}
+			
 			System.out.println("total hours "+hours );
 			hours=0F;
 			if(entry.getKey().equals("09289A")){
@@ -573,5 +614,3 @@ public class ReadUtilization {
 	    return emppojo;
 	} 
 }
-
-	
