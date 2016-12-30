@@ -96,6 +96,7 @@ public class StatisticsResource {
 		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
+		encoded = encoded.replaceAll("\n","");
 		URLConnection conn = urlresource.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();
