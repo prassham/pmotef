@@ -78,19 +78,19 @@ public class StatisticsResource {
         	break;
         case "offonmix": 
         	url = url +"employee/_design/offonmix/_view/offonmix?reduce=true&group=true";
-        	uri = prop.getProperty("offonmix");
+        	uri = url;
             break;
         case "diversitymix": 
         	url = url +"employee/_design/diversitymix/_view/diversitymix?reduce=true&group=true";
-        	uri = prop.getProperty("diversitymix");
+        	uri = url;
         	break;
         case "employeetype":  
         	url = url +"employee/_design/type/_view/type?reduce=true&group=true";
-        	uri = prop.getProperty("type");
+        	uri = url;
         	break;
         case "total":  
         	url = url +"employee/_design/type/_view/type?reduce=true";
-        	uri = prop.getProperty("total");
+        	uri = url;
         	break;
         default: 
         	InputStream stream = new ByteArrayInputStream(ins.getBytes(StandardCharsets.UTF_8));
