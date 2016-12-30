@@ -35,10 +35,10 @@
     					<td>{{item.name}}</td>
     					<td>{{item.email}}</td>
     					<td>{{item.vacationtype}}</td>
-    					<td>{{item.startDate}}</td>
+    					<td>{{item.startDate | date : 'dd-MM-yyyy' }}</td>
     					<td>{{item.endDate}}</td>
     					<td>{{item.no_of_days}}</td>
-    					<td>{{item.requestedDate}}</td>
+    					<td>{{item.requestedDate | date : 'dd-MM-yyyy' }}</td>
     					<td>
        						<select class="form-control" ng-model="selectedValue" ng-options="v for v in dropdown.values" ng-change=requestState(selectedValue,item)>
        						<option value="">Select</option>

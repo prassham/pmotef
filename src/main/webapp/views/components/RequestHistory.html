@@ -29,12 +29,12 @@
 <tr height="30" ng-repeat="(k,v) in vacationhistory">
 <td>{{v.vacationtype}}</td>
 <td>{{v.reason}}</td>
-<td>{{v.startDate}}</td>
-<td>{{v.endDate}}</td>
+<td>{{v.startDate | date : 'dd-MM-yyyy' }}</td>
+<td>{{v.endDate | date : 'dd-MM-yyyy' }}</td>
 <td>{{v.no_of_days}}</td>
 <td>{{v.approver}}</td>
 <td>{{v.requeststate}}</td>
-<td>{{v.requestedDate}}</td>
+<td>{{v.requestedDate | date : 'dd-MM-yyyy' }}</td>
 <td ng-if="((v.startDate) >= (CurrentDate | date:'yyyy-MM-dd')) && (v.requeststate == 'Pending')"><a href ng-click=updateRequest(v._id)>Modify</a></td>
 </tr>
 </table>

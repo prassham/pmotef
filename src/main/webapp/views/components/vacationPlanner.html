@@ -26,8 +26,8 @@
                     <td>{{item.name}}</td>
                     <td>{{item.team}}</td>
                     <td>{{item.approver}}</td>
-                    <td>{{item.startDate}}</td>
-                    <td>{{item.endDate}}</td>
+                    <td>{{item.startDate | date : 'dd-MM-yyyy' }}</td>
+                    <td>{{item.endDate | date : 'dd-MM-yyyy' }}</td>
                 </tr>
         </table>
         </div>

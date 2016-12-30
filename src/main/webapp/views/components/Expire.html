@@ -32,7 +32,7 @@
                     <td>{{item.NAME}}</td>
                     <td>{{item.WORKSTREAM}}</td>
                     <td>{{item.PEM}}</td>
-                    <td>{{item.END_DATE_GBSTIMESTAMP}}</td>
+                    <td>{{item.END_DATE_GBSTIMESTAMP | date : 'dd-MM-yyyy' }}</td>
                     <td style=background-color:{{item.EXPIRES}}></td>
                  </tr>
                  </tbody>
