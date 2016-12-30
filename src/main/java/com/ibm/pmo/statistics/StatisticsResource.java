@@ -73,10 +73,10 @@ public class StatisticsResource {
 		String uri=null;
 		switch (data) {
         case "bandmixpercentage": 
-        	uri = url +"/employee/_design/band/_view/band?reduce=true&group=true" ;
+        	uri = url +"/employee/_design/band/_view/band?reduce=true&group=true";
         	break;
         case "offonmix": 
-        	uri = url +"employee/_design/offonmix/_view/offonmix?reduce=true&group=true"
+        	uri = url +"employee/_design/offonmix/_view/offonmix?reduce=true&group=true";
             break;
         case "diversitymix": 
         	uri = url + "employee/_design/diversitymix/_view/diversitymix?reduce=true&group=true";
