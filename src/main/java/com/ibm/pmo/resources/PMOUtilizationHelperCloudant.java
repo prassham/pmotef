@@ -30,6 +30,10 @@ import com.ibm.pmo.utils.CloudantUtilization;
 import com.ibm.pmo.utils.CloudantUtilization.Row.Key;
 import com.ibm.pmo.utils.DBConnection;
 import com.ibm.pmo.utils.EmployeePojo;
+import com.ibm.pmo.employee.CloudantEmployee;
+
+import com.google.gson.JsonObject;
+
 
 import com.ibm.pmo.utils.Workstream;
 import com.ibm.pmo.utils.Workstream.Row;
@@ -57,12 +61,23 @@ public class PMOUtilizationHelperCloudant {
 	}*/
 
 	public CloudantUtilization getCloudantUtilization() throws JSONException, IOException{
-		String uri = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/utilization/_design/util/_view/util?reduce=true&group=true";
-		URL url = new URL(uri);
-		String loginPassword = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix"+ ":" + "Bluemix4me";
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		String uri = url +"/utilization/_design/util/_view/util?reduce=true&group=true";
+		URL urlresource = new URL(uri);
+		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
-		URLConnection conn = url.openConnection();
+		URLConnection conn = urlresource.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();
 	    Reader reader = new InputStreamReader(input,"UTF-8");
@@ -73,12 +88,23 @@ public class PMOUtilizationHelperCloudant {
 	} 
 	
 	public Workstream getCloudantWorkstream() throws JSONException, IOException{
-		String uri = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/employee/_design/workstream/_view/workstream?reduce=true&group=true";
-		URL url = new URL(uri);
-		String loginPassword = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix"+ ":" + "Bluemix4me";
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		String uri = url +"/employee/_design/workstream/_view/workstream?reduce=true&group=true";
+		URL urlresource = new URL(uri);
+		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
-		URLConnection conn = url.openConnection();
+		URLConnection conn = urlresource.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();
 	    Reader reader = new InputStreamReader(input,"UTF-8");
@@ -87,9 +113,20 @@ public class PMOUtilizationHelperCloudant {
 	    return workstream;
 	} 
 	public EmployeePojo getCloudantEmployee() throws JSONException, IOException{
-		String uri = "https://e73401b4-0b36-4cf0-9c97-966350085029-bluemix.cloudant.com/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
+		String username = credentials.get("username").toString();
+		System.out.println(username);
+        String password = credentials.get("password").toString();
+        System.out.println(password);
+	    String url = credentials.get("url").toString();
+	    System.out.println(url);
+	    username = username.replaceAll("^\"|\"$", "");
+	    password = password.replaceAll("^\"|\"$", "");
+	    url = url.replaceAll("^\"|\"$", "");
+	    System.out.println("connection establishment");
+		String uri = url +"/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
 		URL url = new URL(uri);
-		String loginPassword = "e73401b4-0b36-4cf0-9c97-966350085029-bluemix"+ ":" + "Bluemix4me";
+		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
 		URLConnection conn = url.openConnection();
