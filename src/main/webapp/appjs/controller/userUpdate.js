@@ -205,7 +205,7 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 		  $scope.date2 = $scope.CurrentDate;
 		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
 		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
-		    alert($scope.diffDays);
+		    //alert($scope.diffDays);
 			if($scope.diffDays > 31){
 				$scope.EXPIRES ="green";
 			}
@@ -216,7 +216,7 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 				$scope.EXPIRES = "red";
 			}
 			$scope.user.EXPIRES = $scope.EXPIRES;
-			alert($scope.user.EXPIRES);
+			//alert($scope.user.EXPIRES);
 	  }
 	  
 	$scope.insert = function(user){
