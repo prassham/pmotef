@@ -615,12 +615,12 @@ public class ReadUtilization {
 	    url = url.replaceAll("^\"|\"$", "");
 	    System.out.println("connection establishment");
 		String uri = url +"/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
-		URL url = new URL(uri);
+		URL urlresource = new URL(uri);
 		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
 		encoded = encoded.replaceAll("\n","");
-		URLConnection conn = url.openConnection();
+		URLConnection conn = urlresource.openConnection();
 		conn.setRequestProperty ("Authorization", "Basic " + encoded);
 	    InputStream input = conn.getInputStream();
 	    Reader reader = new InputStreamReader(input,"UTF-8");
