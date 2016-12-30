@@ -219,16 +219,20 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 			//alert($scope.user.EXPIRES);
 	  }
 	  
-	$scope.insert = function(user){
+	$scope.insert = function(item){
 		 $scope.registered = true;
-		user.REVISED_EMP_ID = user.EMP_ID;
-		user.STATUS = "Active";
-		user.EXPIRES = $scope.user.EXPIRES;
-		user.DOJ_IBM = $filter('date')(user.DOJ_IBM,'yyyy-MM-dd');
-		user.DOJ_O2 = $filter('date')(user.DOJ_O2,'yyyy-MM-dd');
-		user.START_DATE = $filter('date')(user.START_DATE,'yyyy-MM-dd');
-		user.END_DATE_GBSTIMESTAMP = $filter('date')(user.END_DATE_GBSTIMESTAMP,'yyyy-MM-dd');
-		var employeejson = JSON.stringify(user);
+		item.REVISED_EMP_ID = item.EMP_ID;
+		item.STATUS = "Active";
+		item.EXPIRES = $scope.user.EXPIRES;
+		item.DOJ_IBM = $filter('date')(item.DOJ_IBM,'yyyy-MM-dd');
+		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
+		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
+		item.END_DATE_GBSTIMESTAMP = $filter('date')(item.END_DATE_GBSTIMESTAMP,'yyyy-MM-dd');
+		item.EXPIRES = $scope.user.EXPIRES;
+		item.TENURE = $scope.user.TENURE;
+		item.RANGE_EXP = $scope.user.RANGE_EXP;
+		item.AGE_TENURE = $scope.user.AGE_TENURE;
+		var employeejson = JSON.stringify(item);
 		 $scope.insertEmployeeData = PMOHttpService
 			.postEmployee(employeejson).then(function(response) {
 				$scope.request = response.data;

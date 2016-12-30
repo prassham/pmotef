@@ -215,6 +215,10 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
 		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
 		item.END_DATEGBSTIMESTAMP = $filter('date')(item.END_DATEGBSTIMESTAMP,'yyyy-MM-dd');
+		item.EXPIRES = $scope.user.EXPIRES;
+		item.TENURE = $scope.user.TENURE;
+		item.RANGE_EXP = $scope.user.RANGE_EXP;
+		item.AGE_TENURE = $scope.user.AGE_TENURE;
 		//alert(item.STATUS);
 		var json = JSON.stringify(item);
 		var jsoninsert = json;
