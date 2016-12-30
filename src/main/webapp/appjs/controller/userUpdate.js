@@ -207,13 +207,13 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
 		    //alert($scope.diffDays);
 			if($scope.diffDays > 31){
-				$scope.EXPIRES ="green";
+				$scope.EXPIRES ="Green";
 			}
 			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
 				$scope.EXPIRES = "#FFA500";
 			}
 			else{
-				$scope.EXPIRES = "red";
+				$scope.EXPIRES = "Red";
 			}
 			$scope.user.EXPIRES = $scope.EXPIRES;
 			//alert($scope.user.EXPIRES);
