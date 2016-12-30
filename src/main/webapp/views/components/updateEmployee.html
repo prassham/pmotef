@@ -81,21 +81,21 @@
 				<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Work Location*</label>
     						<div class="col-sm-6">
-      						<select class="form-control" ng-model="user.WORK_LOCATION" ng-options="v.location as v.location for (k,v) in optionsdata.worklocationoptions" ng-change=selectedWorkLocation(user.WORK_LOCATION)>
+      						<select class="form-control" ng-model="user.WORK_LOCATION" ng-options="v.location as v.location for (k,v) in optionsdata.worklocationoptions" ng-change=selectedWorkLocation(user.WORK_LOCATION) required>
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Building*</label>
     						<div class="col-sm-6">
-      						<select class="form-control" ng-model="user.BUILDING" ng-options="i as i for i in buildingop">
+      						<select class="form-control" ng-model="user.BUILDING" ng-options="i as i for i in buildingop" required>
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">On_Off_Shore*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.ON_OFF_SHORE" ng-options="v.shore as v.shore for (k,v) in optionsdata.shoreoptions"" ng-change=selectedType(user.ON_OFF_SHORE) ng-selected="user.ON_OFF_SHORE">
+    						<select class="form-control" ng-model="user.ON_OFF_SHORE" ng-options="v.shore as v.shore for (k,v) in optionsdata.shoreoptions"" ng-change=selectedType(user.ON_OFF_SHORE) ng-selected="user.ON_OFF_SHORE" required>
 							</select>
     						</div>
   						</div>
@@ -105,7 +105,7 @@
 				<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.WORKSTREAM" ng-options="v.workstream as v.workstream for (k,v) in optionsdata.workstreamoptions"" ng-selected="user.WORKSTREAM" ng-change=selectedWorkstream(user.WORKSTREAM)>
+    						<select class="form-control" ng-model="user.WORKSTREAM" ng-options="v.workstream as v.workstream for (k,v) in optionsdata.workstreamoptions"" ng-selected="user.WORKSTREAM" ng-change=selectedWorkstream(user.WORKSTREAM) required>
     						</select>
     						</div>
   						</div>
@@ -206,14 +206,14 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Band*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.BAND" ng-options="v.band as v.band for (k,v) in optionsdata.bandoptions" ng-selected="user.BAND">
+    						<select class="form-control" ng-model="user.BAND" ng-options="v.band as v.band for (k,v) in optionsdata.bandoptions" ng-selected="user.BAND" required>
    							</select>
     						</div>
   						</div>
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Gender*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.GENDER" ng-options="v.gender as v.gender for (k,v) in optionsdata.genderoptions" ng-selected="user.GENDER">
+    						<select class="form-control" ng-model="user.GENDER" ng-options="v.gender as v.gender for (k,v) in optionsdata.genderoptions" ng-selected="user.GENDER" required>
    							</select>
     						</div>
   						</div>
@@ -262,7 +262,7 @@
 	  		<h6>Fields indicates * are mandatory.</h6>
       		</div>
 	  		<div class="col-sm-6">
-	  		<input type="submit" class="btn btn-primary" value="update" />
+	  		<input type="submit" class="btn btn-primary" value="update" ng-click="checktab(user)"/>
 	  		<button type="submit" class="btn btn-primary glyphicon glyphicon-circle-arrow-left" ng-click=back(user)> Back</button>
 	  		</div>
 	  		</form>

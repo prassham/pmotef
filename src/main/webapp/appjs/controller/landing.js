@@ -14,6 +14,15 @@ angular.module('LandingCtrl', []).controller('LandingController', function ($sco
     // Data load spinner div
     console.log("Checking the commit point ...");
     $scope.loading=true;
+    
+    
+    $scope.search =" ";
+	   $scope.customsearch = function(item){
+		   //alert($scope.search);
+		   return (item.EMP_ID + item.NAME + item.WORKSTREAM)
+			.indexOf($scope.search) >= 0;
+	   }
+	   
 	 $scope.numPerPage = 20;
 	 $scope.currentPage = 0;
 	 

@@ -56,7 +56,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Type*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.TYPE" ng-options="v.type as v.type for (k,v) in optionsdata.typeoptions" ng-change=selectedType(user.TYPE)>
+    						<select class="form-control" ng-model="user.TYPE" ng-options="v.type as v.type for (k,v) in optionsdata.typeoptions" ng-change=selectedType(user.TYPE) required>
     						<option value="">--Select--</option>
 							</select>
     						</div>
@@ -83,7 +83,7 @@
 				<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Work Location*</label>
     						<div class="col-sm-6">
-      						<select class="form-control" ng-model="user.WORK_LOCATION" ng-options="v.location as v.location for (k,v) in optionsdata.worklocationoptions" ng-change=selectedWorkLocation(user.WORK_LOCATION)>
+      						<select class="form-control" ng-model="user.WORK_LOCATION" ng-options="v.location as v.location for (k,v) in optionsdata.worklocationoptions" ng-change=selectedWorkLocation(user.WORK_LOCATION) required>
       						<option value="">--Select--</option>
    							</select>
     						</div>
@@ -91,7 +91,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Building*</label>
     						<div class="col-sm-6">
-      						<select class="form-control" ng-model="user.BUILDING" ng-options="i as i for i in buildingop" ng-change=selectedType(user.WORK_LOCATION)>
+      						<select class="form-control" ng-model="user.BUILDING" ng-options="i as i for i in buildingop" ng-change=selectedType(user.WORK_LOCATION) required>
       						<option value="">--Select--</option>
    							</select>
     						</div>
@@ -99,7 +99,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">On/OffShore*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.ON_OFF_SHORE" ng-options="v.shore as v.shore for (k,v) in optionsdata.shoreoptions"" ng-change=selectedType(user.ON_OFF_SHORE)>
+    						<select class="form-control" ng-model="user.ON_OFF_SHORE" ng-options="v.shore as v.shore for (k,v) in optionsdata.shoreoptions"" ng-change=selectedType(user.ON_OFF_SHORE) required>
     						<option value="">--Select--</option>
 							</select>
     						</div>
@@ -110,7 +110,7 @@
 				<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Workstream*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.WORKSTREAM" ng-options="v.workstream as v.workstream for (k,v) in optionsdata.workstreamoptions"" ng-change=selectedWorkstream(user.WORKSTREAM)>
+    						<select class="form-control" ng-model="user.WORKSTREAM" ng-options="v.workstream as v.workstream for (k,v) in optionsdata.workstreamoptions"" ng-change=selectedWorkstream(user.WORKSTREAM) required>
     						<option value="">--Select--</option>
     						</select>
     						</div>
@@ -213,7 +213,7 @@
     						<label for="inputtext3" class="col-sm-4 form-control-label">Graduate Hire*</label>
     						<div class="col-sm-6">
       						<!--<input type="text" class="form-control" id="inputtext3" ng-model="user.ELTP" required="true">-->
-      						<select class="form-control" ng-model="user.ELTP" ng-options="v.eltp as v.eltp for (k,v) in optionsdata.ELTPoptions">
+      						<select class="form-control" ng-model="user.ELTP" ng-options="v.eltp as v.eltp for (k,v) in optionsdata.ELTPoptions" required>
       						<option value="">--Select--</option>
       						</select>
     						</div>
@@ -221,7 +221,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Band*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.BAND" ng-options="v.band as v.band for (k,v) in optionsdata.bandoptions" ng-change=selectedType(user.BAND)>
+    						<select class="form-control" ng-model="user.BAND" ng-options="v.band as v.band for (k,v) in optionsdata.bandoptions" ng-change=selectedType(user.BAND) required>
     						<option value="">--Select--</option>
    							</select>
     						</div>
@@ -229,7 +229,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Gender*</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.GENDER" ng-options="v.gender as v.gender for (k,v) in optionsdata.genderoptions" ng-change=selectedType(user.GENDER)>
+    						<select class="form-control" ng-model="user.GENDER" ng-options="v.gender as v.gender for (k,v) in optionsdata.genderoptions" ng-change=selectedType(user.GENDER) required>
     						<option value="">--Select--</option>
    							</select>
     						</div>
@@ -237,7 +237,7 @@
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Laptop</label>
     						<div class="col-sm-6">
-    						<select class="form-control" ng-model="user.LAPTOP" ng-options="v.laptop as v.laptop for (k,v) in optionsdata.laptopoptions" ng-change=selectedType(user.LAPTOP)>
+    						<select class="form-control" ng-model="user.LAPTOP" ng-options="v.laptop as v.laptop for (k,v) in optionsdata.laptopoptions" ng-change=selectedType(user.LAPTOP) required>
     						<option value="">--Select--</option>
       						</select>
     						</div>
@@ -280,7 +280,7 @@
 	  		<h6>Fields indicates * are mandatory.</h6>
       		</div>
 	  		<div class="col-sm-6">
-	  		<input type="submit" class="btn btn-primary" value="Save" />
+	  		<input type="submit" class="btn btn-primary" value="Save" ng-click="checktab(user)"/>
 	  		</div>
 	  		</form>
 	  		</div>

@@ -7,7 +7,7 @@
     <div ng-include="'views/components/sideBar.html'"></div>
       <!--Load Employee Table in landing page-->
     <div class="col-md-9">
-        <input type="text" placeholder="Search Employee" id="search" class="form-control" ng-model="search" ng-change ="searchTextChange()" />
+        <input type="text" placeholder="Search Employee by Name or Id or workstream" id="search" class="form-control" ng-model="search" ng-change ="searchTextChange()" />
         <br>
         
         <div style="text-align: center;" ng-show="loading"  >
@@ -26,7 +26,7 @@
                     <th>DOJ of O2</th>
                     <!--<th>Band</th>-->
                 </tr>
-                <tr ng-repeat="item in employeeReferenceDataList | filter:search" ng-click="showEmployee(item)">
+                <tr ng-repeat="item in employeeReferenceDataList | filter:customsearch" ng-click="showEmployee(item)">
                     <td>{{item.EMP_ID}}</td>
                     <td>{{item.NAME}}</td>
                     <td>{{item.MOBILE}}</td>

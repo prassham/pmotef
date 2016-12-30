@@ -194,6 +194,21 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 			alert($scope.user.EXPIRES);
 	  }
 	  
+	  $scope.checktab = function(user){
+			  if(user.EMP_ID == undefined ||user.NAME == undefined || user.NOTES_ID == undefined || user.EMAIL == undefined || user.TYPE == undefined){
+				  $scope.activeTab = 1;
+			  }
+			  else if(user.WORK_LOCATION == undefined || user.BUILDING == undefined || user.ON_OFF_SHORE == undefined){
+				  $scope.activeTab = 2;
+			  }
+			  else if(user.WORKSTREAM == undefined || user.SKILL_SET == undefined || user.CURRENT_ROLE == undefined || user.PEM == undefined || user.DOJ_IBM == undefined || user.DOJ_O2 == undefined){
+				  $scope.activeTab = 3;
+			  }
+			  else{
+				  $scope.activeTab = 5;
+			  }
+	  }
+	  
 	$scope.update = function(item){
 		item.REVISED_EMP_ID = item.EMP_ID;
 		item.DOJ_IBM = $filter('date')(item.DOJ_IBM,'yyyy-MM-dd');

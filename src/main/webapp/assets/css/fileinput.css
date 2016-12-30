@@ -329,6 +329,9 @@ section {
     margin-top: -32px;  /* -1 * image height / 2 */
     display: block;     
 }
+.validation {
+	color:red;
+}
 .welcome {
     color: #CEF0D4; 
     font-family: Helvetica, sans-serif; 
