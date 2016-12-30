@@ -190,7 +190,7 @@ public class EmployeeResource {
 						JsonObject jobj = gson.fromJson(data, JsonObject.class);
 						String status = jobj.get("STATUS").toString();
 						System.out.println("Status of"+ status);
-						if(status.equals("\"A\"")){
+						if(status.equals("\"Active\"")){
 							db = con.database("employee", false);
 							db.update(jobj);
 							responseObject.put("message","Employee record updated successfully");
@@ -198,7 +198,8 @@ public class EmployeeResource {
 						}
 						else{
 							db = con.database("employee", false);
-							db.remove(jobj);
+							//db.remove(jobj);
+							db.update(jobj);
 							db = con.database("employee_history", false);
 							System.out.println("Connected");
 							jobj.remove("_id");
