@@ -129,15 +129,15 @@ public class VacationResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	/*@Produces(MediaType.APPLICATION_JSON)*/
 	public Response insert(String data) throws JSONException {
-		JSONObject responseObject = new JSONObject();
+		/*JSONObject responseObject = new JSONObject();
 		PMOTest validation = new PMOTest();
 		String res = validation.getEmployee();
 		String result = login(res);
 		if(result.contains("User does not exist")){
 			responseObject.put("Error : ", "You are not authorized to view this page. If you believe you should be able to view the page, kindly contact system admin to grant access.");
 			return Response.status(403).entity(responseObject.toString()).build();
-		}
-		
+		}*/
+		JSONObject responseObject = new JSONObject();
 		CloudantClient con = null;
 		try {
 			con = getConnection();

@@ -229,7 +229,7 @@
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" datepicker-popup="mediumDate" is-open="valuationDatePickerenddateIsOpen" 
-                   			ng-click="valuationDatePickerOpen()" ng-model="user.END_DATE_GBSTIMESTAMP" ng-change="createDate()" required/>
+                   			ng-click="valuationDatePickerOpen()" ng-model="user.END_DATE_GBSTIMESTAMP" ng-change="createDate(user.END_DATE_GBSTIMESTAMP)" required/>
             				<span class="input-group-btn">
               				<button type="button" class="btn btn-default" ng-click="valuationDatePickerendOpen($event)">
                 			<i class="glyphicon glyphicon-calendar"></i>

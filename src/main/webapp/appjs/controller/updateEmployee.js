@@ -180,7 +180,7 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		  $scope.date2 = $scope.CurrentDate;
 		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
 		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
-		    alert($scope.diffDays);
+		    //alert($scope.diffDays);
 			if($scope.diffDays > 31){
 				$scope.EXPIRES ="green";
 			}
@@ -191,7 +191,7 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 				$scope.EXPIRES = "red";
 			}
 			$scope.user.EXPIRES = $scope.EXPIRES;
-			alert($scope.user.EXPIRES);
+			//alert($scope.user.EXPIRES);
 	  }
 	  
 	  $scope.checktab = function(user){
@@ -215,10 +215,10 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
 		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
 		item.END_DATEGBSTIMESTAMP = $filter('date')(item.END_DATEGBSTIMESTAMP,'yyyy-MM-dd');
-		item.EXPIRES = $scope.user.EXPIRES;
-		item.TENURE = $scope.user.TENURE;
-		item.RANGE_EXP = $scope.user.RANGE_EXP;
-		item.AGE_TENURE = $scope.user.AGE_TENURE;
+		item.EXPIRES = $scope.EXPIRES;
+		item.TENURE = $scope.TENURE;
+		item.RANGE_EXP = $scope.RANGE_EXP;
+		item.AGE_TENURE = $scope.AGE_TENURE;
 		//alert(item.STATUS);
 		var json = JSON.stringify(item);
 		var jsoninsert = json;
