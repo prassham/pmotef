@@ -98,7 +98,7 @@ public class StatisticsResource {
 		}
         
 		URL url = new URL(uri);
-		String loginPassword = userName+ ":" + password;
+		String loginPassword = username+ ":" + password;
 		@SuppressWarnings("restriction")
 		String encoded = new sun.misc.BASE64Encoder().encode (loginPassword.getBytes());
 		URLConnection conn = url.openConnection();
