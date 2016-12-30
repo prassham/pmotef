@@ -76,16 +76,16 @@ public class StatisticsResource {
         	uri = url +"/employee/_design/band/_view/band?reduce=true&group=true";
         	break;
         case "offonmix": 
-        	uri = url +"employee/_design/offonmix/_view/offonmix?reduce=true&group=true";
+        	uri = url +"/employee/_design/offonmix/_view/offonmix?reduce=true&group=true";
             break;
         case "diversitymix": 
-        	uri = url + "employee/_design/diversitymix/_view/diversitymix?reduce=true&group=true";
+        	uri = url + "/employee/_design/diversitymix/_view/diversitymix?reduce=true&group=true";
         	break;
         case "employeetype":  
-        	uri = url +"employee/_design/type/_view/type?reduce=true&group=true";
+        	uri = url +"/employee/_design/type/_view/type?reduce=true&group=true";
         	break;
         case "total":  
-        	uri = url +"employee/_design/type/_view/type?reduce=true";
+        	uri = url +"/employee/_design/type/_view/type?reduce=true";
         	break;
         default: 
         	InputStream stream = new ByteArrayInputStream(ins.getBytes(StandardCharsets.UTF_8));
