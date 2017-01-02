@@ -13,7 +13,7 @@
                     <th>Mobile</th>
                     <th>Work Stream</th>
                     <th>PEM</th>
-                    <th>DOJ of O2</th>
+                    <th>End Date</th>
                     <!--<th>Band</th>-->
                 </tr>
                 <tr ng-repeat="item in history | filter:search">
@@ -22,7 +22,7 @@
                     <td>{{item.MOBILE}}</td>
                     <td>{{item.WORKSTREAM}}</td>
                     <td>{{item.PEM}}</td>
-                    <td>{{item.DOJ_O2}}</td>
+                    <td>{{item.END_DATE_GBSTIMESTAMP | date : 'dd-MM-yyyy' }}</td>
                  </tr>
                  </tbody>
                  </table>
