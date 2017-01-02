@@ -188,7 +188,7 @@
     						<div class="col-sm-6">
     						<p class="input-group">
       						<input type="text" class="form-control" placeholder="START_DATE" datepicker-popup="mediumDate" is-open="valuationDatePickerstartdateIsOpen" 
-                   			ng-click="valuationDatePickerOpen()" ng-model="user.START_DATE" ng-change="createDate()" max-date=CurrentDate required/>
+                   			ng-click="valuationDatePickerOpen()" ng-model="user.START_DATE" ng-change="createDate()" min-date="user.DOJ_O2" required/>
             				<span class="input-group-btn">
               				<button type="button" class="btn btn-default" ng-click="valuationDatePickerstartOpen($event)">
                 			<i class="glyphicon glyphicon-calendar"></i>
@@ -228,8 +228,8 @@
     						<label for="inputPassword3" class="col-sm-4 control-label">End Date*</label>
     						<div class="col-sm-6">
     						<p class="input-group">
-      						<input type="text" class="form-control" datepicker-popup="mediumDate" is-open="valuationDatePickerenddateIsOpen" 
-                   			ng-click="valuationDatePickerOpen()" ng-model="user.END_DATE_GBSTIMESTAMP" ng-change="createDate(user.END_DATE_GBSTIMESTAMP)" required/>
+      						<input type="text" class="form-control" datepicker-popup="mediumDate" is-open="valuationDatePickerenddateIsOpen" min-date="START_DATE"
+                   			ng-click="valuationDatePickerOpen()" ng-model="user.END_DATE_GBSTIMESTAMP" ng-change="checkExpires(user.END_DATE_GBSTIMESTAMP)" required/>
             				<span class="input-group-btn">
               				<button type="button" class="btn btn-default" ng-click="valuationDatePickerendOpen($event)">
                 			<i class="glyphicon glyphicon-calendar"></i>
@@ -241,8 +241,14 @@
   						<!-- <div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Expires*</label>
     						<div class="col-sm-6">
-      						<input type="text" class="form-control" id="inputtext3" ng-model="user.EXPIRES" required="true">
+      						<input type="hidden" class="form-control" id="inputtext3" ng-model="user.EXPIRES" required="true">
     						</div>
+  						</div>-->
+  						<!-- <div class="form-group row">
+    						<<label for="inputtext3" class="col-sm-4 form-control-label">Expires</label>
+    						<div class="col-sm-6">-->
+      						<input type="hidden" class="form-control" id="inputtext3" ng-model="user.EXPIRES" required="true">
+    						<!-- </div>
   						</div>-->
   						<div class="form-group row">
     						<label for="inputtext3" class="col-sm-4 form-control-label">Open_Seat_No*</label>

@@ -174,6 +174,7 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		    $scope.user.RANGE_EXP = $scope.RANGE_EXP;
 }
 	  //To calculate Expires
+	//calculate Expires
 	  $scope.checkExpires = function(enddate){
 		  $scope.date1 = enddate;
 		  $scope.date2 = $scope.CurrentDate;
@@ -181,18 +182,17 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
 		    //alert($scope.diffDays);
 			if($scope.diffDays > 31){
-				$scope.EXPIRES ="green";
+				$scope.EXPIRES ="Green";
 			}
 			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
 				$scope.EXPIRES = "#FFA500";
 			}
 			else{
-				$scope.EXPIRES = "red";
+				$scope.EXPIRES = "Red";
 			}
 			$scope.user.EXPIRES = $scope.EXPIRES;
 			//alert($scope.user.EXPIRES);
 	  }
-	  
 	  $scope.checktab = function(user){
 			  if(user.EMP_ID == undefined ||user.NAME == undefined || user.NOTES_ID == undefined || user.EMAIL == undefined || user.TYPE == undefined){
 				  $scope.activeTab = 1;
@@ -213,12 +213,9 @@ angular.module('UpdateEmployeeCtrl', []).controller('UpdateEmployeeController', 
 		item.DOJ_IBM = $filter('date')(item.DOJ_IBM,'yyyy-MM-dd');
 		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
 		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
-		item.END_DATEGBSTIMESTAMP = $filter('date')(item.END_DATEGBSTIMESTAMP,'yyyy-MM-dd');
-		item.EXPIRES = $scope.user.EXPIRES;
-		//item.TENURE = $scope.TENURE;
-		//item.RANGE_EXP = $scope.RANGE_EXP;
-		//item.AGE_TENURE = $scope.AGE_TENURE;
+		item.END_DATE_GBSTIMESTAMP = $filter('date')(item.END_DATE_GBSTIMESTAMP,'yyyy-MM-dd');
 		//alert(item.STATUS);
+		//alert(item.EXPIRES);
 		var json = JSON.stringify(item);
 		var jsoninsert = json;
 		/*$scope.deleteEmployeeData = PMOHttpService

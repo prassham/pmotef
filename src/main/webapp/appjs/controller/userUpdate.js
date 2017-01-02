@@ -3,12 +3,16 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 	
 	$scope.activeTab = 1;
 	$scope.CurrentDate = new Date();
-	$scope.user = PMOHttpService;
+	$scope.pmo = PMOHttpService;
+	$scope.user = "";
+	$scope.START_DATE = $scope.CurrentDate;
+	//alert($scope.START_DATE);
 	
 	$scope.setActiveTab = function(tabToSet) {
 		$scope.activeTab = tabToSet;
 	}
-	 $scope.user.START_DATE = $scope.CurrentDate;
+	
+	 //$scope.user.START_DATE = $scope.CurrentDate;
 	  //alert($scope.user.START_DATE);
 	$scope.count = 0;
 	
@@ -184,6 +188,26 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 			    $scope.user.RANGE_EXP = $scope.RANGE_EXP;
 	  }
 	  
+	//calculate Expires
+	  $scope.checkExpires = function(enddate){
+		  $scope.date1 = enddate;
+		  $scope.date2 = $scope.CurrentDate;
+		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
+		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
+		    //alert($scope.diffDays);
+			if($scope.diffDays > 31){
+				$scope.EXPIRES ="green";
+			}
+			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
+				$scope.EXPIRES = "#FFA500";
+			}
+			else{
+				$scope.EXPIRES = "red";
+			}
+			$scope.user.EXPIRES = $scope.EXPIRES;
+			//alert($scope.user.EXPIRES);
+	  }
+	  
 	  $scope.checktab = function(user){
 		  if(user.EMP_ID == undefined ||user.NAME == undefined || user.NOTES_ID == undefined || user.EMAIL == undefined || user.TYPE == undefined){
 			  $scope.activeTab = 1;
@@ -198,37 +222,15 @@ angular.module('UserUpdateCtrl', []).controller('UserUpdateController', function
 			  $scope.activeTab = 5;
 		  }
 	  }
-	  
-	//calculate Expires
-	  $scope.checkExpires = function(enddate){
-		  $scope.date1 = enddate;
-		  $scope.date2 = $scope.CurrentDate;
-		  $scope.timeDiff = Math.abs($scope.date1.getTime() - $scope.date2.getTime());   
-		    $scope.diffDays = Math.ceil($scope.timeDiff / (1000 * 3600 * 24)); 
-		    //alert($scope.diffDays);
-			if($scope.diffDays > 31){
-				$scope.EXPIRES ="Green";
-			}
-			else if($scope.diffDays > 7 && $scope.diffDays <= 31){
-				$scope.EXPIRES = "#FFA500";
-			}
-			else{
-				$scope.EXPIRES = "Red";
-			}
-			$scope.user.EXPIRES = $scope.EXPIRES;
-			//alert($scope.user.EXPIRES);
-	  }
-	  
 	$scope.insert = function(item){
 		 $scope.registered = true;
 		item.REVISED_EMP_ID = item.EMP_ID;
 		item.STATUS = "Active";
-		item.EXPIRES = $scope.user.EXPIRES;
+		//alert($scope.user.EXPIRES);
 		item.DOJ_IBM = $filter('date')(item.DOJ_IBM,'yyyy-MM-dd');
 		item.DOJ_O2 = $filter('date')(item.DOJ_O2,'yyyy-MM-dd');
-		item.START_DATE = $filter('date')(item.START_DATE,'yyyy-MM-dd');
+		item.START_DATE = $filter('date')($scope.START_DATE,'yyyy-MM-dd');
 		item.END_DATE_GBSTIMESTAMP = $filter('date')(item.END_DATE_GBSTIMESTAMP,'yyyy-MM-dd');
-		item.EXPIRES = $scope.user.EXPIRES;
 		var employeejson = JSON.stringify(item);
 		 $scope.insertEmployeeData = PMOHttpService
 			.postEmployee(employeejson).then(function(response) {
