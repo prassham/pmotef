@@ -600,7 +600,7 @@ public class ReadUtilization {
 	    }
 	    
 	public EmployeePojo getCloudantEmployee() throws JSONException, IOException{
-		/*JsonObject credentials = CloudantEmployee.getConnectionObject();
+		JsonObject credentials = CloudantEmployee.getConnectionObject();
 		String username = credentials.get("username").toString();
 		System.out.println(username);
         String password = credentials.get("password").toString();
@@ -610,11 +610,11 @@ public class ReadUtilization {
 	    username = username.replaceAll("^\"|\"$", "");
 	    password = password.replaceAll("^\"|\"$", "");
 	    url = url.replaceAll("^\"|\"$", "");
-	    System.out.println("connection establishment");*/
-		String url = "https://88f3cfbf-6d6f-4344-9d7c-72ba212722bb-bluemix:e23fef1522cfdb4df1417089d27c4409eb9d90238d1c373e19ef3aea852de5c3@88f3cfbf-6d6f-4344-9d7c-72ba212722bb-bluemix.cloudant.com";
+	    System.out.println("connection establishment");
+		/*String url = "https://88f3cfbf-6d6f-4344-9d7c-72ba212722bb-bluemix:e23fef1522cfdb4df1417089d27c4409eb9d90238d1c373e19ef3aea852de5c3@88f3cfbf-6d6f-4344-9d7c-72ba212722bb-bluemix.cloudant.com";
 		String username = "88f3cfbf-6d6f-4344-9d7c-72ba212722bb-bluemix";
 		String password = "e23fef1522cfdb4df1417089d27c4409eb9d90238d1c373e19ef3aea852de5c3";
-		//String uri = url +"/utilization/_design/util/_view/util?reduce=true&group=true";
+		//String uri = url +"/utilization/_design/util/_view/util?reduce=true&group=true";*/
 		String uri = url +"/employee/_design/employeeDetails/_view/employeeDetails?reduce=true&group=true";
 		URL urlresource = new URL(uri);
 		String loginPassword = username+ ":" + password;
