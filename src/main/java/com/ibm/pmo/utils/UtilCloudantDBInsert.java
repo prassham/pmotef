@@ -78,7 +78,7 @@ public class UtilCloudantDBInsert {
 		return dbMap;	
 	}
 	
-	public  void dbinsert(HashMap<String,EmployUtilizationBean> util){
+	public  void dbinsert(HashMap<String,EmployUtilizationBean> util) throws InterruptedException{
 			
 			CloudantClient connection = getConnection();
 			Database dbutilization = connection.database("utilization", false);
@@ -90,6 +90,9 @@ public class UtilCloudantDBInsert {
 				// iterating over the emputilmap  for each empID			
 				while(it.hasNext()){
 					count++;
+					if(count%5==0){
+					Thread.sleep(1000);
+					}
 					Map.Entry me = (Map.Entry)it.next();
 			//		dbutilization.createIndex("{\"index\": { \"fields\": [\"emp_id\"] }, \"type\": \"json\"}");
 					List<JsonFormatter> jsfromcloudant = dbutilization.findByIndex("\"selector\": { \"emp_id\" : \""+me.getKey().toString()+"\"}",JsonFormatter.class);
