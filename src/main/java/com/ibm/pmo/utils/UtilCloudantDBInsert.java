@@ -90,7 +90,7 @@ public class UtilCloudantDBInsert {
 				// iterating over the emputilmap  for each empID			
 				while(it.hasNext()){
 					count++;
-					Thread.sleep(2000);
+					Thread.sleep(200);
 					Map.Entry me = (Map.Entry)it.next();
 			//		dbutilization.createIndex("{\"index\": { \"fields\": [\"emp_id\"] }, \"type\": \"json\"}");
 					List<JsonFormatter> jsfromcloudant = dbutilization.findByIndex("\"selector\": { \"emp_id\" : \""+me.getKey().toString()+"\"}",JsonFormatter.class);
